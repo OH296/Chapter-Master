@@ -52,6 +52,26 @@ function scr_cheatcode(argument0) {
         if (cheatcode_string=="sisterhospitaler"){
             scr_add_man("Sister Hospitaler",0,"","",0,true,"default");
         }
+		if (cheatcode_string=="sisterofbattle"){
+			scr_add_man("Sister of Battle",0,"","",0,true,"default");
+		}
+		if (cheatcode_string=="skitarii"){
+			scr_add_man("Skitarii",0,"","",0,true,"default");
+		}
+		// Explanation - techpriest and inquisition crusader crash the game, while ork sniper simply does not work, hence commenting them out
+		// I did not add eldar ranger, because someone thought it was skitarii ranger and eldar are hard to find anyway
+		//if (cheatcode_string=="techpriest"){
+		//	scr_add_man("Tech Priest",0,"","",0,true,"default");
+		//}
+		//if (cheatcode_string=="inquisitioncrusader"){
+		//	scr_add_man("Inquisition Crusader",0,"","",0,true,"default");
+		//}
+		//if (cheatcode_string=="orksniper"){
+		//	scr_add_man("Ork Sniper",0,"","",0,true,"default");
+		//}
+		if (cheatcode_string=="flashgit"){
+			scr_add_man("Flash Git",0,"","",0,true,"default");
+		}
         if (cheatcode_string=="chaosfleetspawn"){
             spawn_chaos_warlord();
         }
