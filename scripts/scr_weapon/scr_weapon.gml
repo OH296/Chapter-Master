@@ -2069,11 +2069,21 @@ global.gear = {
 			"description": "An advanced medical field kit these allow Apothecaries to heal wounds or recover Gene-Seed from fallen Astartes.",
 			"melee_hands": -0.5,
 			"ranged_hands": -0.5,
+			"damage_resistance_mod": {
+				"standard": 0, // Adjusted
+				"master_crafted": 5, // Adjusted
+				"artifact": 10 // Adjusted
+			}, // I also had an idea to make Nartheciums and Servo Arms give bonuses to melee and ranged, when master-crafted or artifact, indicating measuring devices that help to find weakpoints and deal more damage, but I'm not sure if You're okay with that
 		},
 		"Psychic Hood": {
 			"abbreviation": "PsyHd",
-			"special_properties": ["Perils Protection 50"],
+			"special_properties": ["Perils Protection 50"], // I am curious if it is possible to raise the protection, if it's master crafted or artifact quality
 			"description": "An arcane hood that protects Psykers from enemy psychic powers and enhances control of their psychic abilities.",
+			"damage_resistance_mod": {
+				"standard": 0, // Adjusted
+				"master_crafted": 5, // Adjusted
+				"artifact": 10 // Adjusted
+			},
 		},
 		"Rosarius": {
 			"abbreviation": "Rsrius",
@@ -2135,13 +2145,23 @@ global.gear = {
 			"description": "A pair of powerful mechanical arms. They include several tools that allow trained Astartes to repair vehicles rapidly alongside an integrated flamer to beat back the Emperor's foes.",
 			"melee_hands": 0.25,
 			"ranged_hands": 0.25,
+			"damage_resistance_mod": {
+				"standard": 5, // Adjusted
+				"master_crafted": 10, // Adjusted
+				"artifact": 15 // Adjusted
+			},
 		},
 		"Master Servo Arms": {
-			"abbreviation": "MsSrvArms",
+			"abbreviation": "MsSrvArms", // You know, it would be a bit silly to find Master Crafted Master Servo Arms
 			"special_properties": ["Integrated Flamer, Repairs Vehicles"],
 			"description": "This master servo harness includes additional mechanical arms and tools, allowing a greater capacity and rate of repairs.",
 			"melee_hands": 0.25,
 			"ranged_hands": 0.25,
+			"damage_resistance_mod": {
+				"standard": 10, // Adjusted
+				"master_crafted": 15, // Adjusted
+				"artifact": 20 // Adjusted
+			},
 		},
 		"Smoke Launchers": {
 			"description": "Useful for providing concealment in open terrain, these launchers project wide-spectrum concealing smoke to prevent accurate targeting of the vehicle.",
