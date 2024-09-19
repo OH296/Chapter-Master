@@ -22,28 +22,34 @@ All notable changes to this project will be documented in this file.
 - warp lane travel drawing abstracted to it's own layer
 - warp lane widths now expand to be more visible when zoomed
 - ork warbosses are now stored in the fleet carge_data area and the struct is transferred directly to a planet
-- advatages tweaks:
-    - "kings of space" advatage now provides +1 battle barge
+- advantages tweaks:
+    - "kings of space" advantage now provides +1 battle barge
     - "Boarders" now provides +2 frigates
-    - display and discription text tweaks
+    - display and description text tweaks
     - "lightning warriors" now increases number of starting biker squads
-
 - equipment and weapons:
-    - boarding shields now provide advatages to boarders
+    - boarding shields now provide advantages to boarders
     - underslung flamers now have light armour piercing
+- eviscerator and relic blade sprites are now vertical again and support second weapon display
+- deathwing color now is a tiny bit darker
 
 ### Fixed:
 - travelling without waypoints while pressing shift now fixed
-- melee enthusiats now decreases starting devestators as well as increasing assualts
+- melee enthusiast now decreases starting devastators as well as increasing assaults
+- vanguard sergeants, honour guard and dark angels veterans no longer spawn overburdened
+- eviscerator and relic blade sprites display on terminators
+- deathwing knights color scheme
 - crash from inquisitors snooping onplayer bases
 
 ### Added:
 - New warp hub planets
     - new graded warp travel routes
-
 - new squad type breachers
-
 - ability to cancel warp travel within the same turn you commanded fleet to travel
+- 3 new cheats:
+	- sisterofbattle - spawns 1 Sister of Battle
+	- skitarii - spawns 1 Skitarii
+	- flashgit - spawns 1 Flash Git
 
 ## [0.9.2.4]
 
