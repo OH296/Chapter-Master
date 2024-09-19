@@ -1614,7 +1614,7 @@ function scr_initialize_custom() {
 				"role": $"Vanguard {roles.sergeant}",
 				"loadout": {
 					"required": {
-						"wep1": ["Relic Blade", 1],
+						"wep1": ["Thunder Hammer", 1],
 						"wep2": ["Storm Shield", 1],
 						"mobi": ["Jump Pack", 1]
 					},
@@ -2830,11 +2830,7 @@ function scr_initialize_custom() {
 		gear[company][k] = gear[100, 2];
 		mobi[company][k] = mobi[100, 2];
 		// wep1 power sword // wep2 storm bolter default
-		wep1[company][k] = choose_weighted([
-			["Power Sword", 3],
-			["Power Axe", 3],
-			["Relic Blade", 1]
-		]);
+		wep1[company][k] = choose("Power Sword", "Power Axe", "Power Spear");
 		wep2[company][k] = wep2[101, 2];
 		armour[company][k] = armour[101, 2];
 		if (global.chapter_name == "Dark Angels") {
@@ -3088,12 +3084,6 @@ function scr_initialize_custom() {
 		wep2[company][k] = wep2[101, 3];
 		gear[company][k] = gear[101, 3];
 		mobi[company][k] = mobi[101, 3];
-		if (global.chapter_name == "Dark Angels" && company == 1){
-			wep1[company][k] = wep1[101, 4];
-			wep2[company][k] = wep2[101, 4];
-			gear[company][k] = gear[101, 4];
-			mobi[company][k] = mobi[101, 4];
-		}
 	}
 
 	for (i = 0; i < 2; i++) {
