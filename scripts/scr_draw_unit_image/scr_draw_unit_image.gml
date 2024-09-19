@@ -320,10 +320,8 @@ function scr_draw_unit_image(_background=false){
         else if (role()=="Death Company"){ui_specialist=15;}
         // Dark Angels
         if (global.chapter_name=="Dark Angels"){
-            // Honour guard
-            if (role() == obj_ini.role[100][Role.HONOUR_GUARD]) then ui_coloring="deathwing";
             // Deathwing
-            else if (company == 1) {
+            if (company == 1) {
                 ui_coloring="deathwing";
             }
             // Ravenwing
@@ -554,11 +552,9 @@ function scr_draw_unit_image(_background=false){
             if (ui_coloring == "deathwing"){
                 if !array_contains([obj_ini.role[100][Role.CHAPLAIN],obj_ini.role[100][Role.LIBRARIAN], obj_ini.role[100][Role.TECHMARINE]], role()){
                     shader_array_set[ShaderType.Body] = Colors.Deathwing;
+                    shader_array_set[ShaderType.Trim] = Colors.Light_Caliban_Green;
                     if (role() != obj_ini.role[100][Role.APOTHECARY]){
                         shader_array_set[ShaderType.Helmet] = Colors.Deathwing;
-                    }
-                    if (role() != obj_ini.role[100][Role.HONOUR_GUARD]){
-                        shader_array_set[ShaderType.Trim] = Colors.Light_Caliban_Green;
                     }
                 }
                 if !array_contains([obj_ini.role[100][Role.CHAPLAIN],obj_ini.role[100][Role.TECHMARINE]], role()){
@@ -587,6 +583,16 @@ function scr_draw_unit_image(_background=false){
             if (global.chapter_name == "Dark Angels" && role() == obj_ini.role[100][Role.CAPTAIN] && company != 1){
                 shader_array_set[ShaderType.RightPauldron] = Colors.Dark_Red;
                 shader_array_set[ShaderType.Helmet] = Colors.Deathwing;
+                pauldron_trim=0;
+                specialist_colours=0;
+            }
+
+            // Dark Angels Honour Guard
+            if (global.chapter_name == "Dark Angels" && role() == obj_ini.role[100][Role.HONOUR_GUARD]){
+                shader_array_set[ShaderType.Body] = Colors.Deathwing;
+                shader_array_set[ShaderType.RightPauldron] = Colors.Deathwing;
+                shader_array_set[ShaderType.LeftPauldron] = Colors.Deathwing;
+                shader_array_set[ShaderType.Trim] = Colors.Copper;
                 pauldron_trim=0;
                 specialist_colours=0;
             }
