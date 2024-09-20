@@ -15,6 +15,10 @@ All notable changes to this project will be documented in this file.
 ### Fixed:
 - example list
     - example nested list
+
+### Under The Hood:
+- here go changes that are important only to other developers.
+    - everything that a normal player doesn't need to know.
 ----------------------------------
 ## [0.9.3.0]
 
