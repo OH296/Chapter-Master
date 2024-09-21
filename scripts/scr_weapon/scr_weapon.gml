@@ -2146,9 +2146,9 @@ global.gear = {
 			"melee_hands": 0.25,
 			"ranged_hands": 0.25,
 			"damage_resistance_mod": {
-				"standard": 5, // Adjusted
-				"master_crafted": 10, // Adjusted
-				"artifact": 15 // Adjusted
+				"standard": 0, // Adjusted
+				"master_crafted": 5, // Adjusted
+				"artifact": 10 // Adjusted
 			},
 		},
 		"Master Servo Arms": {
@@ -2158,9 +2158,9 @@ global.gear = {
 			"melee_hands": 0.25,
 			"ranged_hands": 0.25,
 			"damage_resistance_mod": {
-				"standard": 10, // Adjusted
-				"master_crafted": 15, // Adjusted
-				"artifact": 20 // Adjusted
+				"standard": 0, // Adjusted
+				"master_crafted": 5, // Adjusted
+				"artifact": 10 // Adjusted
 			},
 		},
 		"Smoke Launchers": {
