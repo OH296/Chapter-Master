@@ -2158,9 +2158,9 @@ global.gear = {
 			"melee_hands": 0.25,
 			"ranged_hands": 0.25,
 			"damage_resistance_mod": {
-				"standard": 0, // Adjusted
-				"master_crafted": 5, // Adjusted
-				"artifact": 10 // Adjusted
+				"standard": 5, // Adjusted
+				"master_crafted": 10, // Adjusted
+				"artifact": 15 // Adjusted
 			},
 		},
 		"Smoke Launchers": {
