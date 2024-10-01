@@ -47,7 +47,7 @@ if (max_ships>0)and (instance_exists(obj_star_select)){
     var sel_all_button = draw_unit_buttons([bomb_window.x2-55, bomb_window.y1+80, bomb_window.x2-40, bomb_window.y1+95],sel_all_label,[1,1],38144,fa_center,fnt_40k_14b);
     if (point_and_click(sel_all_button)){
         for(var i=1; i<=30; i++){
-            if (obj_ini.ship[i]!="") and (ship_all[i]==all_sel){
+            if (obj_ini.ship[i]!="" && ship_all[i]==all_sel && obj_ini.ship_location[i]==p_target.name){
                 ship_all[i]=!all_sel;
                 ships_selected=all_sel?ships_selected-1:ships_selected+1;
             }

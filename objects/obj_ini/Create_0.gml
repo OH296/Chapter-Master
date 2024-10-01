@@ -71,7 +71,10 @@ repeat(210){i+=1;
          ship_wep_facing[i,s]="";
          ship_wep_condition[i,s]="";
     }
-    ship_capacity[i]=0;ship_carrying[i]=0;ship_contents[i]="";ship_turrets[i]=0;
+    ship_capacity[i]=0;
+    ship_carrying[i]=0;
+    ship_contents[i]="";
+    ship_turrets[i]=0;
 }
 
 var company,v;

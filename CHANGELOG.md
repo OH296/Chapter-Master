@@ -88,6 +88,7 @@ All notable changes to this project will be documented in this file.
 - 1 Dreadnought to Equal Specialist Distribution custom chapters.
 - Fixed Force Staff getting double damage bonus because of a code mistake.
 - stars should no longer spawn very close to the right or bottom edge of the map
+- will no longer be able to select all ships globally wiht select all on bombard
 
 ### Under The Hood:
 - Ork Warbosses are now stored in the fleet carge_data area and the struct is transferred directly to a planet.
