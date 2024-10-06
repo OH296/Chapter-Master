@@ -184,11 +184,22 @@ chapter_id[21] = chapter21;
 	     adv21[2]=adv[2];
 	     adv21[3]=adv[3];
 	     adv21[4]=adv[4];
+	     adv21[5]=adv[5];
+	     adv21[6]=adv[6];
+	     adv21[7]=adv[7];
+	     adv21[8]=adv[8];
+
+
 		
 		 dis21[1]=dis[1];
 	     dis21[2]=dis[2];
 	     dis21[3]=dis[3];
 	     dis21[4]=dis[4];
+	     dis21[5]=dis[5];
+	     dis21[6]=dis[6];
+	     dis21[7]=dis[7];
+	     dis21[8]=dis[8];
+
 	
 	  	for (var i=0;i<=22;i++){
 		    role_21[i]=role[100][i];

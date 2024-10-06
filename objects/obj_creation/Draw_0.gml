@@ -465,7 +465,7 @@ if (slide=2){
         draw_set_halign(fa_left);
         draw_set_font(fnt_40k_30b);
         draw_text_transformed(436,564,"Chapter Advantages",0.5,0.5,0);draw_set_font(fnt_40k_14);
-        for (i=1;i<5;i++){
+        for (i=1;i<=8;i++){
             var draw_string = adv_num[i]==0?"[+]":"[-] "+adv[i];
             draw_text(436,570+(i*20), draw_string);
             if (scr_hit(436,570+(i*20),640,599+(i*20))){
@@ -497,7 +497,7 @@ if (slide=2){
         draw_set_font(fnt_40k_30b);
         draw_text_transformed(810,564,"Chapter Disadvantages",0.5,0.5,0);
         draw_set_font(fnt_40k_14);
-        for (i=1;i<5;i++){
+        for (i=1;i<=8;i++){
             var draw_string = dis_num[i]==0?"[+]":"[-] "+dis[i];
             draw_text(810,570+(i*20), draw_string);
             if (scr_hit(810,570+(i*20),1014,599+(i*20))){

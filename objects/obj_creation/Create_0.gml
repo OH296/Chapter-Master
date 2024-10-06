@@ -79,7 +79,7 @@ points=0;maxpoints=100;
 fleet_type=1;
 strength=5;cooperation=5;
 purity=5;stability=5;
-var i;i=-1;repeat(6){i+=1;adv[i]="";adv_num[i]=0;dis[i]="";dis_num[i]=0;}
+var i;i=-1;repeat(10){i+=1;adv[i]="";adv_num[i]=0;dis[i]="";dis_num[i]=0;}
 homeworld="Temperate";homeworld_name=global.name_generator.generate_star_name();
 recruiting="Death";recruiting_name=global.name_generator.generate_star_name();
 flagship_name=global.name_generator.generate_imperial_ship_name();
@@ -309,9 +309,9 @@ if((file_exists("chaptersave#1.ini")=true) and (chapter_made=1)){
 		chapter_master_melee21 = ini_read_real("Creation","chapter_master_melee",chapter_master_melee);
 		chapter_master_ranged21= ini_read_string("Creation","master_ranged",chapter_master_ranged);
 		chapter_master_specialty21=ini_read_string("Creation","master_specialty",chapter_master_specialty);
-		adv21=[1,2,3,4];
-		dis21=[1,2,3,4];
-		for(var i =1;i<=4;i++){
+		adv21=[1,2,3,4,5,6,7,8];
+		dis21=[1,2,3,4,5,6,7,8];
+		for(var i =1;i<=8;i++){
 			
 			adv21[i]=ini_read_string("Creation","adv21"+string(i),"")
 			dis21[i]=ini_read_string("Creation","dis21"+string(i),"")
@@ -331,8 +331,8 @@ ini_close();
 
 
 else if (file_exists("chaptersave#1.ini")=false){
- adv21 = [1,2,3,4]
- dis21 =[1,2,3,4]
+ adv21 = [1,2,3,4,5,6,7,8]
+ dis21 =[1,2,3,4,5,6,7,8]
  disposition21 = [1,2,3,4,5,6,7]
  founding21=4;
  
