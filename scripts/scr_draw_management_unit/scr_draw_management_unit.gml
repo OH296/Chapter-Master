@@ -356,27 +356,25 @@ function scr_draw_management_unit(selected, yy=0, xx=0, draw=true){
 
     if (!unclickable){
     	var changed = false;
-    	
+		    	
     	if (sel_all!="") {
-    		if (sel_all=="vehicle" || sel_all=="man" || sel_all == "Command"){
-	    		if (sel_all=="vehicle" && !is_man){
-	    			changed = true;
-	    		} else if(sel_all=="man" && is_man){
-	    			changed = true;    			
-	    		}else if (sel_all=="Command" && is_man){
-
-                    if (unit.IsSpecialist("command")){
-                        changed=true
-                    }else if (unit.squad!="none"){
-                        if (obj_ini.squads[unit.squad].type=="command_squad"){
-                            changed=true
-                        }
-                    }
-                }
-	    	}else if (ma_role[selected] == sel_all){
-				man_sel[selected] = !man_sel[selected];
-	    		changed = true;  
-    		}
+			if(sel_all == "all"){
+				changed = true;
+			} else if (sel_all=="vehicle" && !is_man){
+				changed = true;
+			} else if(sel_all=="man" && is_man){
+				changed = true;    			
+			} else if (sel_all=="Command" && is_man){
+				if (unit.IsSpecialist("command")){
+					changed=true
+				} else if (unit.squad!="none"){
+					if (obj_ini.squads[unit.squad].type=="command_squad"){
+						changed=true
+					}
+				}
+			} else if (ma_role[selected] == sel_all){
+				changed = true;  
+			}
     	}
     	if (filter_mode && changed){
     		ma_view[selected] = !ma_view[selected];
