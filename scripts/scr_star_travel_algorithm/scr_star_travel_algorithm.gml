@@ -104,24 +104,26 @@ function create_complex_star_routes(){
 		if (x>700) && (y>700) && (x<room_width-700) && (x<room_width-700){
 			array_push(central, id);
 		}
-		if (irandom(10)){
-			var nearest_star = distance_removed_star(x,y,1,true,true,false);
-			if (determine_warp_join(nearest_star.id, self.id)){
-				array_push(warp_lanes, [distance_removed_star(x,y,2,true,true,false).name, 1]);
-			} else {
-				array_push(warp_lanes, [nearest_star.name, 1]);
-			}
+
+		var nearest_star = distance_removed_star(x,y,1,true,true,false);
+		if (determine_warp_join(nearest_star.id, self.id)){
+			array_push(warp_lanes, [distance_removed_star(x,y,2,true,true,false).name, 1]);
 		} else {
+			array_push(warp_lanes, [nearest_star.name, 1]);
+		}
+
+		if (!irandom(8)){
 			array_push(warp_lanes, [distance_removed_star(x,y,irandom_range(3, 6),true,true,false).name, 1]);
 		}
 	}
 	full_loci = [north, east,west,south,central];
-	var current_start,set, join_set, total_joins;
+	// here is where we set up the warp hubs
+	var WarpHub,set, join_set, total_joins;
 	for (var i=0;i<array_length(full_loci);i++){
 		if (irandom(1)) then continue;
 		set = full_loci[i];
 		if (array_length(set) == 0) then continue;
-		current_start = set[irandom(array_length(set)-1)];
+		WarpHub = set[irandom(array_length(set)-1)];
 		total_joins =0;
 		for (var s=0;s<array_length(full_loci);s++){
 			if (!irandom(1)) then continue;
@@ -133,7 +135,7 @@ function create_complex_star_routes(){
 				//if !(irandom(2)) then
 			}*/
 			join_star = join_set[irandom(set_count-1)];
-			array_push(current_start.warp_lanes, [join_star.name, 4]);
+			array_push(WarpHub.warp_lanes, [join_star.name, 4]);
 			total_joins++;
 			if (total_joins>3) then break;
 		}

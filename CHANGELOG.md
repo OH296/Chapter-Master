@@ -49,8 +49,8 @@ All notable changes to this project will be documented in this file.
 - Requisition points reward for winning battles, depending on the strength of the enemy that you fought.
 	- Code-wise it's just a simple table with static rewards. I can't bother with more.
 - Genestealer cults now have names.
-- medium and larger forges now have the option to have vehicle hangers built allowing vehicles to be built at the forge
-	- built vehicels will spawn at locations with said hangers
+- Medium and larger forges now have the option to have vehicle hangers built, allowing vehicles to be built at the forge.
+	- Built vehicles will spawn at locations with said hangers.
 ### Changed:
 - Stars will no longer spawn on top of each other.
 - Player should now be able to move camera closer to the edge of the screen.
@@ -87,10 +87,16 @@ All notable changes to this project will be documented in this file.
 - Crashes: 
 	- Caused Inquisitors snooping on player bases.
 	- Caused by Chaplain duplication on drop select.
+	- (Possibly fixed) After ancient ruins ambush with a single unit.
+	- (Possibly fixed) Magic crash caused by `obj_turn_end_Alarm_0`.
+	- During save loading caused by `gml_Script_return_json_from_ini`.
+	- End turn crash caused by `gml_Script_ork_ship_production`.
+	- During save loading caused by `obj_event_log.event = json_parse(base64_decode(ini_read_string("Event","log","")));`.
 - Visual:
 	- Eviscerator and Relic Blade sprites display on Terminators properly now.
 	- Deathwing knights color scheme is no longer broken.
 	- Promotion gear text overlapping.
+	- Fix button placement on the livery/color chapter creation page.
 - In-game wiki should now work (kinda).
 - Travelling without waypoints while pressing shift now fixed.
 - Vanguard Sergeants, Honour Guard and Dark Angels Veterans no longer spawn overburdened.
@@ -101,10 +107,13 @@ All notable changes to this project will be documented in this file.
 - Fixed Force Staff getting double damage bonus because of a code mistake.
 - Stars should no longer spawn very close to the right or bottom edge of the map.
 - Will no longer be able to select all ships globally with select all on bombard.
-- Hopefully fixed company view sometimes not coming up.
+- Selecting vehicles globaly, bypassing location checks.
+	- Related negative space on spaceships bug.
+- Hopefully fixed squad view sometimes not coming up and related problems.
 - Max artifact count is increased to 50.
 - Inquisitor should no longer try inspect fleets heading out of system.
-- player will now be able to build vehicles in the forge correctly
+- Player will now be able to build vehicles in the forge correctly.
+- Livery and color unit preview switching, on chapter creation, now supports non-custom chapters.
 
 ### Under The Hood:
 - Warp travel route grading support.
