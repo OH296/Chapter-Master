@@ -68,7 +68,6 @@ target_gear=0;
 tab=0;
 role_names_all="";
 
-// 
 chapter="Unnamed";
 chapter_string="Unnamed";
 chapter_year=0;
@@ -79,7 +78,13 @@ points=0;maxpoints=100;
 fleet_type=1;
 strength=5;cooperation=5;
 purity=5;stability=5;
-var i;i=-1;repeat(10){i+=1;adv[i]="";adv_num[i]=0;dis[i]="";dis_num[i]=0;}
+for(var i=0; i<16; i++){
+    adv[i]="";
+    adv_num[i]=0;
+    dis[i]="";
+    dis_num[i]=0;
+}
+var i;i=-1;repeat(10){i+=1;}
 homeworld="Temperate";homeworld_name=global.name_generator.generate_star_name();
 recruiting="Death";recruiting_name=global.name_generator.generate_star_name();
 flagship_name=global.name_generator.generate_imperial_ship_name();
@@ -564,7 +569,7 @@ color_to_pauldron21="Red";
 i=-1;
 repeat(61){i+=1;advantage[i]="";advantage_tooltip[i]="";disadvantage[i]="";dis_tooltip[i]="";}
 
-i=0;
+i=1;
 advantage[i]="Ambushers";
 advantage_tooltip[i]="Your chapter is especially trained with ambushing foes; they have a bonus to attack during the start of a battle.";i+=1;
 //advantage[i]="Battle Cousins";
@@ -615,10 +620,11 @@ advantage[i]="Melee Enthusiasts";
 advantage_tooltip[i]="Rip and tear! Each Company has an additional Assault Squad.  Your marines and dreadnoughts also have boosted attack with melee weapons.";i+=1;
 advantage[i]="Venerable Ancients";
 advantage_tooltip[i]="Even in death they still serve. Your chapter places a staunch reverence for its forebears and has a number of additional venerable dreadnoughts in service ";i+=1;
+
 i+=1;
 advantage[i]="Cancel";advantage_tooltip[i]="";
 
-i=0;
+i=1;
 disadvantage[i]="Black Rage";
 dis_tooltip[i]="Your marines are susceptible to Black Rage, having a chance each battle to become Death Company.  These units are locked as Assault Marines and are fairly suicidal.";i+=1;
 disadvantage[i]="Blood Debt";
