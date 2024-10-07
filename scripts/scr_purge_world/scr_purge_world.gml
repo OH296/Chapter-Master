@@ -204,10 +204,10 @@ function scr_purge_world(star, planet, action_type, action_score) {
 	    if (dis>70) then chance=0;
     
 	    // Advantages
-	    o=0;yep=0;repeat(4){o+=1;if (obj_ini.adv[o]="Ambushers") then yep=1;}if (yep=1) then ambush=true;
-	    o=0;yep=0;repeat(4){o+=1;if (obj_ini.adv[o]="Lightning Warriors") then yep=1;}if (yep=1) then chance+=5;
-	    o=0;yep=0;repeat(4){o+=1;if (obj_ini.dis[o]="Shitty Luck") then yep=1;}if (yep=1) then chance+=20;
-    
+		if(scr_has_adv("Ambushers")) then ambush=true;
+		if(scr_has_adv("Lightning Warriors")) then chance+=5;
+		if(scr_has_disadv("Shitty Luck")) then chance+=20;
+
 	    // Size
 	    if (action_score>5) and (action_score<=10) then siz_penalty=5;
 	    if (action_score>10) and (action_score<=20) then siz_penalty=20;
@@ -223,7 +223,7 @@ function scr_purge_world(star, planet, action_type, action_score) {
 	    txt="Your Astartes descend upon the surface of "+string(star.name)+" "+string(scr_roman(planet))+" and plot the movements and schedule of the governor.  ";    
 	    txt+="Once the time is right their target is ambushed "+choose("in their home","in the streets","while driving","taking a piss")+" and tranquilized.  ";
     
-	    o=0;yep=0;repeat(4){o+=1;if (obj_ini.dis[o]="Never Forgive") then yep=1;}if (yep=1) then spec1=1;
+		if(scr_has_disadv("Never Forgive")) then spec1=1;
 	    if (global.chapter_name="Space Wolves") or (obj_ini.progenitor=3) then spec1=3;
 	    if (global.chapter_name="Iron Hands") or (obj_ini.progenitor=6) then spec1=6;
 	    if (obj_ini.omophagea=1) then spec1=choose(spec1,20);

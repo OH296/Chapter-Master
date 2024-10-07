@@ -473,7 +473,7 @@ if (defeat=0) and (enemy=9) and (battle_special="tyranid_org"){
 if (enemy=1) and (on_ship=true) and (defeat=0){
     var diceh;diceh=floor(random(100))+1;
     
-    var o;o=0;repeat(4){i+=1;if (obj_ini.dis[o]="Shitty Luck") then diceh-=15;}
+    if(scr_has_disadv("Shitty Luck")) then diceh-=15;
     
     if (diceh<=15){
         var ship,ship_hp,i;i=-1;

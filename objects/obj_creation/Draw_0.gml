@@ -464,10 +464,19 @@ if (slide=2){
         draw_set_halign(fa_left);
         draw_set_font(fnt_40k_30b);
         draw_text_transformed(436,564,"Chapter Advantages",0.5,0.5,0);draw_set_font(fnt_40k_14);
+        var adv_txt = {
+            x1: 436,
+            y1: 570,
+            w: 204,
+            h: 20,
+        }
+        adv_txt.x2 = adv_txt.x1 + adv_txt.w;
+        adv_txt.y2 = adv_txt.y1 + adv_txt.h;
+
         for (i=1;i<=8;i++){
             var draw_string = adv_num[i]==0?"[+]":"[-] "+adv[i];
-            draw_text(436,570+(i*20), draw_string);
-            if (scr_hit(436,570+(i*20),640,599+(i*20))){
+            draw_text(adv_txt.x1,adv_txt.y1+(i*adv_txt.h), draw_string);
+            if (scr_hit(adv_txt.x1,adv_txt.y1+(i*adv_txt.h),adv_txt.x2,adv_txt.y2+(i*adv_txt.h))){
                 if (adv_num[i]!=0){
                     tooltip=advantage[adv_num[i]];
                     tooltip2=advantage_tooltip[adv_num[i]];
@@ -496,10 +505,20 @@ if (slide=2){
         draw_set_font(fnt_40k_30b);
         draw_text_transformed(810,564,"Chapter Disadvantages",0.5,0.5,0);
         draw_set_font(fnt_40k_14);
+
+        var dis_txt = {
+            x1: 810,
+            y1: 570,
+            w: 204,
+            h: 20,
+        }
+        dis_txt.x2 = dis_txt.x1 + dis_txt.w;
+        dis_txt.y2 = dis_txt.y1 + dis_txt.h;
+
         for (i=1;i<=8;i++){
             var draw_string = dis_num[i]==0?"[+]":"[-] "+dis[i];
-            draw_text(810,570+(i*20), draw_string);
-            if (scr_hit(810,570+(i*20),1014,599+(i*20))){
+            draw_text(dis_txt.x1,dis_txt.y1+(i*dis_txt.h), draw_string);
+            if (scr_hit(dis_txt.x1,dis_txt.y1+(i*dis_txt.h),dis_txt.x2,dis_txt.y2+(i*dis_txt.h))){
                 if (dis_num[1]!=0){
                     tooltip=disadvantage[dis_num[i]];
                     tooltip2=dis_tooltip[dis_num[i]];

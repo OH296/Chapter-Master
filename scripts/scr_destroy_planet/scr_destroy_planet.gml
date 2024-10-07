@@ -100,7 +100,9 @@ function scr_destroy_planet(argument0) {
 	    obj_controller.disposition[4]+=5;
     
 	    obj_controller.disposition[5]+=5;
-	    var o;o=0;repeat(4){if (o<=4){o+=1;if (obj_ini.adv[o]="Reverent Guardians") then o=500;}}if (o>100) then obj_controller.disposition[5]+=5;
+	    var o;o=0;
+		if (scr_has_adv("Reverent Guardians")) then o=500;
+		if (o>100) then obj_controller.disposition[5]+=5;
     
 	    if (obj_controller.blood_debt=1){obj_controller.penitent_current+=1500;obj_controller.penitent_turn=0;obj_controller.penitent_turnly=0;}
 	}

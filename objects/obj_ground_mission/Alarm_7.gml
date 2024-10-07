@@ -17,7 +17,11 @@ if (defeat=0){
     if (dice<(battle_threat*10)){
         if (ruins_race=5){
             obj_controller.disposition[5]+=2;
-            var o;o=0;repeat(4){if (o<=4){o+=1;if (obj_ini.adv[o]="Reverent Guardians") then o=500;}}if (o>100) then obj_controller.disposition[5]+=1;
+            
+            var o;o=0;
+            if (scr_has_adv("Reverent Guardians")) then o=500;
+
+            if (o>100) then obj_controller.disposition[5]+=1;
         }
         
         

@@ -6,9 +6,7 @@ instance_activate_object(obj_enunit);
 // Checks if Chapter master is a psyker and then casts a pskychic power (kamehameha)
 if (chapter_master_psyker = true) and(obj_ini.psy_powers = "default") {
 	var yeo = false;
-	for (var i = 1; i <= 4; i++) {
-		if (obj_ini.adv[i] = "Paragon") then yeo = true;
-	}
+	if (scr_has_adv("Paragon")) then yeo = true;
 	if (yeo = true) then kamehameha = true;
 }
 

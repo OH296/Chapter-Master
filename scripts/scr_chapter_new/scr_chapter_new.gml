@@ -678,15 +678,10 @@ if (argument0="Crimson Fists"){founding="N/A";points=150;
 	    chapter_master_ranged=chapter_master_ranged21;
 		chapter_master_specialty=chapter_master_specialty21;
     
-	    adv[1]=adv21[1]
-	    adv[2]=adv21[2]
-	    adv[3]=adv21[3]
-	    adv[4]=adv21[4]
-		
-		dis[1]=dis21[1]
-	    dis[2]=dis21[2]
-	    dis[3]=dis21[3]
-	    dis[4]=dis21[4]
+		for(var i = 1; i <= 8; i++){
+	    	adv[i]=adv21[i];
+			dis[i]=dis21[i];
+		}
 	}
 
 	/*
