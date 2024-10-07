@@ -564,7 +564,7 @@ color_to_pauldron21="Red";
 i=-1;
 repeat(61){i+=1;advantage[i]="";advantage_tooltip[i]="";disadvantage[i]="";dis_tooltip[i]="";}
 
-i=1;
+i=0;
 advantage[i]="Ambushers";
 advantage_tooltip[i]="Your chapter is especially trained with ambushing foes; they have a bonus to attack during the start of a battle.";i+=1;
 //advantage[i]="Battle Cousins";
@@ -618,7 +618,7 @@ advantage_tooltip[i]="Even in death they still serve. Your chapter places a stau
 i+=1;
 advantage[i]="Cancel";advantage_tooltip[i]="";
 
-i=1;
+i=0;
 disadvantage[i]="Black Rage";
 dis_tooltip[i]="Your marines are susceptible to Black Rage, having a chance each battle to become Death Company.  These units are locked as Assault Marines and are fairly suicidal.";i+=1;
 disadvantage[i]="Blood Debt";
