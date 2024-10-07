@@ -689,40 +689,40 @@ if (slide=2){
         draw_set_font(fnt_40k_14b);draw_set_halign(fa_left);
         
         for(var i = 0; i < array_length(advantage); i++){
-            var col = {
+            var column = {
                 x1: 436,
                 y1: 250,
                 w: 100,
                 h: 20,
             }
-            col.x2 = col.x1 + col.w;
-            col.y2 = col.y1 + col.h;
+            column.x2 = column.x1 + column.w;
+            column.y2 = column.y1 + column.h;
             var disable = 0;
             if (advantage[i]!=""){
                 var adv_name = advantage[i];
                 //columns of 14, shift the left boarder across
-                if(i >= 15 && i <29) {col.x1 = 670; col.x2 = col.x1 + col.w;};
-                if(i >= 29 && i <42) {col.x1 = 904; col.x2 = col.x1 + col.w;};
+                if(i >= 15 && i <29) {column.x1 = 670; column.x2 = column.x1 + column.w;};
+                if(i >= 29 && i <42) {column.x1 = 904; column.x2 = column.x1 + column.w;};
                 draw_set_color(38144);draw_set_alpha(1);
                 if (array_contains(adv, adv_name)) then draw_set_alpha(0.5);
                 if (adv_name="Psyker Abundance" && array_contains(dis, "Psyker Intolerant")){disable=1;draw_set_alpha(0.5);} 
                 if (adv_name="Reverent Guardians"&& array_contains(dis, "Suspicious")){disable=1;draw_set_alpha(0.5);} 
                 if (adv_name="Tech-Brothers" && array_contains(dis, "Tech-Heresy")){disable=1;draw_set_alpha(0.5);}
                 
-                var gap = (((i-1)%14) * col.h);
-                draw_text(col.x1,col.y1+gap,string_hash_to_newline(adv_name));
+                var gap = (((i-1)%14) * column.h);
+                draw_text(column.x1,column.y1+gap,string_hash_to_newline(adv_name));
                 
                 // Cancel button
-                if (scr_hit(col.x1,col.y1+gap,col.x1+string_width(string_hash_to_newline(adv_name)),col.y1+col.h+gap)) and (cooldown<=0) and (mouse_left>=1) and (adv_name="Cancel"){
+                if (scr_hit(column.x1,column.y1+gap,column.x1+string_width(string_hash_to_newline(adv_name)),column.y1+column.h+gap)) and (cooldown<=0) and (mouse_left>=1) and (adv_name="Cancel"){
                     cooldown=8000;popup="";
                 }
                 // Tooltips
-                if (scr_hit(col.x1,col.y1+gap,col.x1+string_width(string_hash_to_newline(adv_name)),col.y1+col.h+gap)){
+                if (scr_hit(column.x1,column.y1+gap,column.x1+string_width(string_hash_to_newline(adv_name)),column.y1+column.h+gap)){
                     tooltip=adv_name;tooltip2=advantage_tooltip[i];draw_set_color(c_white);draw_set_alpha(0.2);
-                    draw_text(col.x1,col.y1+gap,string_hash_to_newline(adv_name));
+                    draw_text(column.x1,column.y1+gap,string_hash_to_newline(adv_name));
                 }
                 //Click on advantage
-                if (scr_hit(col.x1,col.y1+gap,col.x1+string_width(string_hash_to_newline(adv_name)),col.y1+col.h+gap)) and (cooldown<=0) and (mouse_left>=1) and (array_contains(adv, adv_name) == false){
+                if (scr_hit(column.x1,column.y1+gap,column.x1+string_width(string_hash_to_newline(adv_name)),column.y1+column.h+gap)) and (cooldown<=0) and (mouse_left>=1) and (array_contains(adv, adv_name) == false){
                     if (disable=0){
                         cooldown=8000;
                         adv[temp]=adv_name;
@@ -738,20 +738,20 @@ if (slide=2){
         draw_text_transformed(800,211,string_hash_to_newline("Select a Disadvantage"),0.6,0.6,0);
         draw_set_font(fnt_40k_14b);draw_set_halign(fa_left);
         for(var i = 0; i < array_length(disadvantage); i++){
-            var col = {
+            var column = {
                 x1: 436,
                 y1: 250,
                 w: 100,
                 h: 20,
             }
-            col.x2 = col.x1 + col.w;
-            col.y2 = col.y1 + col.h;
+            column.x2 = column.x1 + column.w;
+            column.y2 = column.y1 + column.h;
             var disable = 0;
             if (disadvantage[i]!=""){
                 var dis_name = disadvantage[i];
                 //columns of 14, shift the left boarder across and leave a gap at the top on cols 2 & 3
-                if(i >= 15 && i <29) {col.x1 = 670; col.x2 = col.x1 + col.w;};
-                if(i >= 29 && i <42) {col.x1 = 904; col.x2 = col.x1 + col.w;};
+                if(i >= 15 && i <29) {column.x1 = 670; column.x2 = column.x1 + column.w;};
+                if(i >= 29 && i <42) {column.x1 = 904; column.x2 = column.x1 + column.w;};
                 draw_set_color(38144);draw_set_alpha(1);
                 if (array_contains(dis, dis_name)) then draw_set_alpha(0.5);
                 
@@ -760,18 +760,18 @@ if (slide=2){
                 if (dis_name="Tech-Heresy") and (array_contains(adv, "Tech-Brothers")){disable=1;draw_set_alpha(0.5);}
                 if (dis_name="Blood Debt") and (fleet_type=3){disable=1;draw_set_alpha(0.5);}
                 
-                var gap = (((i-1)%14) * col.h);
+                var gap = (((i-1)%14) * column.h);
 
-                draw_text(col.x1,col.y1+gap,string_hash_to_newline(dis_name));
+                draw_text(column.x1,column.y1+gap,string_hash_to_newline(dis_name));
                 
                 // Cancel button
-                if (scr_hit(col.x1,col.y1+gap,col.x1+string_width(string_hash_to_newline(dis_name)),col.y1+col.h+gap)) and (cooldown<=0) and (mouse_left>=1) and (dis_name="Cancel"){
+                if (scr_hit(column.x1,column.y1+gap,column.x1+string_width(string_hash_to_newline(dis_name)),column.y1+column.h+gap)) and (cooldown<=0) and (mouse_left>=1) and (dis_name="Cancel"){
                     cooldown=8000;popup="";
                 }
                 //Tooltip
-                if (scr_hit(col.x1,col.y1+gap,col.x1+string_width(string_hash_to_newline(dis_name)),col.y1+col.h+gap)){tooltip=dis_name;tooltip2=dis_tooltip[i];draw_set_color(c_white);draw_set_alpha(0.2);draw_text(col.x1,col.y1+gap,string_hash_to_newline(dis_name));}
+                if (scr_hit(column.x1,column.y1+gap,column.x1+string_width(string_hash_to_newline(dis_name)),column.y1+column.h+gap)){tooltip=dis_name;tooltip2=dis_tooltip[i];draw_set_color(c_white);draw_set_alpha(0.2);draw_text(column.x1,column.y1+gap,string_hash_to_newline(dis_name));}
                 //Click on disadvantage
-                if (scr_hit(col.x1,col.y1+gap,col.x1+string_width(string_hash_to_newline(dis_name)),col.y1+col.h+gap)) and (cooldown<=0) and (mouse_left>=1) and (array_contains(dis, dis_name) == false){
+                if (scr_hit(column.x1,column.y1+gap,column.x1+string_width(string_hash_to_newline(dis_name)),column.y1+column.h+gap)) and (cooldown<=0) and (mouse_left>=1) and (array_contains(dis, dis_name) == false){
                     if (disable=0){
                         cooldown=8000;
                         dis[temp]=dis_name;
