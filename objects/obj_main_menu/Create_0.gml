@@ -4,7 +4,7 @@ if (!instance_exists(obj_cuicons)){
     instance_create(0,0,obj_cuicons);
 }
 
-global.version="0.9.2.4";
+global.version="0.9.3.0";
 global.game_seed=0;
 global.cheat_req=false;
 global.cheat_gene=false;
