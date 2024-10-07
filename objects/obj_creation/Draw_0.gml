@@ -477,6 +477,11 @@ if (slide=2){
             var draw_string = adv_num[i]==0?"[+]":"[-] "+adv[i];
             draw_text(adv_txt.x1,adv_txt.y1+(i*adv_txt.h), draw_string);
             if (scr_hit(adv_txt.x1,adv_txt.y1+(i*adv_txt.h),adv_txt.x2,adv_txt.y2+(i*adv_txt.h))){
+                if (points+20>=maxpoints) and (adv_num[i]=0) and (popup=""){
+                    tooltip="Insufficient Points";
+                    tooltip2="Add more disadvantages or decrease Chapter Stats to add more advantages";
+                }
+                
                 if (adv_num[i]!=0){
                     tooltip=advantage[adv_num[i]];
                     tooltip2=advantage_tooltip[adv_num[i]];

@@ -1695,11 +1695,8 @@ function scr_dialogue(diplo_keyphrase) {
 	            disposition[diplomacy]+=3;
 				faction_justmet=0;
 	            var o=0;
-				for(o=0; o<=4; o++){
-					if (obj_ini.adv[o]="Reverent Guardians") {
-						o=500;
-						break;
-					}
+				if (scr_has_adv("Reverent Guardians")) {
+					o=500;
 				}
 				if (o>100) then obj_controller.disposition[5]+=2;
 	        }

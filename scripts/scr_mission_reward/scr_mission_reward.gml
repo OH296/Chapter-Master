@@ -23,7 +23,8 @@ function scr_mission_reward(argument0, argument1, argument2) {
 	        repeat(300){i+=1;
 	            if (obj_ini.role[com][i]=obj_ini.role[100][16]) and (obj_ini.loc[com][i]="Mechanicus Vessel"){
 	                roll2=floor(random(100))+1;
-	                if (obj_ini.dis[1]="Shitty Luck") or (obj_ini.dis[2]="Shitty Luck") or (obj_ini.dis[3]="Shitty Luck") or (obj_ini.dis[4]="Shitty Luck") then roll2-=10;
+					
+					if(scr_has_disadv("Shitty Luck")) then roll2-=10; 
 
 	                if (roll2<=50){obj_controller.command-=1;techs_lost+=1;
 	                    kill_and_recover(com, i, true, false);
@@ -92,7 +93,7 @@ function scr_mission_reward(argument0, argument1, argument2) {
 	if (argument0="mech_raider"){
 	    var roll1,result;
 	    roll1=floor(random(100))+1;result="";
-	    if (obj_ini.dis[1]="Shitty Luck") or (obj_ini.dis[2]="Shitty Luck") or (obj_ini.dis[3]="Shitty Luck") or (obj_ini.dis[4]="Shitty Luck") then roll1+=20;
+	    if (scr_has_disadv("Shitty Luck")) then roll1+=20;
 
 	    if (roll1<=33) then result="New";
 	    if (roll1>33) and (roll1<=66) then result="Land Raider";
@@ -143,7 +144,7 @@ function scr_mission_reward(argument0, argument1, argument2) {
 	if (argument0="mech_bionics"){
 	    var roll1,result;
 	    roll1=floor(random(100))+1;result="";
-	    if (obj_ini.dis[1]="Shitty Luck") or (obj_ini.dis[2]="Shitty Luck") or (obj_ini.dis[3]="Shitty Luck") or (obj_ini.dis[4]="Shitty Luck") then roll1+=20;
+	    if (scr_has_disadv("Shitty Luck")) then roll1+=20;
 
 	    if (roll1<=33) then result="Requisition";
 	    if (roll1>33) and (roll1<=66) then result="Bionics";

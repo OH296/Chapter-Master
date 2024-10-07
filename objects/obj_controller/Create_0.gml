@@ -659,7 +659,7 @@ blood_debt=0;
 // ** Sets penitent or blood debt if chapter disadvantage is selected **
 if (instance_exists(obj_ini)){
     var bloo=0;
-    for(var o=1; o<=4; o++){if (obj_ini.dis[o]="Blood Debt") then bloo=1;}
+    if(scr_has_disadv("Blood Debt")) then bloo=1;
 
     penitent=obj_ini.penitent;
     penitent_current=obj_ini.penitent_current;

@@ -339,12 +339,11 @@ psyker_points += training_points_values[training_psyker];
 
 var goal=60,yep=0;
 novice_type = string("{0} Aspirant",obj_ini.role[100,17]);
-for(var o=1; o<=4; o++){
-    if (obj_ini.adv[o]=="Psyker Abundance"){
-        goal=40;
-        yep=1;
-    }
+if (scr_has_adv("Psyker Abundance")){
+    goal=40;
+    yep=1;
 }
+
 
 if (training_psyker>0){
     recruit_count=scr_role_count(novice_type,"0");
@@ -789,9 +788,7 @@ if (blood_debt==1) and (penitent==1){
         disposition[eFACTION.Inquisition]+=20;
         disposition[eFACTION.Ecclesiarchy]+=20;
         var o=0;
-        for(o=1; o<=4; o++){
-            if (obj_ini.adv[o]=="Reverent Guardians") then o=500;
-        }
+        if (scr_has_adv("Reverent Guardians")) then o=500;
         if (o>100) then obj_controller.disposition[eFACTION.Ecclesiarchy]+=10;
         scr_event_log("","Blood Debt payed off.  You may once more recruit Astartes.");
     }
@@ -815,9 +812,7 @@ if (penitent==1) and (blood_debt==0){
         disposition[eFACTION.Imperium]+=20;
         disposition[eFACTION.Ecclesiarchy]+=20;
         var o=0;
-        for(o=1; o<=4; o++){
-            if (obj_ini.adv[o]=="Reverent Guardians") then o=500;
-        }
+        if (scr_has_adv("Reverent Guardians")) then o=500;
         if (o>100) then obj_controller.disposition[eFACTION.Ecclesiarchy]+=10;
         scr_event_log("","Penitent Crusade ends.  You may once more recruit Astartes.");
     }
