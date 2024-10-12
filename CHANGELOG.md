@@ -33,7 +33,7 @@ All notable changes to this project will be documented in this file.
 - Hidden game settings that currently don't do anything.
 - Normal Dreadnoughts have 600 as max age at chapter generation.
 - Artifacts now have more relevant stat info in their descriptions.
-- Artifact equip buttons are different now.
+- Artifact equip window buttons.
 
 ### Fixed:
 - Crash from building forges at secret lairs.
@@ -51,6 +51,7 @@ All notable changes to this project will be documented in this file.
 - Crash from deprecated onceh variable.
 - Added fail safes to stop crash when viewing some planetary features.
 - Artifact screen text overlap, broken strings are fixed.
+- Some of the tooltip issues.
 
 ### Under The Hood:
 - `scr_has_adv` and `scr_has_disadv` functions.

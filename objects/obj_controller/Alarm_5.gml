@@ -708,7 +708,7 @@ if (gene_xeno>0){
 }
 var p=0,penitorium=0, unit;
 for(var c=0; c<11; c++){
-    for(var e=1; e<=250; e++){
+    for(var e=1; e<=array_length(obj_ini.god); e++){
         if (obj_ini.god[c,e]>=10){
             unit=fetch_unit([c,e]);
             p+=1;

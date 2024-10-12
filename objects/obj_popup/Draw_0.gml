@@ -403,7 +403,7 @@ if (type = 8) and (instance_exists(obj_controller)) {
     var y2 = yy + 48;
     var before = target_comp;
     var temp_alpha = 1;
-    var arti = obj_ini.artifact_struct[obj_controller.menu_artifact];
+    arti = obj_ini.artifact_struct[obj_controller.menu_artifact];
 
     // draw_sprite(spr_popup_large,0,x2,y2);
 
@@ -418,7 +418,7 @@ if (type = 8) and (instance_exists(obj_controller)) {
     draw_set_halign(fa_left);
     draw_text(x2 + 31, y2 + 35, "Select Company:");
 
-    // Draw HQ text
+    // Draw HQ button
     temp_alpha = (target_comp == 0) ? 1 : 0.5;
     var hq_text = $"HQ";
     var hq_button = draw_unit_buttons([x2 + 60, y2 + 75, x2 + 60 + 60, y2 + 75 + 20], hq_text, [1, 1], , , fnt_40k_12, temp_alpha); // Position for HQ
@@ -426,7 +426,7 @@ if (type = 8) and (instance_exists(obj_controller)) {
         target_comp = 0;
     }
 
-    // Draw other items
+    // Draw other company buttons
     for (var i = 1; i < 11; i++) {
         temp_alpha = (target_comp == i) ? 1 : 0.5;
         var item_text = $"{romanNumerals[i - 1]}";
@@ -453,6 +453,7 @@ if (type = 8) and (instance_exists(obj_controller)) {
         i = -1;
     }
 
+    // Weapon slot buttons
     if (arti.determine_base_type() == "weapon") {
         draw_text(x2 + 30, y2 + 128, ("Replace:"));
     
@@ -470,15 +471,15 @@ if (type = 8) and (instance_exists(obj_controller)) {
     }
 
 
+    // Soldier list
     draw_set_font(fnt_40k_12);
     draw_rectangle(x2+29,y2+160,x2+569,y2+363+356,1);// Main rectangle?
-    
     scr_scrollbar(1520,220,1543,761,23,obj_controller.man_max,obj_controller.man_current);
     draw_rectangle(x2+569,y2+171,x2+592,y2+357+356,1);// Inside of scroll
     draw_rectangle(x2+569,y2+150,x2+592,y2+378+356,1);// Outside of scroll
     draw_sprite_stretched(spr_arrow,2,x2+569,y2+150,23,22);
     draw_sprite_stretched(spr_arrow,3,x2+569,y2+357+356,23,22);
-    
+
     if (target_comp!=-1){
         var top,sel,temp1,temp2,temp3,temp4,temp5;temp1="";temp2="";temp3="";temp4="";temp5="";
         top=obj_controller.man_current;sel=top;
@@ -577,6 +578,9 @@ if (type = 8) and (instance_exists(obj_controller)) {
         }
     }
 
+    if (target_role > 0) and (target_comp != -1) and (units = 1) then all_good = 1
+    else all_good = 0;
+    if (arti.determine_base_type() == "weapon" && target_role > 2) then all_good = 0;
 
     // Screen bottom buttons and shit
     //
@@ -627,7 +631,7 @@ if (type = 8) and (instance_exists(obj_controller)) {
 
                 if (target_role=1) then replace="weapon1";
                 if (target_role=2) then replace="weapon2";
-                if (target_role>3){
+                if (target_role>2){
                     if (gear_weapon_data("armour", arti_base)!=false){
                         replace="armour";
                     } else if (gear_weapon_data("gear", arti_base)!=false){

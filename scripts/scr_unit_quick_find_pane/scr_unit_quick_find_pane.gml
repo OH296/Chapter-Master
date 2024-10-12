@@ -268,7 +268,7 @@ function scr_unit_quick_find_pane() constructor{
 				hover_count=0;
 				hover_item="none";
 			}else if (hover_item!="none"){
-		    	if point_and_click(hover_item.draw(10, 90+(20*hover_item.root_item), "Manage")){
+		    	if point_and_click(hover_item.draw(xx+10, yy+90+(20*hover_item.root_item), "Manage")){
 					group_selection(garrison_log[$system_names[hover_item.root_item]].units,{
 						purpose:$"{system_names[hover_item.root_item]} Management",
 						purpose_code : "manage",

@@ -747,11 +747,6 @@ if (type=6){// Equipment
     if (target_comp=5) then target_role=sel5;
 }
 
-if (type=8){
-    all_good=0;
-    if (target_role>0) and (target_comp!=-1) and (units=1) then all_good=1;
-}
-
 if (image="gene_bad"){
     option1="Dispose of ";
     if (obj_controller.gene_seed<=30) then option1+="100% of the gene-seed.";

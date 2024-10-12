@@ -5,7 +5,9 @@ if (instance_exists(obj_fleet)) then exit;
 if (global.load>0) then exit;
 if (obj_controller.invis==true) then exit;
 
-draw_warp_lanes();
+if (obj_controller.menu==0){
+	draw_warp_lanes();
+}
 
 
 
