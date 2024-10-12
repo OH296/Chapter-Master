@@ -221,7 +221,8 @@ if (defeat=0) and (battle_special="space_hulk"){
     part10="Space Hulk Exploration at ";
     ex=min(100,100-((enemy_power-1)*20));
     part10+=string(ex)+"%";
-    newline=part10;if (ex=100) then newline_color="red";
+    newline=part10;
+    if (ex=100) then newline_color="red";
     scr_newtext();
 
     if (string_count("Shitty",obj_ini.strin2)>0) then dicey=dicey*1.5;
@@ -246,7 +247,7 @@ if (string_count("ruins",battle_special)>0){
     scr_newtext();
 }
 
-var reduce_power;reduce_power=true;
+var reduce_power=true;
 if (battle_special="tyranid_org") then reduce_power=false;
 if (battle_special="ship_demon") then reduce_power=false;
 if (string_count("_attack",battle_special)>0) then reduce_power=false;
@@ -266,14 +267,37 @@ if (defeat=0) and (reduce_power=true){
         // if (threat=1) or (threat=2) then battle_object.p_guardsmen[battle_id]=0;
     }
 
-    if (enemy=5){enemy_power=battle_object.p_sisters[battle_id];part10="Ecclesiarchy";}
-    if (enemy=6){enemy_power=battle_object.p_eldar[battle_id];part10="Eldar";}
-    if (enemy=7){enemy_power=battle_object.p_orks[battle_id];part10="Ork";}
-    if (enemy=8){enemy_power=battle_object.p_tau[battle_id];part10="Tau";}
-    if (enemy=9){enemy_power=battle_object.p_tyranids[battle_id];part10="Tyranid";}
-    if (enemy=10){enemy_power=battle_object.p_traitors[battle_id];part10="Heretic";if (threat=7) then part10="Daemon";}
-    if (enemy=11){enemy_power=battle_object.p_chaos[battle_id];part10="Chaos Space Marine";}
-    if (enemy=13){enemy_power=battle_object.p_necrons[battle_id];part10="Necrons";}
+    if (enemy=5){
+        enemy_power=battle_object.p_sisters[battle_id];
+        part10="Ecclesiarchy";
+    }
+    else if (enemy=6){
+        enemy_power=battle_object.p_eldar[battle_id];
+        part10="Eldar";
+    }
+    else if (enemy=7){
+        enemy_power=battle_object.p_orks[battle_id];
+        part10="Ork";
+    }
+    else if (enemy=8){
+        enemy_power=battle_object.p_tau[battle_id];
+        part10="Tau";
+    }
+    else if (enemy=9){
+        enemy_power=battle_object.p_tyranids[battle_id];
+        part10="Tyranid";
+    }
+    else if (enemy=10){
+        enemy_power=battle_object.p_traitors[battle_id];
+        part10="Heretic";if (threat=7) then part10="Daemon";
+    }
+    else if (enemy=11){
+        enemy_power=battle_object.p_chaos[battle_id];
+        part10="Chaos Space Marine";}
+    else if (enemy=13){
+        enemy_power=battle_object.p_necrons[battle_id];
+        part10="Necrons";
+    }
 
     if (instance_exists(battle_object)) and (enemy_power>2){
         if (awake_tomb_world(battle_object.p_feature[battle_id])!=0){
@@ -377,9 +401,11 @@ if (defeat=0) and (reduce_power=true){
         if (battle_id=4) then part10+=" IV";
         if (battle_id=5) then part10+=" V";
         if (new_power == 0){
-            part10+=$" were completely wiped out. Previous power: {enemy_power}. Reduction: {power_reduction}.";
+            part10+=$" were completely wiped out. Previous power: {
+                enemy_power}. Reduction: {power_reduction}.";
         } else {
-            part10+=$" were reduced to {new_power} after this battle. Previous power: {enemy_power}. Reduction: {power_reduction}.";
+            part10+=$" were reduced to {new_power} after this battle. Previous power: {
+                enemy_power}. Reduction: {power_reduction}.";
         }
         newline=part10;scr_newtext();
         part10 = $"Received {requisition_reward} requisition points as a reward for slaying enemies of the Imperium.";
@@ -460,6 +486,7 @@ if (defeat=0) and (reduce_power=true){
         }
     }*/
 }
+
 if (defeat=0) and (enemy=9) and (battle_special="tyranid_org"){
     // show_message(string(captured_gaunt));
     if (captured_gaunt=1) then newline=captured_gaunt+" Gaunt organism have been captured.";
@@ -624,7 +651,7 @@ if (obj_ini.omophagea){
                     scr_event_log("red","EXCOMMUNICATUS TRAITORUS");  
                     obj_controller.alarm[8]=1;   
                     if ((!instance_exists(obj_turn_end))){
-                        var pip;pip=instance_create(0,0,obj_popup);
+                        var pip=instance_create(0,0,obj_popup);
                         pip.title="Inquisitor Killed";
                         pip.text=msg;
                         pip.image="inquisition";
@@ -651,7 +678,8 @@ if (obj_ini.omophagea){
 if (inq_eated=false) and (obj_ncombat.sorcery_seen>=2){
     scr_loyalty("Use of Sorcery","+");
     newline="Inquisitor "+string(obj_controller.inquisitor[1])+" witnessed your Chapter using sorcery.";
-    scr_event_log("green",string(newline));scr_newtext();
+    scr_event_log("green",string(newline));
+    scr_newtext();
 }
 
 if (exterminatus>0) and (dropping!=0){
@@ -749,14 +777,16 @@ if (endline=0){
 
 if (defeat=1){
 	player_forces=0;
-		if (ground_mission){
+	if (ground_mission){
 		obj_ground_mission.recoverable_gene_seed = seed_max;
 	}
 	
 }
 
 instance_deactivate_object(obj_star);
+instance_deactivate_object(obj_ground_mission);
 
-
+show_debug_message($"{instance_number(obj_popup)}");
+show_debug_message($"{started}");
 /* */
 /*  */

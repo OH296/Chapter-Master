@@ -536,7 +536,7 @@ if (obj_controller.selecting_planet!=0){
             y_move += button_size[3]-button_size[1];
             if (point_and_click(button_size)){
                 if (planet_displays[i][0] != "????"){
-                    feature = new feature_selected(planet_displays[i][1]);
+                    feature = new feature_selected(planet_displays[i][1], target, current_planet);
                 } else {
                     feature = "";
                 }

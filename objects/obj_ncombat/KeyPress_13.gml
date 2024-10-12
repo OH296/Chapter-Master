@@ -5,7 +5,7 @@ if __b__
 __b__ = action_if_variable(cd, 1, 1);
 if __b__
 {
-__b__ = action_if_variable(fix_timer, 1, 1);
+__b__ = action_if_variable(click_stall_timer, 1, 1);
 if __b__
 {
 
@@ -20,19 +20,25 @@ if __b__
 if (started>=2) then instance_activate_object(obj_pnunit);
 
 if (started=3){
+    show_debug_message("start alarm7 runup");
     instance_activate_all();
     instance_activate_object(obj_pnunit);
     instance_activate_object(obj_enunit);
-    if (instance_exists(obj_pnunit)){obj_pnunit.alarm[6]=1;}
+    instance_destroy(obj_popup);
+    instance_destroy(obj_star_select);
+    if (instance_exists(obj_pnunit)){
+        obj_pnunit.alarm[6]=1;
+    }
     
     alarm[7]=2;
-    fix_timer=15;
+    click_stall_timer=15;
 }
 
 // if (done>=1) then exit;
 
 if ((started=2) or (started=4)){
-    instance_activate_object(obj_pnunit);instance_activate_object(obj_enunit);
+    instance_activate_object(obj_pnunit);
+    instance_activate_object(obj_enunit);
     // started=3;alarm[5]=3;obj_pnunit.alarm[4]=1;obj_pnunit.alarm[5]=2;obj_enunit.alarm[1]=3;
     started=3;
     // obj_pnunit.alarm[4]=2;obj_pnunit.alarm[5]=3;obj_enunit.alarm[1]=1;
@@ -44,12 +50,14 @@ if ((started=2) or (started=4)){
     instance_activate_object(obj_star);
     instance_activate_object(obj_event_log);
     alarm[5]=6;
-    fix_timer=15;
+    click_stall_timer=15;
     
     fack=1;
     
-    newline="------------------------------------------------------------------------------";scr_newtext();
-    newline="------------------------------------------------------------------------------";scr_newtext();
+    newline="------------------------------------------------------------------------------";
+    scr_newtext();
+    newline="------------------------------------------------------------------------------";
+    scr_newtext();
 }
 
 if (fadein<0) and (fadein>-100) and (started=0){
@@ -81,7 +89,7 @@ if (timer_stage=1) or (timer_stage=5){
     if (global_perils<0) then global_perils=0;
     turns+=1;
     
-    four_show=0;fix_timer=15;
+    four_show=0;click_stall_timer=15;
     // if (battle_over!=1) then alarm[8]=15;
 
     if (enemy!=6){
@@ -114,7 +122,7 @@ if (timer_stage=1) or (timer_stage=5){
 
 else if (timer_stage=3){
     if (battle_over!=1) then alarm[8]=15;
-    fix_timer=15;
+    click_stall_timer=15;
 
     if (enemy!=6){
         if (instance_exists(obj_pnunit)){

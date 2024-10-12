@@ -31,7 +31,9 @@ if (image="fuklaw") and (save>0){
             if (file_exists("screen"+string(del)+".png")){file_delete("screen"+string(del)+".png");}
             with(obj_saveload){instance_destroy();}
             var news=instance_create(0,0,obj_saveload);
-            news.menu=woopwoopwoop;news.top=owner;news.alarm[4]=1;
+            news.menu=woopwoopwoop;
+            news.top=owner;
+            news.alarm[4]=1;
             
             instance_destroy();
         }
@@ -544,43 +546,21 @@ if (image="geneseed_lab"){
 }
 
 
-if (image="ancient_ruins") and (woopwoopwoop=2){
+if (image="ancient_ruins" && woopwoopwoop && move_to_next_stage()) {
     instance_deactivate_all(true);
-    instance_activate_object(obj_controller);
-    instance_activate_object(obj_ini);
-    instance_activate_object(obj_controller.current_planet_feature.battle);
-	var _star = obj_controller.current_planet_feature.star;
-	var _planet = obj_controller.current_planet_feature.planet;
-    
-    instance_create(0,0,obj_ncombat);
-    
-    instance_activate_object(_star);
-	obj_ncombat.man_size_limit = obj_controller.current_planet_feature.man_size_limit;
-   // with(obj_star){if (name!=obj_temp4.loc) then instance_deactivate_object(id);}
-    
-    //that_one=instance_nearest(0,0,obj_star);
-   // instance_activate_object(obj_star);
-    scr_battle_roster(_star.name ,_planet,true);
-    obj_controller.cooldown=10;
-    obj_ncombat.battle_object=_star;
-    instance_deactivate_object(obj_star);
-    obj_ncombat.battle_loc=_star.name;
-    obj_ncombat.battle_id=_planet;
-    obj_ncombat.battle_special="ruins";
-    if (obj_ground_mission.ruins_race=6) then obj_ncombat.battle_special="ruins_eldar";
-    obj_ncombat.dropping=0;obj_ncombat.attacking=0;
-    obj_ncombat.enemy=obj_ground_mission.ruins_battle;
-    obj_ncombat.threat=obj_ground_mission.battle_threat;
-    obj_ncombat.formation_set=1;
-    
-    instance_destroy();exit;
-}
-
-if (image="ancient_ruins") and (option1!=""){
+    instance_activate_object(obj_ground_mission);
+    instance_activate_object(obj_popup);
+    var _explore_feature = obj_ground_mission.explore_feature;
+    _explore_feature.suprise_attack();
+    woopwoopwoop=0;
+    show_debug_message("ruins combat");
+    instance_destroy(self.id);
+    instance_destroy();
+    exit;
+}else if (image="ancient_ruins" && option1!="" && instance_exists(obj_ground_mission)){
     if (press=1){// Begin
-		var _ruins = obj_controller.current_planet_feature;
-        var ruins_battle,ruins_fact,ruins_disp,ruins_reward,dice,battle_threat;
-        ruins_battle=0;ruins_fact=0;ruins_disp=0;ruins_reward=0;battle_threat=0;
+		var _ruins = obj_ground_mission.explore_feature;
+        var ruins_battle=0,ruins_fact=0,ruins_disp=0,ruins_reward=0,dice,battle_threat=0;
         
         _ruins.determine_race()
         
@@ -593,17 +573,17 @@ if (image="ancient_ruins") and (option1!=""){
         
         if (ruins_battle=1){
             dice=floor(random(100))+1;
-            if shit_luck then dice+=10;
+            if (shit_luck) then dice+=10;
             
             battle_threat=4;
             if (dice>0) and (dice<=60) then battle_threat=1;
             if (dice>60) and (dice<=90) then battle_threat=2;
             if (dice>90) and (dice<=99) then battle_threat=3;
             
-            if (_ruins.ruins_race=1) or (_ruins.ruins_race=2) or (_ruins.ruins_race=10) then ruins_battle=choose(10,10,10,10,11,11,12);
-            if (_ruins.ruins_race=5) then ruins_battle=10;
-            if (_ruins.ruins_race=6) then ruins_battle=choose(6,6,10,10,10,12);
-            
+            if (_ruins.ruins_race==1) or (_ruins.ruins_race=2) or (_ruins.ruins_race=10) then ruins_battle=choose(10,10,10,10,11,11,12);
+            if (_ruins.ruins_race==5) then ruins_battle=10;
+            if (_ruins.ruins_race==6) then ruins_battle=choose(6,6,10,10,10,12);
+            if (ruins_battle==1) then ruins_battle = choose(6,10, 12);
             obj_ground_mission.ruins_race=_ruins.ruins_race;
             obj_ground_mission.ruins_battle=ruins_battle;
             obj_ground_mission.battle_threat=battle_threat;
@@ -629,7 +609,7 @@ if (image="ancient_ruins") and (option1!=""){
         if (ruins_battle=0){
             var obj=obj_ground_mission.obj;
             instance_activate_object(obj_star);
-            scr_ruins_reward(obj,obj_ground_mission.num,obj_controller.current_planet_feature);
+            scr_ruins_reward(star_by_name(obj_ground_mission.battle_loc),obj_ground_mission.num,obj_ground_mission.explore_feature);
             instance_destroy();
             exit;
         }
@@ -688,7 +668,11 @@ if (image="stc"){
             scr_return_ship(obj_ground_mission.loc,obj_ground_mission,obj_ground_mission.num);
             var man_size,ship_id,comp,plan,i;
             i=0;ship_id=0;man_size=0;comp=0;plan=0;
-            repeat(30){i+=1;if (obj_ini.ship[i]=obj_ground_mission.loc) then ship_id=i;}i=0;
+            repeat(30){
+                i+=1;
+                if (obj_ini.ship[i]=obj_ground_mission.loc) then ship_id=i;
+            }
+            i=0;
             obj_controller.menu=0;obj_controller.managing=0;
             obj_controller.cooldown=10;
             with(obj_ground_mission){instance_destroy();}
@@ -764,8 +748,6 @@ if (type=6){// Equipment
 }
 
 if (type=8){
-    var arti = obj_ini.artifact_struct[obj_controller.menu_artifact];
-    if (array_contains(["mobility","gear", "armour"],arti.determine_base_type())) then target_role=5; 
     all_good=0;
     if (target_role>0) and (target_comp!=-1) and (units=1) then all_good=1;
 }

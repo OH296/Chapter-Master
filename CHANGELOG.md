@@ -20,29 +20,42 @@ All notable changes to this project will be documented in this file.
 - here go changes that are important only to other collaborators.
     - everything that a normal player doesn't need to know.
 ----------------------------------
+
 ## [0.9.3.2]
 
-### Fixed:
-- crash from building forges at secret lairs
-- crash from fleets arriving at player fleets trying to trade
-- tooltips will now always draw as the top layer
-- crash from guard attempting to recruit new guard
-- ship occupancy sometimes breaking
-- crash from moving vehicles possibly fixed and being monitored
-- error log obj_controller.x=ii.x; when arriving at ork fleet
-- attempt to fix squad view screen bugging and not appearing fix status to be determined following play testing
-- custom formations not loading correctly upon save load
-- artifact arrays making some artifacts unusable
-- ork fleets will no longer death stack
+### New:
+- Introduction of a bug log file `message_log.log`, located in `AppData\Local\Chapter Master`.
+- Introduction of proper error handling of end turn sequences should vastly reduce crashes for player on turn end and will provide error log codes stored in message_log.log and displayed in to the player at turn end.
+- Maximum advantage/disadvantage count is now 8.
+- New cheat - "ruinspopulate" to put an ancient ruins on every planet.
 
 ### Changed:
-- hide settings that currently don't do anything
+- Hidden game settings that currently don't do anything.
+- Normal Dreadnoughts have 600 as max age at chapter generation.
+- Artifacts now have more relevant stat info in their descriptions.
+- Artifact equip buttons are different now.
 
-### New:
-- Introduction of a bug log file message_log.log
-- introduction of proper error handling of end turn sequences should vastly reduce crashes for player on turn end and will provide error log codes stored in message_log.log and displayed in to the player at turn end
+### Fixed:
+- Crash from building forges at secret lairs.
+- Crash from fleets arriving at player fleets trying to trade.
+- Tooltips will now always draw as the top layer.
+- Crash from guard attempting to recruit new guard.
+- Ship occupancy sometimes breaking.
+- Crash from moving vehicles possibly fixed and being monitored.
+- Error log obj_controller.x = ii.x; when arriving at ork fleet.
+- Attempt to fix squad view screen bugging and not appearing. Fix status to be determined following play testing.
+- Custom formations not loading correctly upon save load.
+- Artifact arrays making some artifacts unusable.
+- Ork fleets will no longer death stack.
+- Role settings on the creation screen being click through.
+- Crash from deprecated onceh variable.
+- Added fail safes to stop crash when viewing some planetary features.
+- Artifact screen text overlap, broken strings are fixed.
 
-
+### Under The Hood:
+- `scr_has_adv` and `scr_has_disadv` functions.
+- New error handling method - `try_and_report_loop`, described [>here<](https://discord.com/channels/714022226810372107/1121959429546455050/1293597133093470269).
+- Partly refactored artifact equip popup.
 
 ## [0.9.3.1]
 

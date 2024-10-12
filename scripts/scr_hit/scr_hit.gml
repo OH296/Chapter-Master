@@ -1,3 +1,6 @@
+/// @function scr_hit
+/// @description Returns true if mouse is hovering on the specified rectangle area.
+/// @returns {bool}
 function scr_hit(x1=0, y1=0, x2=0, y2=0) {
 	var mouse_consts = return_mouse_consts();
 	if (is_array(x1)){
@@ -9,6 +12,10 @@ function scr_hit(x1=0, y1=0, x2=0, y2=0) {
 
 }
 
+/// @function point_and_click
+/// @description Returns true if left mouse button was clicked on the desired rectangle area.
+/// @param {array} rect x1, y1, x2, y2 array.
+/// @returns {bool}
 function point_and_click(rect){
 	var mouse_consts = return_mouse_consts();
 	if (point_in_rectangle(mouse_consts[0], mouse_consts[1], rect[0], rect[1],rect[2], rect[3])){

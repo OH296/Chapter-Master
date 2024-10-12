@@ -57,7 +57,7 @@ repeat(45){l+=1;
 }
 
 draw_set_color(38144);
-if (fix_timer<=0){
+if (click_stall_timer<=0){
     if (fadein<0) and (fadein>-100) and (started=0){
         draw_set_alpha((fadein*-1)/30);
         draw_set_halign(fa_center);

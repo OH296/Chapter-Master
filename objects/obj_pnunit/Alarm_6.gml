@@ -8,8 +8,8 @@
 
 // show_message("pnunit alarm 6");
 
-var i=0,unit;
-repeat(600){
+var i=-1,unit;
+repeat(array_length(unit_struct)){
     i+=1;
     if (marine_dead[i]>0) and (marine_type[i]!="") and (ally[i]=false){
         unit = unit_struct[i];

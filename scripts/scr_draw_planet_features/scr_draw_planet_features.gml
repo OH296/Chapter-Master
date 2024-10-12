@@ -3,7 +3,7 @@
 
 
 
-function feature_selected(Feature) constructor{
+function feature_selected(Feature, system, planet) constructor{
 	feature = Feature;
 	main_slate = new mk_two_data_slate();
 	exit_sequence = false;
@@ -12,7 +12,7 @@ function feature_selected(Feature) constructor{
 	destroy=false;
 	exit_count = 0;
 	enter_count=18;
-	planet_data = new PlanetData(obj_controller.selecting_planet,obj_controller.selected.id);
+	planet_data = new PlanetData(planet,system);
 
 	if (feature.f_type == P_features.Forge){
 		var worker_caps= [2,4,8];
@@ -28,6 +28,11 @@ function feature_selected(Feature) constructor{
 	}
 
 	draw_planet_features = function(xx,yy){
+		if (!struct_exists(self,"planet_data")){
+			planet_data = new PlanetData(obj_controller.selecting_planet,obj_controller.selected.id);
+		} else if (!is_struct(planet_data)){
+			planet_data = new PlanetData(obj_controller.selecting_planet,obj_controller.selected.id);
+		}
 	    draw_set_halign(fa_center);
 	    draw_set_font(fnt_40k_14);
 	    //draw_sprite(spr_planet_screen,0,xx,yy);

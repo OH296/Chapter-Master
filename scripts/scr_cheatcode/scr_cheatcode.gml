@@ -134,6 +134,13 @@ function scr_cheatcode(argument0) {
 						}
 					}
 					break;
+				case "ruinspopulate":
+					with (obj_star) {
+						for (i = 1; i <= planets; i++) {
+							array_push(p_feature[i], new new_planet_feature(P_features.Ancient_Ruins));
+						}
+					}
+					break;					
 				case "event":
 					if (cheat_arguments[0] == "crusade") {
 						show_debug_message("crusading");

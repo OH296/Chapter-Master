@@ -1,6 +1,6 @@
 
 // show_message("biiiiiIIIng");
-
+try_and_report_loop("battle alarm 0 loop", function(){
 instance_activate_object(obj_star);
 combating=0;
 
@@ -141,16 +141,13 @@ if (battles>0) and (current_battle<=battles){
             
             strin[3]="";
             
-            var tempy;tempy=0;
+            var tempy=0;
             tempy=battle_object[current_battle].p_owner[battle_world[current_battle]];
             
             if (tempy=1) or (tempy=2) or (tempy=3){
-                if (battle_object[current_battle].p_fortified[battle_world[current_battle]]=1) then strin[3]="Minimally";
-                if (battle_object[current_battle].p_fortified[battle_world[current_battle]]=2) then strin[3]="Lightly";
-                if (battle_object[current_battle].p_fortified[battle_world[current_battle]]=3) then strin[3]="Moderately";
-                if (battle_object[current_battle].p_fortified[battle_world[current_battle]]=4) then strin[3]="Highly";
-                if (battle_object[current_battle].p_fortified[battle_world[current_battle]]=5) then strin[3]="Extremely";
-                if (battle_object[current_battle].p_fortified[battle_world[current_battle]]=6) then strin[3]="Maximally";
+                var array_string = ["","Minimally","Lightly","Moderately","Highly","Extremely","Maximally"];
+                var battle_fortification = battle_object[current_battle].p_fortified[battle_world[current_battle]];
+                strin[3] = array_string[clamp(battle_fortification, 1, 6)];
             }
             
             tempy=0;
@@ -192,3 +189,4 @@ if (battle[1]=0) or (current_battle>battles){//                         This is 
 
 /* */
 /*  */
+});

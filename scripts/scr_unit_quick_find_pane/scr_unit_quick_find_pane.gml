@@ -867,73 +867,9 @@ function planet_selection_action(){
 					        }
 					        
 					        // Ancient Ruins
-							var _planet = target.p_feature[sel_plan]
-							var _ruins_list =  search_planet_features( _planet, P_features.Ancient_Ruins)
-							var _explore_ruins;
-					        if (array_length(_ruins_list) > 0){
-								for (var _ruin= 0; _ruin < array_length(_ruins_list); _ruin++){
-									if ( _planet[_ruins_list[_ruin]].exploration_complete == false){
-										 _explore_ruins = _planet[_ruins_list[_ruin]];
-										break;
-									}else{ _explore_ruins=0;}
-								}
-								if ( _explore_ruins!= 0){
-									obj_controller.current_planet_feature =_explore_ruins;
-									obj_controller.current_planet_feature.star = target;
-									obj_controller.current_planet_feature.planet = sel_plan;
-					                var arti;
-					                var pip=instance_create(0,0,obj_popup);
-					                pip.title="Ancient Ruins";
-					    			var ruins_size = obj_controller.current_planet_feature.ruins_size
-					                
-					                var nu=planet_numeral_name(sel_plan,target);
-
-					    			 if(_explore_ruins.failed_exploration ==1){
-					    			 	pip.text=$"The accursed ruins on {nu} where your brothers fell still holds many secrets including the remains of your brothers honour demands you avenge them."
-					    			 }else{
-					    				 pip.text=$"Located upon {nu} is a {ruins_size} expanse of ancient ruins, dating back to times long since forgotten.  Locals are superstitious about the place- as a result the ruins are hardly explored.  What they might contain, and any potential threats, are unknown.";
-					    				switch (ruins_size){
-					    					case "tiny":
-					    						pip.text += "It's tiny nature means no more than five marines can operate in cohesion without being seperated";
-					    					break;
-					    					case "small":
-					    						pip.text += "As a result of it's narrow corridors and tight spaces a squad of any more than 15 would struggle to operate effectivly";
-					    					break;
-					    					case "medium":
-					    						pip.text += "Half a standard company (55) could easily operate effectivly in the many wide spaces and caverns";
-					    					break;
-					    					case "large":
-					    						pip.text += "A whole company (110) would not be confined in the huge spaces that such a ruin contain";
-					    					break;
-					    					case "sprawling":
-					    						pip.text += "The ruins is of an unprecidented size whole legions of old would not feel uncomfortable in such a space"
-					    					break;
-					    				}
-					    				pip.text += ". What is thy will?"
-					    			}
-					                pip.option1="Explore the ruins.";
-					                pip.option2="Do nothing.";
-					                pip.option3="Return your marines to the ship.";
-					                pip.image="ancient_ruins";
-					                
-					                arti=instance_create(target.x,target.y,obj_ground_mission);
-					                arti.num=sel_plan;
-					                arti.alarm[0]=1;
-					                arti.loc=obj_controller.selecting_location;
-					                arti.battle_loc=target.name;
-					                arti.manag=obj_controller.managing;
-					                arti.obj=target;
-
-					                with (arti){
-					                    setup_planet_mission_group();
-					                }
-
-					                arti.ship_id=obj_controller.ma_lid[1];
-					    			obj_controller.current_planet_feature.battle = arti;
-								}
-					        }
-
-					        instance_destroy();
+							scr_check_for_ruins_exploration(sel_plan, target); 
+							instance_destroy();
+							exit;
 						}	                	
 	                }                
 	            }

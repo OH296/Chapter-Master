@@ -1,9 +1,12 @@
 
+show_debug_message("alarm 7 start");
 audio_stop_sound(snd_battle);
 audio_play_sound(snd_royal,0,true);
 audio_sound_gain(snd_royal, 0, 0);
-var nope;nope=0;if (obj_controller.master_volume=0) or (obj_controller.music_volume=0) then nope=1;
-if (nope!=1){audio_sound_gain(snd_royal,0.25*obj_controller.master_volume*obj_controller.music_volume,2000);}
+var nope=0;if (obj_controller.master_volume=0) or (obj_controller.music_volume=0) then nope=1;
+if (nope!=1){
+    audio_sound_gain(snd_royal,0.25*obj_controller.master_volume*obj_controller.music_volume,2000);
+}
 
 // scr_dead_marines(1);
 
@@ -13,14 +16,13 @@ if (nope!=1){audio_sound_gain(snd_royal,0.25*obj_controller.master_volume*obj_co
 obj_controller.cooldown=10;
 
 
-if (defeat=0) then debugl("Ground Combat - Victory - Enemy:"+string(enemy)+" ("+string(battle_special)+")");
-if (defeat=1) then debugl("Ground Combat - Defeat - Enemy:"+string(enemy)+" ("+string(battle_special)+")");
+debugl($"Ground Combat - {defeat ? "Defeat" : "Victory"}Victory - Enemy:{enemy} ({battle_special})");
 
 
 // If battling own dudes, then remove the loyalists after the fact
 
 
-if (obj_ncombat.enemy=1){
+if (enemy=1){
 
     var cleann,j;
     j=-1;repeat(11){j+=1;cleann[j]=0;}
@@ -97,21 +99,30 @@ if (string_count("cs_meeting",battle_special)>0){
 
 
 
-var i,that;i=0;that=0;
-repeat(50){if (that=0){i+=1;if (post_equipment_lost[i]="Company Standard") then that=i;}}
-if (that!=0){repeat(post_equipments_lost[that]){scr_loyalty("Lost Standard","+");}}
-
-if (battle_special="ruins") or (battle_special="ruins_eldar"){
-    instance_activate_object(obj_ground_mission);
-    obj_ground_mission.defeat=defeat;
-    obj_ground_mission.alarm[7]=1;
+var i=0,that=0;
+repeat(50){
+    if (that=0){
+        i+=1;
+        if (post_equipment_lost[i]="Company Standard") then that=i;
+    }
+}
+if (that!=0){
+    repeat(post_equipments_lost[that]){
+        scr_loyalty("Lost Standard","+");
+    }
 }
 
+if (battle_special="ruins" || battle_special="ruins_eldar"){
+    obj_ground_mission.defeat=defeat;
+    obj_ground_mission.explore_feature.ruins_combat_end();
+}
 
-if (battle_special="WL10_reveal") or (battle_special="WL10_later"){var moar,ox,oy;
+else if (battle_special="WL10_reveal") or (battle_special="WL10_later"){var moar,ox,oy;
     with(obj_temp8){instance_destroy();}
     
-    if (chaos_angry>=5){if (string_count("|CPF|",obj_controller.useful_info)=0) then obj_controller.useful_info+="|CPF|";}
+    if (chaos_angry>=5){
+        if (string_count("|CPF|",obj_controller.useful_info)=0) then obj_controller.useful_info+="|CPF|";
+    }
     
     if (battle_special="WL10_reveal"){
         instance_create(battle_object.x,battle_object.y,obj_temp8);
@@ -169,8 +180,9 @@ if (battle_special="WL10_reveal") or (battle_special="WL10_later"){var moar,ox,o
         }
         if (!instance_exists(obj_turn_end)){
             scr_event_log("","Enemy Leader Assassinated: Chaos Lord");
-            var pop;pop=instance_create(0,0,obj_popup);
-            pop.image="";pop.title="Chaos Lord Killed";
+            var pop=instance_create(0,0,obj_popup);
+            pop.image="";
+            pop.title="Chaos Lord Killed";
             pop.text="Chaos Lord "+string(obj_controller.faction_leader[eFACTION.Chaos])+" has been slain in combat.  Without his leadership the various forces of Chaos in the sector will crumble apart and disintegrate from infighting.  Sector "+string(obj_ini.sector_name)+" is no longer as threatened by the forces of Chaos.";
         }
         
@@ -182,7 +194,7 @@ if (battle_special="WL10_reveal") or (battle_special="WL10_later"){var moar,ox,o
 
 if (battle_special="study2a") or (battle_special="study2b"){
     if (defeat=1){
-        var ii,good;ii=0;good=0;
+        var ii=0,good=0;
 
         if (remove_planet_problem(battle_id, "mech_tomb", battle_object)){
             obj_controller.disposition[3]-=10;
@@ -240,19 +252,11 @@ if (string_count("mech",battle_special)>0) and (defeat=0) then with(obj_ground_m
     with(obj_ground_mission){instance_destroy();}
 }
 
-i=-1;
-repeat(11){i+=1;
-    if (i=0){with(obj_ini){scr_company_order(0);scr_vehicle_order(0);}}
-    if (i=1){with(obj_ini){scr_company_order(1);scr_vehicle_order(1);}}
-    if (i=2){with(obj_ini){scr_company_order(2);scr_vehicle_order(2);}}
-    if (i=3){with(obj_ini){scr_company_order(3);scr_vehicle_order(3);}}
-    if (i=4){with(obj_ini){scr_company_order(4);scr_vehicle_order(4);}}
-    if (i=5){with(obj_ini){scr_company_order(5);scr_vehicle_order(5);}}
-    if (i=6){with(obj_ini){scr_company_order(6);scr_vehicle_order(6);}}
-    if (i=7){with(obj_ini){scr_company_order(7);scr_vehicle_order(7);}}
-    if (i=8){with(obj_ini){scr_company_order(8);scr_vehicle_order(8);}}
-    if (i=9){with(obj_ini){scr_company_order(9);scr_vehicle_order(9);}}
-    if (i=10){with(obj_ini){scr_company_order(10);scr_vehicle_order(10);}}
+with(obj_ini){
+    for (var i=0;i<=10;i++){
+        scr_company_order(i);
+        scr_vehicle_order(i);
+    }
 }
 
 obj_controller.x=view_x;
@@ -264,7 +268,8 @@ obj_controller.command-=final_command_deaths;
 instance_activate_all();
 
 if (scr_role_count("Chapter Master","")=0){
-    obj_controller.alarm[7]=1;if (global.defeat<=1) then global.defeat=1;
+    obj_controller.alarm[7]=1;
+    if (global.defeat<=1) then global.defeat=1;
     if (enemy=1) or (enemy=2) or (enemy=5) then global.defeat=3;
 }
 
@@ -279,12 +284,15 @@ if (defeat=1) and (final_deaths+final_command_deaths>=10) then scr_recent("battl
 
 
 if ((dropping=1) or (attacking=1)) and (string_count("_attack",battle_special)=0) and (string_count("mech",battle_special)=0) and (string_count("ruins",battle_special)=0) and (battle_special!="ship_demon"){
-    obj_controller.combat=0;with(obj_drop_select){instance_destroy()};
+    obj_controller.combat=0;
+    with(obj_drop_select){
+        instance_destroy()
+    };
 }
 if ((dropping+attacking=0)) and (string_count("_attack",battle_special)=0) and (string_count("mech",battle_special)=0) and (string_count("ruins",battle_special)=0) and (battle_special!="ship_demon") and (string_count("cs_meeting",battle_special)=0){
-    var yeehaw1;
-    yeehaw1=0;yeehaw1=obj_turn_end.battle_object[obj_turn_end.current_battle];
-    if (string_count("ruins",battle_special)=0) then yeehaw1.p_player[obj_turn_end.battle_world[obj_turn_end.current_battle]]-=world_size;
+
+    var yeehaw1=obj_turn_end.battle_object[obj_turn_end.current_battle];
+    yeehaw1.p_player[obj_turn_end.battle_world[obj_turn_end.current_battle]]-=world_size;
     if (defeat=1) then yeehaw1.p_player[obj_turn_end.battle_world[obj_turn_end.current_battle]]=0;
     
     obj_controller.combat=0;
@@ -293,19 +301,18 @@ if ((dropping+attacking=0)) and (string_count("_attack",battle_special)=0) and (
     }
 }
 if (string_count("ruins",battle_special)>0) and (defeat=1){
-    instance_activate_object(obj_star);
-    with(obj_star){if (name!=obj_ncombat.battle_loc) then instance_deactivate_object(id);}
-    with(obj_star){
-        p_player[obj_ncombat.battle_id]-=obj_ncombat.world_size;
+    //TODO this logic is wrong assumes all player units died in ruins
+    var _combat_star = star_by_name(obj_ncombat.battle_loc);
+    if (_combat_star!="none"){
+        _combat_star.p_player[obj_ncombat.battle_id]-=obj_ncombat.world_size;
     }
-    instance_activate_object(obj_star);
 }
 
 
 
 if (string_count("_attack",battle_special)>0) and (string_count("mech",battle_special)=0) and (string_count("ruins",battle_special)=0) and (string_count("cs_meeting",battle_special)=0){
     if (string_count("wake",battle_special)>0){
-        var pip;pip=instance_create(0,0,obj_popup);
+        var pip=instance_create(0,0,obj_popup);
         with(pip){
             title="Necron Tomb Awakens";
             image="necron_army";
@@ -346,14 +353,16 @@ if (string_count("_attack",battle_special)>0) and (string_count("mech",battle_sp
     if (defeat=0) and (string_count("wake",battle_special)=0){
         obj_temp8.stage+=1;
         obj_controller.combat=0;
-        var pip;pip=instance_create(0,0,obj_popup);
+        var pip=instance_create(0,0,obj_popup);
         
         with(pip){
             title="Necron Tunnels : "+string(obj_temp8.stage);
-            if (obj_temp8.stage=2){image="necron_tunnels_2";
+            if (obj_temp8.stage=2){
+                image="necron_tunnels_2";
                 text="The energy readings are much stronger, now that your marines are deep inside the tunnels.  What was once cramped is now luxuriously large, the tunnel ceiling far overhead decorated by stalactites.";
             }
-            if (obj_temp8.stage=3){image="necron_tunnels_3";
+            if (obj_temp8.stage=3){
+                image="necron_tunnels_3";
                 text="After several hours of descent the entrance to the Necron Tomb finally looms ahead- dancing, sickly green light shining free.  Your marine confirms that the Plasma Bomb is ready.";
             }
             if (obj_temp8.stage=4){
@@ -526,8 +535,9 @@ if (enemy=10){
         if (instance_exists(obj_turn_end)){
             obj_turn_end.combating=0;// obj_turn_end.alarm[1]=1;
         }
-        var pip;pip=instance_create(0,0,obj_popup);
-        pip.title="Survived";pip.text="You and the rest of your battle brothers fight your way out of the catacombs, back through the tunnel where you first entered.  By the time you manage it your forces are battered and bloodied and in desperate need of pickup.  The whole meeting was a bust- Chaos Lord "+string(obj_controller.faction_leader[eFACTION.Chaos])+" clearly intended to kill you and simply be done with it.";
+        var pip=instance_create(0,0,obj_popup);
+        pip.title="Survived";
+        pip.text="You and the rest of your battle brothers fight your way out of the catacombs, back through the tunnel where you first entered.  By the time you manage it your forces are battered and bloodied and in desperate need of pickup.  The whole meeting was a bust- Chaos Lord "+string(obj_controller.faction_leader[eFACTION.Chaos])+" clearly intended to kill you and simply be done with it.";
     }
 
     if ((battle_special="cs_meeting_battle5") or (battle_special="cs_meeting_battle6")) and (defeat=0){
@@ -542,7 +552,10 @@ if (enemy=10){
         }
         // Master of Sanctity present, wishes to take in the player
         if (instance_exists(obj_ground_mission)) and (string_count("CRMOS|",obj_controller.useful_info)=0){
-            obj_controller.menu=20;with(obj_controller){scr_dialogue("cs_meeting_m5");}
+            obj_controller.menu=20;
+            with(obj_controller){
+                scr_dialogue("cs_meeting_m5");
+            }
         }
         
         // Master of Sanctity not present, just get told that you have defeated the Chaos Lord
@@ -668,7 +681,9 @@ with(obj_centerline){instance_destroy();}
 obj_controller.new_buttons_hide=0;
 
 
-if (instance_exists(obj_cursor)){obj_cursor.image_index=0;}
+if (instance_exists(obj_cursor)){
+    obj_cursor.image_index=0;
+}
 
 instance_destroy();
 

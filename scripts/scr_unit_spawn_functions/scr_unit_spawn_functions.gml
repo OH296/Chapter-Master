@@ -178,7 +178,7 @@ function scr_marine_spawn_age(){
 		// Company marines
 		case obj_ini.role[100][Role.DREADNOUGHT]:
 			_minimum_age += 400;
-			_maximum_age = 0;
+			_maximum_age = 600;
 			_apply_gauss = true;
 			break;
 		case "Venerable Dreadnought":

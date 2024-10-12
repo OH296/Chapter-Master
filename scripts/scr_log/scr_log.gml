@@ -6,10 +6,11 @@ function log_into_file(_message) {
 }
 
 
-function try_and_report_loop(dev_marker="generic crash",func, turn_end=true){
+function try_and_report_loop(dev_marker="generic crash",func, turn_end=true, args=[]){
     try{
-        func();
+        method_call(func,args);
     } catch (_exception){
+        show_debug_message($"{_exception}")
         if (turn_end || instance_exists(obj_turn_end) ){
             scr_popup($"debug message {dev_marker}", $"please report the following on the debug forum on the game discord \n{_exception}", "debug")
         } else {

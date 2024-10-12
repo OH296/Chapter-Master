@@ -1,3 +1,5 @@
+if (instance_number(obj_ncombat)>1) then  instance_destroy();
+
 set_zoom_to_defualt();
 var co,i;co=-1;
 repeat(15){co+=1;i=-1;
@@ -13,7 +15,7 @@ debugl("Ground Combat Started");
 audio_stop_sound(snd_royal);
 audio_play_sound(snd_battle,0,true);
 audio_sound_gain(snd_battle, 0, 0);
-var nope;nope=0;if (obj_controller.master_volume=0) or (obj_controller.music_volume=0) then nope=1;
+var nope=0;if (obj_controller.master_volume=0) or (obj_controller.music_volume=0) then nope=1;
 if (nope!=1){audio_sound_gain(snd_battle,0.25*obj_controller.master_volume*obj_controller.music_volume,2000);}
 
 
@@ -22,7 +24,7 @@ man_size_limit = 0;
 fack=0;
 cd=0;
 owner  = eFACTION.Player;
-fix_timer=0;
+click_stall_timer=0;
 formation_set=0;
 big_boom=0;
 kamehameha=false;

@@ -177,7 +177,7 @@ if (argument0="White Scars"){founding="N/A";points=150;
 		selected_chapter=4;chapter=argument0;icon=4;icon_name="if";founding=0;fleet_type=1;strength=6;purity=7;stability=10;cooperation=8;
 		adv[1]="Bolter Drilling";adv[2]="Siege Masters";
 		homeworld="Ice";homeworld_name="Inwit";recruiting="Hive";recruiting_name="Necromunda";
-		homeworld_exists=1;recruiting_exists=1;homeworld_rule=2;aspirant_trial=eTrials.SURVIVAL;
+		homeworld_exists=1;recruiting_exists=1;homeworld_rule=2;aspirant_trial=eTrials.SURVIVAL;discipline="telekinesis";
 
 		color_to_main="Gold";color_to_secondary="Gold";color_to_trim="Red";color_to_pauldron="Gold"
 		color_to_pauldron2="Gold";color_to_lens="Red";color_to_weapon="Black"
@@ -602,14 +602,6 @@ if (argument0="Lamenters"){founding=5;points=150;
 	}
 
 
-
-	
-	
-	
-
-
-
-
 	if (argument0="Doom Benefactors"){points=100;
 	    selected_chapter=135;chapter=argument0;icon=0;icon_name="eye";founding=0;scr_icon("");
 	    fleet_type=1;strength=1;purity=10;stability=7;cooperation=8;
@@ -651,7 +643,7 @@ if (argument0="Lamenters"){founding=5;points=150;
 	//generates custom chapter if it exists
 	if (argument0=chapter21){
 		points=100;
-	    selected_chapter=22;chapter=argument0;icon=icon21;icon_name=icon_name21;founding=founding21;
+	    selected_chapter=21;chapter=argument0;icon=icon21;icon_name=icon_name21;founding=founding21;
 	    fleet_type=fleet_type21;
 		strength=strength21;
 		purity=purity21;

@@ -1678,7 +1678,7 @@ if __b__ {
 
 	/* */
 }
-
+/*
 if (obj_ncombat.battle_special = "ruins") or(obj_ncombat.battle_special = "ruins_eldar") {
 	var i;
 	i = 0;
@@ -1697,6 +1697,7 @@ if (obj_ncombat.battle_special = "ruins") or(obj_ncombat.battle_special = "ruins
 		}
 	}
 }
+*/
 
 if (men + veh + medi <= 0) {
 	instance_destroy();

@@ -905,14 +905,14 @@ if (menu==20) and (diplomacy>0) or ((diplomacy<-5) and (diplomacy>-6)) and (cool
             scr_trade(false);
         }
         // Gene-seed
-        if (scr_hit(xx+342,yy+422,xx+485,yy+470)==true) and (minz!=0) and (cooldown<=0) and (trade_gene>0){
+        else if (scr_hit(xx+342,yy+422,xx+485,yy+470)==true) and (minz!=0) and (cooldown<=0) and (trade_gene>0){
             cooldown=8000;
             click2=1;
             get_integer2("Gene-Seed offered?",trade_gene,"m"+string(minz),"Gene-Seed");
             scr_trade(false);
         }
         // STC Fragment
-        if (scr_hit(xx+342,yy+470,xx+485,yy+517)==true) and (minz!=0) and (cooldown<=0) and (trade_chip>0){
+        else if (scr_hit(xx+342,yy+470,xx+485,yy+517)==true) and (minz!=0) and (cooldown<=0) and (trade_chip>0){
             cooldown=8000;
             click2=1;
             get_integer2("STC Fragments offered?",trade_chip,"m"+string(minz),"STC Fragment");

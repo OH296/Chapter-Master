@@ -918,6 +918,7 @@
     {"id":{"name":"scr_turn_first","path":"scripts/scr_turn_first/scr_turn_first.yy",},},
     {"id":{"name":"spr_rg_mk5_helm","path":"sprites/spr_rg_mk5_helm/spr_rg_mk5_helm.yy",},},
     {"id":{"name":"scr_event_log","path":"scripts/scr_event_log/scr_event_log.yy",},},
+    {"id":{"name":"scr_ancient_ruins","path":"scripts/scr_ancient_ruins/scr_ancient_ruins.yy",},},
     {"id":{"name":"spr_terminator_hands","path":"sprites/spr_terminator_hands/spr_terminator_hands.yy",},},
     {"id":{"name":"scr_recent","path":"scripts/scr_recent/scr_recent.yy",},},
     {"id":{"name":"scr_star_ownership","path":"scripts/scr_star_ownership/scr_star_ownership.yy",},},

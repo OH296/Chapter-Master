@@ -2,7 +2,6 @@
 // TODO refactor
 
 try_and_report_loop("final end turn alarm 5",function(){
-var times=max(1,round(turn/150));
 var recruit_count=0;
 var random_marine, marine_position;
 var eq1=1,eq2=1,eq3=1,t=0,r=0;
@@ -19,6 +18,7 @@ var unit;
 
 
 try_and_report_loop("chaos_spread", function(){
+    var times=max(1,round(turn/150));
     if (known[eFACTION.Chaos]==2) and (faction_defeated[eFACTION.Chaos]==0) then times+=1;
     var xx3, yy3, plani, _star;
     xx3=irandom(room_width)+1;
