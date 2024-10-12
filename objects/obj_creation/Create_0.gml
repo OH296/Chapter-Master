@@ -199,26 +199,26 @@ chapter_id[14]="Lamenters";
 chapter_tooltip[14]="The Lamenter's accursed and haunted legacy seems to taint much of what they have achieved; their victories often become bitter ashes in their hands.  Nearly extinct, they fight their last days on behalf of the common folk in a crusade of endless penitence.";
 
 chapter_id[15]="Carcharodons";
-//chapter_tooltip[15]="Rumored to be Successors of the Raven Guard, these Astartes are known for their sudden attacks and shock assaults. Travelling through the Imperium via self-sufficient Nomad-Predation based fleets, no enemy is safe from the fury of these bloodthirsty Space Marines.";
+chapter_tooltip[15]="Rumored to be Successors of the Raven Guard, these Astartes are known for their sudden attacks and shock assaults. Travelling through the Imperium via self-sufficient Nomad-Predation based fleets, no enemy is safe from the fury of these bloodthirsty Space Marines.";
 
 chapter_id[16]="Soul Drinkers";
 chapter_tooltip[16]="Sharing ancestry of the Black Templars or Crimson fists. As proud sons of Dorn they share the strong void combat traditions, fielding a large amount of Battle Barges. As well as being fearsome in close combat. Whispers of the Ruinous Powers are however quite enticing."
 
 
-chapter_id[17]="Angry Marines";
+chapter_id[18]="Angry Marines";
 //chapter_tooltip[17]="Frothing with pathological rage since the day their Primarch emerged from his pod with naught but a dented copy of battletoads.  Every last Angry Marine is a homicidal, suicidal berserker with a voice that projects, and are always angry, all the time.  A /tg/ classic.";
 
-chapter_id[18]="Emperor's Nightmare";
+chapter_id[19]="Emperor's Nightmare";
 //chapter_tooltip[18]="The Emperor's Nightmare bear the curse of a bizarre mutation within their gene-seed. The Catalepsean Node is in a state of decay and thus do not sleep for months at a time until falling asleep suddenly. They prefer shock and awe tactics with stealth.";
 
-chapter_id[19]="Star Krakens";
+chapter_id[20]="Star Krakens";
 //chapter_tooltip[19]="In darkness, they dwell in The Deep. The Star Krakens stand divided in individual companies but united in the form of the Ten-Flag Council. They utilize boarding tactics and are the sole guardians of the ancient sensor array called “The Lighthouse”.";
 
-chapter_id[20]="Conservators";
+chapter_id[21]="Conservators";
 //chapter_tooltip[20]="Hailing from the Asharn Marches and having established their homeworld on the planet Dekara, these proud sons of Dorn suffer from an extreme lack of supplies, Ork raids, and more. Though under strength and lacking equipment, they managed to forge an interstellar kingdom loyal to both Emperor and Imperium.";
 
-chapter_id[21]= "Custom";
-chapter_tooltip[21]="Your Chapter";
+chapter_id[22]= "Custom";
+chapter_tooltip[22]="Your Chapter";
 
 //Stores info for custom chapter
 
@@ -620,6 +620,8 @@ advantage[i]="Melee Enthusiasts";
 advantage_tooltip[i]="Rip and tear! Each Company has an additional Assault Squad.  Your marines and dreadnoughts also have boosted attack with melee weapons.";i+=1;
 advantage[i]="Venerable Ancients";
 advantage_tooltip[i]="Even in death they still serve. Your chapter places a staunch reverence for its forebears and has a number of additional venerable dreadnoughts in service ";i+=1;
+advantage[i]="Medicae Primacy";
+advantage_tooltip[i]="Your chapter reveres its Apothecarion above all of it's specialist; You start with more Apothecaries.";i+=1;
 
 i+=1;
 advantage[i]="Cancel";advantage_tooltip[i]="";
