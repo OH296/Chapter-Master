@@ -10,7 +10,7 @@ function scr_bomb_world(star_system, planet_number, bombard_target_faction, bomb
 	txt1+= $" annihilation upon {star_system.name} {scr_roman_numerals()[planet_number-1]}. Even from the void, explosions can be seen, battering across the planet's surface.";
 
 	if (star_system.p_large[planet_number]=0){
-		kill=bombard_ment_power*15000000;// Population if normal, we should consider making loses to be more percentage-wise, rather than flat, also in scr_purge_world
+		kill=bombard_ment_power*15000000;// Population if normal, TODO consider making loses to be more percentage-wise, rather than flat, also in scr_purge_world
 	}else if (star_system.p_large[planet_number]=1){
 		kill=bombard_ment_power*0.15;// Population if large
 	}
@@ -32,6 +32,10 @@ function scr_bomb_world(star_system, planet_number, bombard_target_faction, bomb
 	if (star_system.p_type[planet_number]!="Space Hulk"){
 	    var bombard_protection=1;
 	    switch(bombard_target_faction){
+			// case 1:
+				// txt2="##The Space Marine forces are difficult to bombard; ";
+				// bombard_protection=3;
+				// break;
 	    	case 2:
 	    		txt2="##The Imperial forces are suitably fortified; ";
 				bombard_protection=2;
@@ -47,8 +51,12 @@ function scr_bomb_world(star_system, planet_number, bombard_target_faction, bomb
 	    		break; // I think PDF and renegades down there should be kind of poorly prepared for this
 	    	case 3:
 	    		txt2="##The Mechanicus forces are well fortified; ";
-	    		bombard_protection=3;
-	    		break; // If we get to Admech, I think they should be pretty capable with the hi-tech goodies they have
+	    		bombard_protection=3; // If we get to Admech, I think they should be pretty capable with the hi-tech goodies they have
+	    		break;
+			// case 4:
+	    		// txt2="##The Inquisition forces are difficult to bombard; ";
+				// bombard_protection=3;
+	    		// break;
 	    	case 5:
 	    		txt2="##The Ecclesiarchy forces are concentrated within their Cathedral; ";
 				bombard_protection=1;
@@ -67,8 +75,8 @@ function scr_bomb_world(star_system, planet_number, bombard_target_faction, bomb
 	    		break;
 	    	case 9:
 	    		txt2="##The Tyranid Swarm is a large target; ";
-				bombard_protection=0;
-	    		break; // I suppose we should have this at 0
+				bombard_protection=0; // TODO add considerations when it is a cult, and when it is bioforms out in the open
+	    		break;
 	    	case 10:
 	    		if (star_system.p_type[planet_number]="Daemon"){
 	    			bombard_protection=3; // Kind of irrelevant if the bombardment will be nulled later either way
@@ -79,8 +87,16 @@ function scr_bomb_world(star_system, planet_number, bombard_target_faction, bomb
 	    		}
 	    		bombard_protection=2;
 	    		break;
+			// case 11:
+				// txt2="##The Chaos Space Marine forces are difficult to bombard; ";
+				// bombard_protection=3;
+				// break;
+			// case 12:
+				// txt2="##The Daemonic forces are incredibly difficult to bombard; ";
+				// bombard_protection=4;
+				// break;
 	    	case 13:
-	    		txt2="##The Necrons are very well dug in; ";
+	    		txt2="##The Necron forces are incredibly difficult to bombard; ";
 				bombard_protection=4; // They are a hi-tech faction, so bombing them should be difficult
 	    		break;	    			    			    			    			    			    				    		    			    		
 	    }
@@ -163,6 +179,18 @@ function scr_bomb_world(star_system, planet_number, bombard_target_faction, bomb
 	        }
         
         	switch(bombard_target_faction){
+				// case 1:
+        			// star_system.p_marines[planet_number]-=strength_reduction;
+        			// break;
+				// case 2:
+					// star_system.p_ig[planet_number]-=strength_reduction;
+					// break;
+				// case 3:
+					// star_system.p_mechanicus[planet_number]-=strength_reduction;
+					// break;
+				// case 4:
+					// star_system.p_inquisition[planet_number]-=strength_reduction;
+					// break;
         		case 5:
         			star_system.p_sisters[planet_number]-=strength_reduction;
         			break;
@@ -181,6 +209,12 @@ function scr_bomb_world(star_system, planet_number, bombard_target_faction, bomb
          		case 10:
         			star_system.p_traitors[planet_number]-=strength_reduction;
         			break;
+				// case 11:
+        			// star_system.p_csm[planet_number]-=strength_reduction;
+        			// break;
+				// case 12:
+        			// star_system.p_demons[planet_number]-=strength_reduction;
+        			// break;
          		case 13:
         			star_system.p_necrons[planet_number]-=strength_reduction;
         			break;        			       			        			        			        			       			
@@ -192,7 +226,7 @@ function scr_bomb_world(star_system, planet_number, bombard_target_faction, bomb
 	    txt3=""; // Life is the Emperor's currency. Spend it well
 	    if (pop_before>0) and (star_system.p_type[planet_number]!="Daemon"){
 	        if (star_system.p_large[planet_number]==0){
-	        	pop_after=round(max(0,pop_after-kill));
+	        	pop_after=round(max(0,pop_after-kill)); // Potential TODO if alien planets will be implemented, add a check for planet ownership
 	        	txt3="##It had Imperium subject population of "+string(scr_display_number(floor(pop_before)))+" and "+string(scr_display_number(floor(kill)))+" were annihilated over the duration of the bombardment.";
 	    	}else if (star_system.p_large[planet_number]=1){
 	    		txt3="##It had Imperium subject population of "+string(pop_before)+" billion and "+string(kill)+" billion were annihilated over the duration of the bombardment.";
@@ -253,7 +287,7 @@ function scr_bomb_world(star_system, planet_number, bombard_target_faction, bomb
 	    var bombard_protection=1;
 	    txt1="Torpedoes and Bombardment Cannons rain hell upon the space hulk; ";
     
-	    reduced_bombard_score=bombard_ment_power/1.25;// fraction of bombardment score, You know, maybe we should make SHs more vulnerable to bombardment? They are out in space, and can be targeted with other weapons
+	    reduced_bombard_score=bombard_ment_power/1.25;// fraction of bombardment score, TODO maybe we should make SHs more vulnerable to bombardment? They are out in space, and can be targeted with other weapons
 	    strength_reduction=0;txt3="";
     
 	    var rel;rel=0;
@@ -265,7 +299,7 @@ function scr_bomb_world(star_system, planet_number, bombard_target_faction, bomb
 	    if (rel>20) and (rel<=40) then txt2="it suffers moderate damage from the bombardment, its integrity reduced by "+string(100-rel)+"%";
 	    if (rel>40) and (rel<=60) then txt2="it suffers heavy damage from the bombardment, its integrity reduced by "+string(100-rel)+"%";
 	    if (rel>60) and ((star_system.p_fortified[planet_number]-reduced_bombard_score)>0) then txt2="it suffers extensive damage from the bombardment, its integrity reduced by "+string(100-rel)+"%";
-	    if ((star_system.p_fortified[planet_number]-reduced_bombard_score)<=0) then txt2="it crumbles apart from the onslaught. It is no more.";
+	    if ((star_system.p_fortified[planet_number]-reduced_bombard_score)<=0) then txt2="it crumbles apart from the onslaught. It is no more."; // Potential TODO Consider adding salvage from the bombed wreckage
     
 	    // DO EET
 	    if (reduced_bombard_score>0) then star_system.p_fortified[planet_number]-=reduced_bombard_score;
