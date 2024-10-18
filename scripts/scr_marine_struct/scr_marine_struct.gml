@@ -433,9 +433,24 @@ global.trait_list = {
 		display_name : "Psychotic",
 		flavour_text : "whether due to experience or some other cause, acquired access to hidden knowledge...",
 	}
+	// "crazy" : {
+		// wisdom : [5, 2],
+		// intelligence : [-2, 2],
+		// constitution : -1,
+		// display_name : "Crazy",
+		// flavor_text : "lost sense of reason"
+	// },
+	// "eccentric" : {
+		// wisdom : [3, 2],
+		// intelligence : [3, 2],
+		// charisma : [3, 2],
+		// technology : [3, 2],
+		// display_name : "Eccentric",
+		// flavor_text : "has a tendency to do things in original way"
+	// }
 }
 global.base_stats = { //tempory stats subject to change by anyone that wishes to try their luck
-	"chapter_master":{
+	"chapter_master":{ // TODO consider allowing the player to change the starting stats of the chapter master, and closest advisors, especially for custom chapters
 			title : "Adeptus Astartes",
 			strength:[42,5],
 			constitution:[44,3],
