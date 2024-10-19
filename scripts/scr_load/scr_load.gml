@@ -175,9 +175,10 @@ function scr_load(save_part, save_id) {
 	    obj_ini.psy_powers=ini_read_string("Ini","psy_powers","default");
 
 	    obj_ini.companies=ini_read_real("Ini","companies",10);
-	    var i;i=-1;repeat(21){i+=1;obj_ini.company_title[i]=ini_read_string("Ini","comp_title"+string(i),"");}
-	    var i;i=-1;repeat(121){i+=1;obj_ini.slave_batch_num[i]=ini_read_real("Ini","slave_num_"+string(i),0);obj_ini.slave_batch_eta[i]=ini_read_real("Ini","slave_eta_"+string(i),0);}
-
+		obj_ini.company_title = return_json_from_ini("Ini","comp_title",array_create(21,""));
+		obj_ini.slave_batch_num = return_json_from_ini("Ini","slave_num_",array_create(121,""));
+		obj_ini.slave_batch_eta = return_json_from_ini("Ini","slave_eta_",array_create(121,""));
+	
 	    obj_ini.complex_livery_data=ini_read_string("Ini","complex_livery","");
 	    if (obj_ini.complex_livery_data!=""){
 	    	obj_ini.complex_livery_data=json_parse(base64_decode(obj_ini.complex_livery_data));
