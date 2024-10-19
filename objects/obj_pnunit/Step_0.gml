@@ -1,4 +1,9 @@
 
+// These arrays are the losses on any one frame.
+// Instead of resetting in a bunch of places, we reset here.
+array_resize(lost, 0)
+array_resize(lost_num, 0)
+
 highlight=0;
 var diff,siz,pos;
 diff=0;pos=880;siz=min(400,(men*0.5)+(veh*2.5)+(dreads*2));

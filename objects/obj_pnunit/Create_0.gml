@@ -93,11 +93,11 @@ repeat(71){i+=1;
     dudes_vehicle[i]=0;
 }
 
-i=-1;
-repeat(61){i+=1;
-    lost[i]="";
-    lost_num[i]=0;
-}
+// These arrays are the losses on any one frame.
+// Let them resize as required.
+// Hardcoded lengths lead to bounds issues when hardcoded values disagree.
+lost = [];
+lost_num = [];
 
 hostile_shots=0;
 hostile_shooters=0;

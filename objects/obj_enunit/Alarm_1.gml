@@ -243,10 +243,6 @@ if __b__ {
 	}
 	i = 0;
 
-	/*i=0;repeat(60){i+=1;
-	    lost[i]="";lost_num[i]=0;
-	}*/
-
 	var dreaded;
 	dreaded = false;
 
