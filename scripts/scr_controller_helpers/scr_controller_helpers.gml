@@ -97,8 +97,14 @@ function scr_in_game_help(){
 }
 function scr_in_game_menu(){
 	scr_change_menu(function(){
-		if (obj_controller.zoomed==0) and (!instance_exists(obj_ingame_menu)) and (!instance_exists(obj_popup)){
+		if (!instance_exists(obj_ingame_menu)) and (!instance_exists(obj_popup)){
 			// Main Menu
+			with (obj_controller) {
+				menu=0;
+				hide_banner=0;
+				location_viewer.update_garrison_log();
+				managing=0;
+			}
 			set_zoom_to_defualt();
 			instance_create(0,0,obj_ingame_menu);
 		}
