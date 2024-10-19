@@ -89,7 +89,7 @@ function scr_clean(target_object) {
                 // Apply damage
                 var minus = hostile_damage - (2 * marine_ac[marine_index]);
                 if (minus > 0) {
-                    var damage_resistance = (marine.damage_resistance / 100);
+                    var damage_resistance = (marine.damage_resistance() / 100);
                     if (marine_mshield[marine_index] > 0) damage_resistance += 0.1;
                     if (marine_fiery[marine_index] > 0) damage_resistance += 0.15;
                     if (marine_fshield[marine_index] > 0) damage_resistance += 0.08;
