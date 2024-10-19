@@ -35,9 +35,7 @@ if (option1=="") and (type<5){
 }
 
 if (type>4) and (type!=9) and (cooldown<=0){
-    var xx,yy;xx=__view_get( e__VW.XView, 0 );yy=__view_get( e__VW.YView, 0 );
-
-    if (mouse_x>=xx+1006) and (mouse_y>=yy+499) and (mouse_x<=xx+1116) and (mouse_y<yy+519){
+    if (scr_hit(1006, 499, 1116, 519)) {
         obj_controller.cooldown=10;
         instance_destroy();
         exit;
@@ -46,57 +44,60 @@ if (type>4) and (type!=9) and (cooldown<=0){
 
 
 
-if (type=5.1) and (cooldown<=0){
-    var xx,yy,before,before2;
-    xx=__view_get( e__VW.XView, 0 );yy=__view_get( e__VW.YView, 0 );
-    before=target_comp;
-    before2=target_role;
-
-    if (mouse_y>=yy+210) and (mouse_y<yy+230){
-        if (mouse_x>=xx+1468) and (mouse_x<=xx+1515){target_comp=0;cooldown=8000;}
-    }
-    if (mouse_y>=yy+230) and (mouse_y<yy+250){
-        if (mouse_x>=xx+1030) and (mouse_x<=xx+1120){target_comp=1;cooldown=8000;}
-        if (mouse_x>=xx+1140) and (mouse_x<=xx+1230){target_comp=2;cooldown=8000;}
-        if (mouse_x>=xx+1250) and (mouse_x<=xx+1340){target_comp=3;cooldown=8000;}
-        if (mouse_x>=xx+1360) and (mouse_x<=xx+1450){target_comp=4;cooldown=8000;}
-        if (mouse_x>=xx+1470) and (mouse_x<=xx+1560){target_comp=5;cooldown=8000;}
-    }
-    if (mouse_y>=yy+250) and (mouse_y<yy+270){
-        if (mouse_x>=xx+1030) and (mouse_x<=xx+1120){target_comp=6;cooldown=8000;}
-        if (mouse_x>=xx+1140) and (mouse_x<=xx+1230){target_comp=7;cooldown=8000;}
-        if (mouse_x>=xx+1250) and (mouse_x<=xx+1340){target_comp=8;cooldown=8000;}
-        if (mouse_x>=xx+1360) and (mouse_x<=xx+1450){target_comp=9;cooldown=8000;}
-        if (mouse_x>=xx+1470) and (mouse_x<=xx+1560){target_comp=10;cooldown=8000;}
+if (type == 5.1 && cooldown <= 0) {
+    if (scr_hit(1468, 210, 1515, 230)) {
+        target_comp = 0;
+        cooldown = 8000;
+    } else if (scr_hit(1030, 230, 1120, 250)) {
+        target_comp = 1;
+        cooldown = 8000;
+    } else if (scr_hit(1140, 230, 1230, 250)) {
+        target_comp = 2;
+        cooldown = 8000;
+    } else if (scr_hit(1250, 230, 1340, 250)) {
+        target_comp = 3;
+        cooldown = 8000;
+    } else if (scr_hit(1360, 230, 1450, 250)) {
+        target_comp = 4;
+        cooldown = 8000;
+    } else if (scr_hit(1470, 230, 1560, 250)) {
+        target_comp = 5;
+        cooldown = 8000;
+    } else if (scr_hit(1030, 250, 1120, 270)) {
+        target_comp = 6;
+        cooldown = 8000;
+    } else if (scr_hit(1140, 250, 1230, 270)) {
+        target_comp = 7;
+        cooldown = 8000;
+    } else if (scr_hit(1250, 250, 1340, 270)) {
+        target_comp = 8;
+        cooldown = 8000;
+    } else if (scr_hit(1360, 250, 1450, 270)) {
+        target_comp = 9;
+        cooldown = 8000;
+    } else if (scr_hit(1470, 250, 1560, 270)) {
+        target_comp = 10;
+        cooldown = 8000;
     }
 }
 
 if (type=5) and (cooldown<=0){
-    var xx,yy,before,before2;
-    xx=__view_get( e__VW.XView, 0 );yy=__view_get( e__VW.YView, 0 );
-    before=target_comp;
-    before2=target_role;
-
-    if (unit_role!=obj_ini.role[100,17]) or (obj_controller.command_set[1]!=0){
-        if (mouse_y>=yy+210) and (mouse_y<yy+230){
-            if (mouse_x>=xx+1468) and (mouse_x<=xx+1515) and (min_exp>=0){
-                target_comp=0;
-                get_unit_promotion_options();
-                cooldown=8000;
-            }
+    if (unit_role != obj_ini.role[100, 17] || obj_controller.command_set[1] != 0) {
+        if (scr_hit(1468, 210, 1515, 230) && min_exp >= 0) {
+            target_comp = 0;
+            get_unit_promotion_options();
+            cooldown = 8000;
         }
     }
 }
 
 /* */
 
-var xx,yy,change_tab;
-xx=__view_get( e__VW.XView, 0 );
-yy=__view_get( e__VW.YView, 0 );
+var change_tab;
 change_tab=0;
 
 
-if (mouse_x>=xx+1465) and (mouse_y>=yy+499) and (mouse_x<xx+1576) and (mouse_y<yy+518){// Transfering right here
+if (scr_hit(1465, 499, 1576, 518)) {// Transfering right here
 
     if (type=5.1){
         if (target_comp>10) then target_comp=0;
@@ -249,63 +250,73 @@ if (mouse_x>=xx+1465) and (mouse_y>=yy+499) and (mouse_x<xx+1576) and (mouse_y<y
 
 /* */
 
-var xx,yy,change_tab,do_not_change;
-xx=__view_get( e__VW.XView, 0 );
-yy=__view_get( e__VW.YView, 0 );
+var change_tab,do_not_change;
 change_tab=0;
 do_not_change=false;
 
 if (type=6) and (cooldown<=0){// Actually changing equipment right here
-    if (target_comp=1) or (target_comp=2){
-        if (mouse_y>=yy+318) and (mouse_y<yy+330) and (mouse_x>=xx+1190) and (mouse_x<xx+1216) and (tab!=1){
-            change_tab=1;
-            tab=1;
-            obj_controller.last_weapons_tab=1;
-            cooldown=8000;
-        }
-        if (mouse_y>=yy+318) and (mouse_y<yy+330) and (mouse_x>=xx+1263) and (mouse_x<xx+1289) and (tab!=2){change_tab=1;tab=2;obj_controller.last_weapons_tab=2;cooldown=8000;}
-        if (mouse_y>=yy+318) and (mouse_y<yy+330) and (mouse_x>=xx+1409) and (mouse_x<xx+1435) and (target_comp<3){
-            var onceh=0;cooldown=8000;
-             if (onceh=0){
-                 if (master_crafted=0){
-                    master_crafted=1;
-                    obj_controller.popup_master_crafted=1;
-                    onceh=1;
+    if (target_comp == 1 || target_comp == 2) {
+        if (scr_hit(1190, 318, 1216, 330) && tab != 1) {
+            change_tab = 1;
+            tab = 1;
+            obj_controller.last_weapons_tab = 1;
+            cooldown = 8000;
+        } else if (scr_hit(1263, 318, 1289, 330) && tab != 2) {
+            change_tab = 1;
+            tab = 2;
+            obj_controller.last_weapons_tab = 2;
+            cooldown = 8000;
+        } else if (scr_hit(1409, 318, 1435, 330) && target_comp < 3) {
+            var onceh = 0;
+            cooldown = 8000;
+            if (onceh == 0) {
+                if (master_crafted == 0) {
+                    master_crafted = 1;
+                    obj_controller.popup_master_crafted = 1;
+                    onceh = 1;
+                    scr_weapons_equip();
+                } else if (master_crafted == 1) {
+                    master_crafted = 0;
+                    obj_controller.popup_master_crafted = 0;
+                    onceh = 1;
                     scr_weapons_equip();
                 }
-                else if (master_crafted=1){
-                    master_crafted=0;
-                    obj_controller.popup_master_crafted=0;
-                    onceh=1;
-                    scr_weapons_equip();
-                }
-             }
+            }
         }
     }
 
-
-    if ((mouse_x>=xx+1296) and (mouse_x<xx+1578)) or (change_tab=1){
-        var befi;befi=target_comp;
-
-        if (change_tab=0){
-            if (mouse_y>=yy+215) and (mouse_y<yy+235){target_comp=1;cooldown=8000;tab=obj_controller.last_weapons_tab;}
-            if (mouse_y>=yy+235) and (mouse_y<yy+255){target_comp=2;cooldown=8000;tab=obj_controller.last_weapons_tab;}
-            if (mouse_y>=yy+255) and (mouse_y<yy+275){target_comp=3;cooldown=8000;}
-            if (mouse_y>=yy+275) and (mouse_y<yy+295){target_comp=4;cooldown=8000;}
-            if (mouse_y>=yy+295) and (mouse_y<yy+315){target_comp=5;cooldown=8000;}
+    if (scr_hit(1296, 215, 1578, 315) || change_tab == 1) {
+        var befi = target_comp;
+    
+        if (change_tab == 0) {
+            if (scr_hit(1296, 215, 1578, 235)) {
+                target_comp = 1;
+                cooldown = 8000;
+                tab = obj_controller.last_weapons_tab;
+            } else if (scr_hit(1296, 235, 1578, 255)) {
+                target_comp = 2;
+                cooldown = 8000;
+                tab = obj_controller.last_weapons_tab;
+            } else if (scr_hit(1296, 255, 1578, 275)) {
+                target_comp = 3;
+                cooldown = 8000;
+            } else if (scr_hit(1296, 275, 1578, 295)) {
+                target_comp = 4;
+                cooldown = 8000;
+            } else if (scr_hit(1296, 295, 1578, 315)) {
+                target_comp = 5;
+                cooldown = 8000;
+            }
         }
-
-        if ((befi!=target_comp) and (vehicle_equipment!=-1)) or (change_tab=1){
-            var i;i=-1;repeat(40){i+=1;item_name[i]="";}
-
+    
+        if ((befi != target_comp) && (vehicle_equipment != -1) || change_tab == 1) {
+            var i;
+            for (i = 0; i < 40; i += 1) {
+                item_name[i] = "";
+            }
             scr_weapons_equip();
-
         }
-
-
-
     }
-
 }
 
 
@@ -314,7 +325,7 @@ if (type=6) and (cooldown<=0){// Actually changing equipment right here
 
 
 
-if (point_in_rectangle(mouse_x, mouse_y, xx+1465, yy+499,xx+1576,yy+518)){// Promoting right here
+if (scr_hit(1465, 499, 1576, 518)) {// Promoting right here
     if (type=5) and (cooldown<=0) and (all_good=1) and (target_comp>=0) and (role_name[target_role]!=""){
         cooldown=999;obj_controller.cooldown=8000;
 
@@ -449,7 +460,7 @@ if (point_in_rectangle(mouse_x, mouse_y, xx+1465, yy+499,xx+1576,yy+518)){// Pro
 
 /* */
 
-if (mouse_x>=xx+1465) and (mouse_y>=yy+499) and (mouse_x<xx+1577) and (mouse_y<yy+520){// Equipment
+if (scr_hit(1465, 499, 1577, 520)) {// Equipment
 
     if (type=6) and (cooldown<=0) and (n_good1+n_good2+n_good3+n_good4+n_good5=5){
         cooldown=999;
@@ -569,10 +580,10 @@ if (mouse_x>=xx+1465) and (mouse_y>=yy+499) and (mouse_x<xx+1577) and (mouse_y<y
 /* */
 
 
-// if ((mouse_x>=xx+240) and (mouse_x<=xx+387) and (type!=88)) or (((type=9) or (type=9.1)) and (mouse_x>=xx+240+420) and (mouse_x<xx+387+420)){
-if (type=9.1) and (mouse_x>=xx+240+420) and (mouse_x<xx+387+420) and (cooldown<=0){
+// if ((mouse_x>=240) and (mouse_x<=387) and (type!=88)) or (((type=9) or (type=9.1)) and (mouse_x>=240+420) and (mouse_x<387+420)){
+if (type=9.1) and (scr_hit(240+420, 0, 378+420, 1080)) and (cooldown<=0){
 
-    if (mouse_y>=yy+325) and (mouse_y<yy+342){
+    if (!scr_hit(0, 325, 1920, 342)) {
         obj_controller.cooldown=8000;
         instance_destroy();
         exit;
@@ -638,11 +649,13 @@ if (type=9.1) and (mouse_x>=xx+240+420) and (mouse_x<xx+387+420) and (cooldown<=
 
 
 
-xx=__view_get( e__VW.XView, 0 )+951;yy=__view_get( e__VW.YView, 0 )+398;
-if (mouse_x>=xx+121) and (mouse_y>=yy+393) and (mouse_x<xx+231) and (mouse_y<yy+414){
+var xx = 951; 
+var yy = 398;
+if (scr_hit(xx+121, yy+393, xx+231, yy+414)){
     if (type=8) and (cooldown<=0){
         obj_controller.cooldown=8000;
-        instance_destroy();exit;
+        instance_destroy();
+        exit;
     }
 }
 

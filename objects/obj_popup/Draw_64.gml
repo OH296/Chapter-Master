@@ -7,9 +7,6 @@ if (image=="debug"){
 }
 
 var romanNumerals=scr_roman_numerals();
-var xx,yy;
-xx=__view_get( e__VW.XView, 0 );
-yy=__view_get( e__VW.YView, 0 );
 
 if (instance_exists(obj_fleet)) then exit;
 
@@ -19,7 +16,7 @@ if (type=99){
     draw_set_color(38144);
     
     if (!obj_controller.zoomed){
-        draw_text_transformed(__view_get( e__VW.XView, 0 )+320,__view_get( e__VW.YView, 0 )+60,"SELECT DESTINATION",0.5,0.5,0);
+        draw_text_transformed(320,60,"SELECT DESTINATION",0.5,0.5,0);
     }
     else {
         draw_text_transformed(room_width/2,60*3,"SELECT DESTINATION",1.5,1.5,0);
@@ -34,7 +31,7 @@ if (type=99){
     draw_set_alpha(1);
     exit;
 }else if  ((type=9) or (type=9.1)) and (instance_exists(obj_controller)){
-    draw_sprite(spr_planet_screen,0,xx+231+314,yy+112);
+    draw_sprite(spr_planet_screen,0,231+314,112);
     draw_set_font(fnt_40k_14);
     draw_set_halign(fa_center);
     draw_set_color(c_gray);
@@ -57,22 +54,22 @@ if (type=99){
         spacer =(iter*40);
         ch = obj_controller.disposition[i] > 0?"+":"-";
         if (obj_controller.known[i]>1){
-            draw_text(xx+740,yy+140+spacer,$"{scr_faction_string_name(i)} ({ch}{obj_controller.disposition[2]})");
-            // draw_text(xx+740,yy+140+spacer,$"{obj_controller.faction_title[i]}");
+            draw_text(740,140+spacer,$"{scr_faction_string_name(i)} ({ch}{obj_controller.disposition[2]})");
+            // draw_text(740,140+spacer,$"{obj_controller.faction_title[i]}");
             iter++;
         } else {
             continue;
         }
-        draw_line(xx+239+420,yy+162+spacer,xx+398+420,yy+162+spacer);
-        if (mouse_x>=xx+240+420) and (mouse_x<=xx+387+420){
-            if (mouse_y>=yy+131+spacer) and (mouse_y<=yy+159+spacer) and (obj_controller.known[i]>1){
+        draw_line(239+420,162+spacer,398+420,162+spacer);
+        if (scr_hit(660, 131 + spacer, 807, 159 + spacer)) {
+            if (obj_controller.known[i] > 1) {
                 if (i==eFACTION.Inquisition){
                     if ((inq_hide!=2) and (inq_hide==1)) then continue;
                 }
                 draw_set_alpha(0.33);
                 draw_set_color(c_gray);
-                draw_rectangle(xx+240+420,yy+135+spacer,xx+398+420,yy+160+spacer,0);
-                if( mouse_check_button_pressed(mb_left)){
+                draw_rectangle(240+420,135+spacer,398+420,160+spacer,0);
+                if(mouse_check_button_pressed(mb_left)){
                     giveto=i;
                 }
             }
@@ -80,7 +77,7 @@ if (type=99){
     }
     draw_set_alpha(1);
     draw_set_color(38144);
-    if (point_and_click(draw_unit_buttons([xx+700,yy+370],"Cancel",[1,1],c_red))){
+    if (point_and_click(draw_unit_buttons([700,370],"Cancel",[1,1],c_red))){
         obj_controller.cooldown=8000;
         instance_destroy();
         exit;
@@ -181,14 +178,14 @@ if ((zoom=0) and (type<=4)) or (type=98){
         sprite_index=spr_popup_medium;
         image_alpha=0;
         widd=sprite_width-50;
-        draw_sprite_ext(spr_popup_medium,type,xx+((1600-sprite_width)/2),yy+((900-sprite_height)/2),1,y_scale,0,c_white,1);
+        draw_sprite_ext(spr_popup_medium,type,((1600-sprite_width)/2),((900-sprite_height)/2),1,y_scale,0,c_white,1);
         if (image!=""){image_wid=100;image_hei=100;}
     }
     else if (size=1){
         sprite_index=spr_popup_small;
         image_alpha=0;
         widd=sprite_width-10;
-        draw_sprite_ext(spr_popup_small,type,xx+((1600-sprite_width)/2),yy+((900-sprite_height)/2),1,y_scale,0,c_white,1);
+        draw_sprite_ext(spr_popup_small,type,((1600-sprite_width)/2),((900-sprite_height)/2),1,y_scale,0,c_white,1);
         if (image!=""){image_wid=150;image_hei=150;}
     }
     else if (size=3){
@@ -200,15 +197,15 @@ if ((zoom=0) and (type<=4)) or (type=98){
             y_scale_mod = 1.5; 
             draw_y_scale = y_scale*y_scale_mod;
         }
-        draw_sprite_ext(spr_popup_large,type,xx+((1600-sprite_width)/2),yy+((900-sprite_height*y_scale_mod)/2),1,draw_y_scale,0,c_white,1);
+        draw_sprite_ext(spr_popup_large,type,((1600-sprite_width)/2),((900-sprite_height*y_scale_mod)/2),1,draw_y_scale,0,c_white,1);
         if (image!=""){image_wid=200;image_hei=200;}
     }
     
     if (image_wid>0) then widd-=(image_wid+10);
     
     var x1,y1;
-    x1=xx+((1600-sprite_width)/2);
-    y1=yy+((900-sprite_height*y_scale_mod)/2);
+    x1=((1600-sprite_width)/2);
+    y1=((900-sprite_height*y_scale_mod)/2);
     
     draw_set_font(fnt_40k_14b);
     draw_set_halign(fa_center);
@@ -219,7 +216,7 @@ if ((zoom=0) and (type<=4)) or (type=98){
         if (type=1) then draw_set_color(255);
     }
     draw_text_transformed(x1+(sprite_width/2),y1+(sprite_height*0.07),string_hash_to_newline(string(title)), 1.1, 1.1, 0);
-    // draw_text(xx+320.5,yy+123.5,string(title));
+    // draw_text(320.5,123.5,string(title));
     
     draw_set_font(fnt_40k_14);
     draw_set_halign(fa_left);
@@ -353,28 +350,42 @@ if ((zoom=0) and (type<=4)) or (type=98){
         if (option2 != "") then t8 = (y1 + 20 + sz) + 5;
         if (option3 = "") then t8 = (y1 + 20 + sz2 + string_height_ext(string_hash_to_newline("3. " + string(option3)), -1, widd)) + 5;
 
+        if (option1 != "") {
+            if (scr_hit(x1, y1 + 21, x1 + 30 + string_width_ext(string_hash_to_newline("1. " + string(option1)), -1, widd), y1 + 39)) {
+                option1enter = true;
+                draw_sprite(spr_popup_select, 0, x1 + 8.5, y1 + 21);
+                if (mouse_check_button_pressed(mb_left)) {
+                    press = 1;
+                }
+            } else {
+                option1enter = false;
+            }
+        }
+        
+        if (option2 != "") {
+            if (scr_hit(x1, y1 + 21 + sz, x1 + 30 + string_width_ext(string_hash_to_newline("2. " + string(option2)), -1, widd), y1 + 39 + sz)) {
+                option2enter = true;
+                draw_sprite(spr_popup_select, 0, x1 + 8.5, y1 + 21 + sz);
+                if (mouse_check_button_pressed(mb_left)) {
+                    press = 2;
+                }
+            } else {
+                option2enter = false;
+            }
+        }
+        
+        if (option3 != "") {
+            if (scr_hit(x1, y1 + 21 + sz2, x1 + 30 + string_width_ext(string_hash_to_newline("3. " + string(option3)), -1, widd), y1 + 39 + sz2)) {
+                option3enter = true;
+                draw_sprite(spr_popup_select, 0, x1 + 8.5, y1 + 21 + sz2);
+                if (mouse_check_button_pressed(mb_left)) {
+                    press = 3;
+                }
+            } else {
+                option3enter = false;
+            }
+        }
 
-        if (option1 != "") and(mouse_x >= x1) and(mouse_y >= y1 + 21) and(mouse_x <= x1 + 30 + string_width_ext(string_hash_to_newline("1. " + string(option1)), -1, widd)) and(mouse_y < y1 + 39) {
-            option1enter=true;
-            draw_sprite(spr_popup_select, 0, x1 + 8.5, y1 + 21);
-            if (mouse_check_button(mb_left)) then press = 1;
-        } else {
-            option1enter=false;
-        }
-        if (option2 != "") and(mouse_x >= x1) and(mouse_y >= y1 + 21 + sz) and(mouse_x <= x1 + 30 + string_width_ext(string_hash_to_newline("2. " + string(option2)), -1, widd)) and(mouse_y < y1 + 39 + sz) {
-            option2enter=true;
-            draw_sprite(spr_popup_select, 0, x1 + 8.5, y1 + 21 + sz);
-            if (mouse_check_button(mb_left)) then press = 2;
-        }else {
-            option2enter=false;
-        }
-        if (option3 != "") and(mouse_x >= x1) and(mouse_y >= y1 + 21 + sz2) and(mouse_x <= x1 + 30 + string_width_ext(string_hash_to_newline("3. " + string(option3)), -1, widd)) and(mouse_y < y1 + 39 + sz2) {
-            option3enter=true;
-            draw_sprite(spr_popup_select, 0, x1 + 8.5, y1 + 21 + sz2);
-            if (mouse_check_button(mb_left)) then press = 3;
-        }else {
-            option3enter=false;
-        }
         if (image=="new_forge_master"){
             var new_master_image = false;
             if (pathway="selection_options"){
@@ -389,7 +400,7 @@ if ((zoom=0) and (type<=4)) or (type=98){
                     techs[experience_pick].stat_display();            
                 }
                 if (is_struct(new_master_image)){
-                    new_master_image.draw(xx+1208, yy+210, true);
+                    new_master_image.draw(1208, 210, true);
                 }
             }
         }
@@ -404,8 +415,8 @@ if ((zoom=0) and (type<=4)) or (type=98){
 
 // ** Equip Artifact **
 if (type = 8) and (instance_exists(obj_controller)) {
-    var x2 = xx + 951;
-    var y2 = yy + 48;
+    var x2 = 951;
+    var y2 = 48;
     var before = target_comp;
     var temp_alpha = 1;
     arti = obj_ini.artifact_struct[obj_controller.menu_artifact];
@@ -417,7 +428,7 @@ if (type = 8) and (instance_exists(obj_controller)) {
     draw_set_color(c_gray);
 
     draw_text(x2 + 312, y2 + 26, $"Equip Artifact ({obj_ini.artifact[obj_controller.menu_artifact]})");
-    // draw_text(x2+320.5,yy+123.5,"Equip Artifact ("+string(obj_ini.artifact[obj_controller.menu_artifact])+")");
+    // draw_text(x2+320.5,123.5,"Equip Artifact ("+string(obj_ini.artifact[obj_controller.menu_artifact])+")");
 
     draw_set_font(fnt_40k_12);
     draw_set_halign(fa_left);
@@ -544,10 +555,10 @@ if (type = 8) and (instance_exists(obj_controller)) {
                 
             /*
             if (string_count("Chapter Master",temp1)>0){
-                draw_text_transformed(xx+27+16,unit_y+64,string(temp1),0.7,0.7,0);draw_text_transformed(xx+28+16,unit_y+64,string(temp1),0.7,0.7,0);
-                draw_text_transformed(xx+27+16,unit_y+65,string(temp1),0.7,0.7,0);draw_text_transformed(xx+28+16,unit_y+65,string(temp1),0.7,0.7,0);
+                draw_text_transformed(27+16,unit_y+64,string(temp1),0.7,0.7,0);draw_text_transformed(28+16,unit_y+64,string(temp1),0.7,0.7,0);
+                draw_text_transformed(27+16,unit_y+65,string(temp1),0.7,0.7,0);draw_text_transformed(28+16,unit_y+65,string(temp1),0.7,0.7,0);
                 // draw inspect icon
-                draw_sprite(spr_inspect_small,0,xx+27,unit_y+68);
+                draw_sprite(spr_inspect_small,0,27,unit_y+68);
             }
             */
             
@@ -702,19 +713,15 @@ if (type = 8) and (instance_exists(obj_controller)) {
 
 }
 
-var xx,yy;
-xx=__view_get( e__VW.XView, 0 );
-yy=__view_get( e__VW.YView, 0 );
-
 // Changing Equipment
 if (zoom=0) and (type=6) and (instance_exists(obj_controller)){
-    draw_set_color(0);draw_rectangle(xx+1006,yy+143,xx+1577,yy+518,0);
+    draw_set_color(0);draw_rectangle(1006,143,1577,518,0);
     
     draw_set_font(fnt_40k_14b);
     draw_set_halign(fa_center);
     draw_set_color(c_gray);
     
-    draw_text(xx+1292,yy+145,"Change Equipment");
+    draw_text(1292,145,"Change Equipment");
     
     draw_set_font(fnt_40k_12);
     var comp="";
@@ -723,115 +730,115 @@ if (zoom=0) and (type=6) and (instance_exists(obj_controller)){
     }
     else if (company>10) then comp="HQ";
 
-    if (vehicle_equipment=0) then draw_text(xx+1292,yy+170,$"{comp} Company, {units} Marines");
-    if (vehicle_equipment=1) then draw_text(xx+1292,yy+170,$"{comp} Company, {units} Vehicles");
+    if (vehicle_equipment=0) then draw_text(1292,170,$"{comp} Company, {units} Marines");
+    if (vehicle_equipment=1) then draw_text(1292,170,$"{comp} Company, {units} Vehicles");
     
     draw_set_halign(fa_left);
     draw_set_color(c_gray);
     
-    draw_rectangle(xx+1010,yy+215,xx+1288,yy+315,1);
-    draw_rectangle(xx+1574,yy+215,xx+1296,yy+315,1);
+    draw_rectangle(1010,215,1288,315,1);
+    draw_rectangle(1574,215,1296,315,1);
     
     
     var show_name="";
     // Need to not show the artifact tags here somehow
     
-    draw_text(xx+1010,yy+195,"Before");
-    draw_text(xx+1010.5,yy+195.5,"Before");
+    draw_text(1010,195,"Before");
+    draw_text(1010.5,195.5,"Before");
     
     show_name=o_wep1;
     if (a_wep1!="") then show_name=a_wep1;
-    if (o_wep1!="") then draw_text(xx+1014,yy+215,string_hash_to_newline(show_name));
-    else draw_text(xx+1014,yy+215,"(None)");
+    if (o_wep1!="") then draw_text(1014,215,string_hash_to_newline(show_name));
+    else draw_text(1014,215,"(None)");
     
     show_name=o_wep2;
     if (a_wep2!="") then show_name=a_wep2;
-    if (o_wep2!="") then draw_text(xx+1014,yy+235,string_hash_to_newline(string(show_name)));
-    else draw_text(xx+1014,yy+235,"(None)");
+    if (o_wep2!="") then draw_text(1014,235,string_hash_to_newline(string(show_name)));
+    else draw_text(1014,235,"(None)");
     
     show_name=o_armour;
     if (a_armour!="") then show_name=a_armour;
-    if (o_armour!="") then draw_text(xx+1014,yy+255,string_hash_to_newline(string(show_name)));
-    else draw_text(xx+1014,yy+255,"(None)");
+    if (o_armour!="") then draw_text(1014,255,string_hash_to_newline(string(show_name)));
+    else draw_text(1014,255,"(None)");
     
     show_name=o_gear;
     if (a_gear!="") then show_name=a_gear;
-    if (o_gear!="") then draw_text(xx+1014,yy+275,string_hash_to_newline(string(show_name)));
-    else draw_text(xx+1014,yy+275,"(None)");
+    if (o_gear!="") then draw_text(1014,275,string_hash_to_newline(string(show_name)));
+    else draw_text(1014,275,"(None)");
     
     show_name=o_mobi;
     if (a_mobi!="") then show_name=a_mobi;
-    if (o_mobi!="") then draw_text(xx+1014,yy+295,string_hash_to_newline(string(show_name)));
-    else draw_text(xx+1014,yy+295,"(None)");
+    if (o_mobi!="") then draw_text(1014,295,string_hash_to_newline(string(show_name)));
+    else draw_text(1014,295,"(None)");
     
-    draw_text(xx+1296,yy+195,string_hash_to_newline("After"));
-    draw_text(xx+1296.5,yy+195.5,"After");
+    draw_text(1296,195,string_hash_to_newline("After"));
+    draw_text(1296.5,195.5,"After");
     
     draw_set_color(c_gray);
     if (n_good1=0) then draw_set_color(255);
     show_name=n_wep1;
     if (a_wep1!="") and (n_wep1=o_wep1) then show_name=a_wep1;
-    if (n_wep1!="") then draw_text(xx+1300,yy+215,string_hash_to_newline(string(show_name)));
-    else draw_text(xx+1300,yy+215,string_hash_to_newline("(None)"));
+    if (n_wep1!="") then draw_text(1300,215,string_hash_to_newline(string(show_name)));
+    else draw_text(1300,215,string_hash_to_newline("(None)"));
     
     draw_set_color(c_gray);
     if (n_good2=0) then draw_set_color(255);
     show_name=n_wep2;
     if (a_wep2!="") and (n_wep2=o_wep2) then show_name=a_wep2;
-    if (n_wep2!="") then draw_text(xx+1300,yy+235,string_hash_to_newline(string(show_name)));
-    else draw_text(xx+1300,yy+235,string_hash_to_newline("(None)"));
+    if (n_wep2!="") then draw_text(1300,235,string_hash_to_newline(string(show_name)));
+    else draw_text(1300,235,string_hash_to_newline("(None)"));
     
     draw_set_color(c_gray);
     if (n_good3=0) then draw_set_color(255);
     show_name=n_armour;
     if (a_armour!="") and (n_armour=o_armour) then show_name=a_armour;
-    if (n_armour!="") then draw_text(xx+1300,yy+255,string_hash_to_newline(string(show_name)));
-    else draw_text(xx+1300,yy+255,string_hash_to_newline("(None)"));
+    if (n_armour!="") then draw_text(1300,255,string_hash_to_newline(string(show_name)));
+    else draw_text(1300,255,string_hash_to_newline("(None)"));
     
     draw_set_color(c_gray);
     if (n_good4=0) then draw_set_color(255);
     show_name=n_gear;
     if (a_gear!="") and (n_gear=o_gear) then show_name=a_gear;
-    if (n_gear!="") then draw_text(xx+1300,yy+275,string_hash_to_newline(string(show_name)));
-    else draw_text(xx+1300,yy+275,string_hash_to_newline("(None)"));
+    if (n_gear!="") then draw_text(1300,275,string_hash_to_newline(string(show_name)));
+    else draw_text(1300,275,string_hash_to_newline("(None)"));
     
     draw_set_color(c_gray);
     if (n_good5=0) then draw_set_color(255);
     show_name=n_mobi;
     if (a_mobi!="") and (n_mobi=o_mobi) then show_name=a_mobi;
-    if (n_mobi!="") then draw_text(xx+1300,yy+295,string_hash_to_newline(string(show_name)));
-    else draw_text(xx+1300,yy+295,string_hash_to_newline("(None)"));
+    if (n_mobi!="") then draw_text(1300,295,string_hash_to_newline(string(show_name)));
+    else draw_text(1300,295,string_hash_to_newline("(None)"));
     
     draw_set_color(c_gray);
     
     for (var i=1;i<=5;i++){
         if (target_comp==i){
-            draw_text(xx+1292,yy+195+(20*i),"->");
+            draw_text(1292,195+(20*i),"->");
             break;
         }
     }
     
     
-    if (mouse_x>=xx+1296) and (mouse_x<xx+1574){
-        if (mouse_y>=yy+215) and (mouse_y<yy+235){
+    if (scr_hit(1296, 215, 1574, 315)) {
+        if (scr_hit(1296, 230, 1574, 230)) {
             draw_set_alpha(0.5);
-            draw_line(xx+1296,yy+230,xx+1574,yy+230);
+            draw_line(1296, 230, 1574, 230);
         }
-        if (mouse_y>=yy+235) and (mouse_y<yy+255){
+        if (scr_hit(1296, 250, 1574, 250)) {
             draw_set_alpha(0.5);
-            draw_line(xx+1296,yy+250,xx+1574,yy+250);
+            draw_line(1296, 250, 1574, 250);
         }
-        if (mouse_y>=yy+255) and (mouse_y<yy+275){
+        if (scr_hit(1296, 270, 1574, 270)) {
             draw_set_alpha(0.5);
-            draw_line(xx+1296,yy+270,xx+1574,yy+270);
+            draw_line(1296, 270, 1574, 270);
         }
-        if (mouse_y>=yy+275) and (mouse_y<yy+295){
+        if (scr_hit(1296, 290, 1574, 290)) {
             draw_set_alpha(0.5);
-            draw_line(xx+1296,yy+290,xx+1574,yy+290);
+            draw_line(1296, 290, 1574, 290);
         }
-        if (mouse_y>=yy+295) and (mouse_y<yy+315){
+        if (scr_hit(1296, 310, 1574, 310)) {
             draw_set_alpha(0.5);
-            draw_line(xx+1296,yy+310,xx+1574,yy+310);
+            draw_line(1296, 310, 1574, 310);
         }
     }
     draw_set_alpha(1);
@@ -849,8 +856,8 @@ if (zoom=0) and (type=6) and (instance_exists(obj_controller)){
          var top=0;
          for (var o=1;o<29;o++){
             if  (item_name[o]!=""){
-                box_x = xx+1016+(row*154);
-                box_y = yy+355+(column*20);
+                box_x = 1016+(row*154);
+                box_y = 355+(column*20);
                 box = [box_x, box_y, box_x+144, box_y+20];
 				check=target_role==o ? "x" : " "; 
                 item_string = $"[{check}] {item_name[o]}";
@@ -1052,46 +1059,46 @@ if (zoom=0) and (type=6) and (instance_exists(obj_controller)){
     if (target_comp=1) or (target_comp=2){
         var msc=" ";
         if (master_crafted=1) then msc="x";
-        if (tab=1) then draw_text(xx+1292,yy+318,string_hash_to_newline("Tab 1 [x]    Tab 2 [ ]        Master-Crafted ["+string(msc)+"]"));
-        if (tab=2) then draw_text(xx+1292,yy+318,string_hash_to_newline("Tab 1 [ ]    Tab 2 [x]        Master-Crafted ["+string(msc)+"]"));
+        if (tab=1) then draw_text(1292,318,string_hash_to_newline("Tab 1 [x]    Tab 2 [ ]        Master-Crafted ["+string(msc)+"]"));
+        if (tab=2) then draw_text(1292,318,string_hash_to_newline("Tab 1 [ ]    Tab 2 [x]        Master-Crafted ["+string(msc)+"]"));
     }
     
     draw_set_color(255);
     draw_set_halign(fa_center);
-    draw_text(xx+1292,yy+476,string_hash_to_newline(warning));
+    draw_text(1292,476,string_hash_to_newline(warning));
     
     draw_set_color(c_gray);
     draw_set_halign(fa_left);
-    draw_rectangle(xx+1006,yy+499,xx+1115,yy+518,1);
+    draw_rectangle(1006,499,1115,518,1);
     draw_set_alpha(0.5);
-    draw_rectangle(xx+1007,yy+500,xx+1114,yy+517,1);
+    draw_rectangle(1007,500,1114,517,1);
     
     
     if (n_good1+n_good2+n_good3+n_good4+n_good5=5){
         draw_set_alpha(1);
-        draw_rectangle(xx+1465,yy+499,xx+1576,yy+518,1);
+        draw_rectangle(1465,499,1576,518,1);
         draw_set_alpha(0.5);
-        draw_rectangle(xx+1466,yy+500,xx+1575,yy+517,1);
+        draw_rectangle(1466,500,1575,517,1);
     }
     if (n_good1+n_good2+n_good3+n_good4+n_good5!=5){
         draw_set_alpha(0.25);
-        draw_rectangle(xx+1465,yy+499,xx+1576,yy+518,1);
-        draw_rectangle(xx+1466,yy+500,xx+1575,yy+517,1);
+        draw_rectangle(1465,499,1576,518,1);
+        draw_rectangle(1466,500,1575,517,1);
     }
     
     draw_set_alpha(1);
     draw_set_halign(fa_center);
-    draw_text(xx+1061,yy+501,string_hash_to_newline("Cancel"));
-    draw_text(xx+1061.5,yy+501.5,string_hash_to_newline("Cancel"));
+    draw_text(1061,501,string_hash_to_newline("Cancel"));
+    draw_text(1061.5,501.5,string_hash_to_newline("Cancel"));
     
     if (n_good1+n_good2+n_good3+n_good4=4){
-        draw_text(xx+1521,yy+501,string_hash_to_newline("Equip!"));
-        draw_text(xx+1521.5,yy+501.5,string_hash_to_newline("Equip!"));
+        draw_text(1521,501,string_hash_to_newline("Equip!"));
+        draw_text(1521.5,501.5,string_hash_to_newline("Equip!"));
     }
     if (n_good1+n_good2+n_good3+n_good4!=4){
         draw_set_alpha(0.25);
-        draw_text(xx+1521,yy+501,string_hash_to_newline("Equip!"));
-        draw_text(xx+1521.5,yy+501.5,string_hash_to_newline("Equip!"));
+        draw_text(1521,501,string_hash_to_newline("Equip!"));
+        draw_text(1521.5,501.5,string_hash_to_newline("Equip!"));
     }
     draw_set_alpha(1);
 }
@@ -1100,12 +1107,12 @@ if (zoom=0) and (type=6) and (instance_exists(obj_controller)){
 if (zoom=0) and (type==5) and (instance_exists(obj_controller)){
 
     draw_set_color(0);
-    draw_rectangle(xx+1006,yy+143,xx+1577,yy+518,0);
+    draw_rectangle(1006,143,1577,518,0);
     
     draw_set_font(fnt_40k_14b);
     draw_set_halign(fa_center);
     draw_set_color(c_gray);
-    draw_text(xx+1292,yy+145,string_hash_to_newline("Promoting"));
+    draw_text(1292,145,string_hash_to_newline("Promoting"));
     
     draw_set_font(fnt_40k_12);
     var comp="";
@@ -1113,18 +1120,18 @@ if (zoom=0) and (type==5) and (instance_exists(obj_controller)){
         comp=romanNumerals[company-1];
     }
     else if (company>10) then comp="HQ";
-    draw_text(xx+1292,yy+170,string_hash_to_newline(string(comp)+" Company "+string(unit_role)));
+    draw_text(1292,170,string_hash_to_newline(string(comp)+" Company "+string(unit_role)));
     
     draw_set_halign(fa_left);
     draw_set_color(c_gray);
-    draw_text(xx+1014,yy+210,string_hash_to_newline("Target Company:"));
+    draw_text(1014,210,string_hash_to_newline("Target Company:"));
     
     var check=" ";
     draw_set_alpha(1);
 
     // HQ Company
     if (target_comp=0) or (target_comp>10) then check="x";
-    draw_text(xx+1470,yy+210,string_hash_to_newline("HQ ["+string(check)+"]"));
+    draw_text(1470,210,string_hash_to_newline("HQ ["+string(check)+"]"));
     check=" ";
    // if (obj_controller.command_set[1]!=0 && !is_specialist(unit_role, "libs")){
     for (i=1;i<=10;i++){
@@ -1137,17 +1144,17 @@ if (zoom=0) and (type==5) and (instance_exists(obj_controller)){
         check=" ";
         if (target_comp==i) then check="x";
         var select_text = $"{romanNumerals[i-1]} [{check}]";
-        draw_text(xx+comp_data[0],yy+comp_data[1],select_text);
-        if (mouse_check_button_pressed(mb_left) && point_in_rectangle(mouse_x, mouse_y, xx+comp_data[0], yy+comp_data[1], xx+comp_data[0]+90, yy+comp_data[1]+20)){
-            target_comp=i;
-            target_role=0;
+        draw_text(comp_data[0],comp_data[1],select_text);
+        if (mouse_check_button_pressed(mb_left) && scr_hit(comp_data[0], comp_data[1], comp_data[0] + 90, comp_data[1] + 20)) {
+            target_comp = i;
+            target_role = 0;
             get_unit_promotion_options();
-            cooldown=8000;
+            cooldown = 8000;
         }
     }
    // }
     
-    draw_text(xx+1014,yy+290,string_hash_to_newline("Target Role:"));//choose new role
+    draw_text(1014,290,string_hash_to_newline("Target Role:"));//choose new role
     var role_x=0;role_y=0;
     if (target_comp!=-1){
         for (var r=1;r<=11;r++){
@@ -1156,8 +1163,8 @@ if (zoom=0) and (type==5) and (instance_exists(obj_controller)){
                 check=" ";
                 if (target_role==r) then check="x";
                 if (min_exp<role_exp[r]) then draw_set_alpha(0.25);
-                draw_text(xx+1030+role_x,yy+310+role_y,string_hash_to_newline(string(role_name[r])+" ["+string(check)+"]"));
-                if (mouse_check_button_pressed(mb_left) && point_in_rectangle(mouse_x, mouse_y, xx+1030+role_x, yy+310+role_y, xx+1180+role_x, yy+330+role_y)){
+                draw_text(1030+role_x,310+role_y,string_hash_to_newline(string(role_name[r])+" ["+string(check)+"]"));
+                if (mouse_check_button_pressed(mb_left) && scr_hit(1030 + role_x, 310 + role_y, 1180 + role_x, 330 + role_y)) {
                     if (min_exp>=role_exp[r]){
                         target_role=r;
                         calculate_equipment_needs();
@@ -1177,7 +1184,7 @@ if (zoom=0) and (type==5) and (instance_exists(obj_controller)){
     
     draw_set_alpha(1);
     
-    draw_text(xx+1014,yy+370,string_hash_to_newline("Required Gear:"));
+    draw_text(1014,370,string_hash_to_newline("Required Gear:"));
     var gr=0,tox="";
     
     if (target_role>0){
@@ -1189,7 +1196,7 @@ if (zoom=0) and (type==5) and (instance_exists(obj_controller)){
             } else {
                 draw_set_color(c_gray);
             }
-            draw_text(xx+1030,yy+390, $"{req_armour_num} {req_armour} (Have {have_armour_num})");
+            draw_text(1030,390, $"{req_armour_num} {req_armour} (Have {have_armour_num})");
         }
         if (req_gear!=""){
             gr=req_gear_num-have_gear_num;
@@ -1199,7 +1206,7 @@ if (zoom=0) and (type==5) and (instance_exists(obj_controller)){
             } else {
                 draw_set_color(c_gray);
             }
-            draw_text(xx+1030,yy+410, $"{req_gear_num} {req_gear} (Have {have_gear_num})");
+            draw_text(1030,410, $"{req_gear_num} {req_gear} (Have {have_gear_num})");
         }
         if (req_mobi!=""){
             gr=req_mobi_num-have_mobi_num;
@@ -1209,7 +1216,7 @@ if (zoom=0) and (type==5) and (instance_exists(obj_controller)){
             } else {
                 draw_set_color(c_gray);
             }
-            draw_text(xx+1030,yy+430, $"{req_mobi_num} {req_mobi} (Have {have_mobi_num})");
+            draw_text(1030,430, $"{req_mobi_num} {req_mobi} (Have {have_mobi_num})");
         }
         if (req_wep1!=""){
             gr=req_wep1_num-have_wep1_num;
@@ -1219,7 +1226,7 @@ if (zoom=0) and (type==5) and (instance_exists(obj_controller)){
             } else {
                 draw_set_color(c_gray);
             }
-            draw_text(xx+1260,yy+390, $"{req_wep1_num} {req_wep1} (Have {have_wep1_num})");
+            draw_text(1260,390, $"{req_wep1_num} {req_wep1} (Have {have_wep1_num})");
         }
         if (req_wep2!=""){
             gr=req_wep2_num-have_wep2_num;
@@ -1229,7 +1236,7 @@ if (zoom=0) and (type==5) and (instance_exists(obj_controller)){
             } else {
                 draw_set_color(c_gray);
             }
-            draw_text(xx+1260,yy+410, $"{req_wep2_num} {req_wep2} (Have {have_wep2_num})");
+            draw_text(1260,410, $"{req_wep2_num} {req_wep2} (Have {have_wep2_num})");
         }
     }
     
@@ -1237,35 +1244,35 @@ if (zoom=0) and (type==5) and (instance_exists(obj_controller)){
     
     draw_set_color(c_gray);
     draw_set_halign(fa_left);
-    draw_rectangle(xx+1006,yy+499,xx+1115,yy+518,1);
+    draw_rectangle(1006,499,1115,518,1);
     draw_set_alpha(0.5);
-    draw_rectangle(xx+1007,yy+500,xx+1114,yy+517,1);
+    draw_rectangle(1007,500,1114,517,1);
     
     if (all_good=1){
         draw_set_alpha(1);
-        draw_rectangle(xx+1465,yy+499,xx+1576,yy+518,1);
+        draw_rectangle(1465,499,1576,518,1);
         draw_set_alpha(0.5);
-        draw_rectangle(xx+1466,yy+500,xx+1575,yy+517,1);
+        draw_rectangle(1466,500,1575,517,1);
     }
     if (all_good!=1){
         draw_set_alpha(0.25);
-        draw_rectangle(xx+1465,yy+499,xx+1576,yy+518,1);
-        draw_rectangle(xx+1466,yy+500,xx+1575,yy+517,1);
+        draw_rectangle(1465,499,1576,518,1);
+        draw_rectangle(1466,500,1575,517,1);
     }
     
     draw_set_alpha(1);
     draw_set_halign(fa_center);
-    draw_text(xx+1061,yy+501,string_hash_to_newline("Cancel"));
-    draw_text(xx+1061.5,yy+501.5,string_hash_to_newline("Cancel"));
+    draw_text(1061,501,string_hash_to_newline("Cancel"));
+    draw_text(1061.5,501.5,string_hash_to_newline("Cancel"));
     
     if (all_good=1){
-        draw_text(xx+1521,yy+501,string_hash_to_newline("Promote!"));
-        draw_text(xx+1521.5,yy+501.5,string_hash_to_newline("Promote!"));
+        draw_text(1521,501,string_hash_to_newline("Promote!"));
+        draw_text(1521.5,501.5,string_hash_to_newline("Promote!"));
     }
     if (all_good!=1){
         draw_set_alpha(0.25);
-        draw_text(xx+1521,yy+501,string_hash_to_newline("Promote!"));
-        draw_text(xx+1521.5,yy+501.5,string_hash_to_newline("Promote!"));
+        draw_text(1521,501,string_hash_to_newline("Promote!"));
+        draw_text(1521.5,501.5,string_hash_to_newline("Promote!"));
     }
     draw_set_alpha(1);
 }
@@ -1273,12 +1280,12 @@ if (zoom=0) and (type==5) and (instance_exists(obj_controller)){
 // ** Transfering **
 if (zoom=0) and (type=5.1) and (instance_exists(obj_controller)){
     draw_set_color(0);
-    draw_rectangle(xx+1006,yy+143,xx+1577,yy+518,0);
+    draw_rectangle(1006,143,1577,518,0);
     
     draw_set_font(fnt_40k_14b);
     draw_set_halign(fa_center);
     draw_set_color(c_gray);
-    draw_text(xx+1292,yy+145,string_hash_to_newline("Transfering"));
+    draw_text(1292,145,string_hash_to_newline("Transfering"));
     
     draw_set_font(fnt_40k_12);
     var comp="";
@@ -1286,58 +1293,58 @@ if (zoom=0) and (type=5.1) and (instance_exists(obj_controller)){
         comp=romanNumerals[company-1];
     }
     else if (company>10) then comp="HQ";
-    draw_text(xx+1292,yy+170,string_hash_to_newline(string(comp)+" Company "+string(unit_role)));
+    draw_text(1292,170,string_hash_to_newline(string(comp)+" Company "+string(unit_role)));
     
     draw_set_halign(fa_left);
     draw_set_color(c_gray);
-    draw_text(xx+1014,yy+210,string_hash_to_newline("Target Company:"));
+    draw_text(1014,210,string_hash_to_newline("Target Company:"));
     
     var check=" ";
     // HQ Company
     if (target_comp=0) or (target_comp>10) then check="x";
-    draw_text(xx+1470,yy+210,string_hash_to_newline("HQ ["+string(check)+"]"));
+    draw_text(1470,210,string_hash_to_newline("HQ ["+string(check)+"]"));
     check=" ";
     
     if ((unit_role!=obj_ini.role[100,17]) or (obj_controller.command_set[1]!=0)) and (unit_role!="Lexicanum") and (unit_role!="Codiciery"){
         // I Company
         if (target_comp==1) then check="x";
-        draw_text(xx+1030,yy+230,string_hash_to_newline(romanNumerals[0]+" ["+string(check)+"]"));
+        draw_text(1030,230,string_hash_to_newline(romanNumerals[0]+" ["+string(check)+"]"));
         check=" ";
         // II Company
         if (target_comp==2) then check="x";
-        draw_text(xx+1140,yy+230,string_hash_to_newline(romanNumerals[1]+" ["+string(check)+"]"));
+        draw_text(1140,230,string_hash_to_newline(romanNumerals[1]+" ["+string(check)+"]"));
         check=" ";
         // III Company
         if (target_comp==3) then check="x";
-        draw_text(xx+1250,yy+230,string_hash_to_newline(romanNumerals[2]+" ["+string(check)+"]"));
+        draw_text(1250,230,string_hash_to_newline(romanNumerals[2]+" ["+string(check)+"]"));
         check=" ";
         // IV Company
         if (target_comp==4) then check="x";
-        draw_text(xx+1360,yy+230,string_hash_to_newline(romanNumerals[3]+" ["+string(check)+"]"));
+        draw_text(1360,230,string_hash_to_newline(romanNumerals[3]+" ["+string(check)+"]"));
         check=" ";
         // V Company
         if (target_comp==5) then check="x";
-        draw_text(xx+1470,yy+230,string_hash_to_newline(romanNumerals[4]+" ["+string(check)+"]"));
+        draw_text(1470,230,string_hash_to_newline(romanNumerals[4]+" ["+string(check)+"]"));
         check=" ";
         // VI Company
         if (target_comp==6) then check="x";
-        draw_text(xx+1030,yy+250,string_hash_to_newline(romanNumerals[5]+" ["+string(check)+"]"));
+        draw_text(1030,250,string_hash_to_newline(romanNumerals[5]+" ["+string(check)+"]"));
         check=" ";
         // VII Company
         if (target_comp==7) then check="x";
-        draw_text(xx+1140,yy+250,string_hash_to_newline(romanNumerals[6]+" ["+string(check)+"]"));
+        draw_text(1140,250,string_hash_to_newline(romanNumerals[6]+" ["+string(check)+"]"));
         check=" ";
         // VIII Company
         if (target_comp==8) then check="x";
-        draw_text(xx+1250,yy+250,string_hash_to_newline(romanNumerals[7]+" ["+string(check)+"]"));
+        draw_text(1250,250,string_hash_to_newline(romanNumerals[7]+" ["+string(check)+"]"));
         check=" ";
         // IX Company
         if (target_comp==9) then check="x";
-        draw_text(xx+1360,yy+250,string_hash_to_newline(romanNumerals[8]+" ["+string(check)+"]"));
+        draw_text(1360,250,string_hash_to_newline(romanNumerals[8]+" ["+string(check)+"]"));
         check=" ";
         // X Company
         if (target_comp==10) then check="x";
-        draw_text(xx+1470,yy+250,string_hash_to_newline(romanNumerals[9]+" ["+string(check)+"]"));
+        draw_text(1470,250,string_hash_to_newline(romanNumerals[9]+" ["+string(check)+"]"));
         check=" ";
     }
     
@@ -1345,35 +1352,35 @@ if (zoom=0) and (type=5.1) and (instance_exists(obj_controller)){
     
     draw_set_color(c_gray);
     draw_set_halign(fa_left);
-    draw_rectangle(xx+1006,yy+499,xx+1115,yy+518,1);
+    draw_rectangle(1006,499,1115,518,1);
     draw_set_alpha(0.5);
-    draw_rectangle(xx+1007,yy+500,xx+1114,yy+517,1);
+    draw_rectangle(1007,500,1114,517,1);
     
     if (company!=target_comp) and (target_comp>=0){
         draw_set_alpha(1);
-        draw_rectangle(xx+1465,yy+499,xx+1576,yy+518,1);
+        draw_rectangle(1465,499,1576,518,1);
         draw_set_alpha(0.5);
-        draw_rectangle(xx+1466,yy+500,xx+1575,yy+517,1);
+        draw_rectangle(1466,500,1575,517,1);
     }
     if (company==target_comp) or (target_comp<0){
         draw_set_alpha(0.25);
-        draw_rectangle(xx+1465,yy+499,xx+1576,yy+518,1);
-        draw_rectangle(xx+1466,yy+500,xx+1575,yy+517,1);
+        draw_rectangle(1465,499,1576,518,1);
+        draw_rectangle(1466,500,1575,517,1);
     }
     
     draw_set_alpha(1);
     draw_set_halign(fa_center);
-    draw_text(xx+1061,yy+501,"Cancel");
-    draw_text(xx+1061.5,yy+501.5,"Cancel");
+    draw_text(1061,501,"Cancel");
+    draw_text(1061.5,501.5,"Cancel");
     
     if (company!=target_comp) and (target_comp>=0){
-        draw_text(xx+1521,yy+501,"Transfer!");
-        draw_text(xx+1521.5,yy+501.5,"Transfer!");
+        draw_text(1521,501,"Transfer!");
+        draw_text(1521.5,501.5,"Transfer!");
     }
     if (company==target_comp) or (target_comp<0){
         draw_set_alpha(0.25);
-        draw_text(xx+1521,yy+501,"Transfer!");
-        draw_text(xx+1521.5,yy+501.5,"Transfer!");
+        draw_text(1521,501,"Transfer!");
+        draw_text(1521.5,501.5,"Transfer!");
     }
     draw_set_alpha(1);
 }
