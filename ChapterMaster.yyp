@@ -647,6 +647,7 @@
     {"id":{"name":"spr_binders_robes","path":"sprites/spr_binders_robes/spr_binders_robes.yy",},},
     {"id":{"name":"spr_helm_decorations","path":"sprites/spr_helm_decorations/spr_helm_decorations.yy",},},
     {"id":{"name":"spr_ship_ammer","path":"sprites/spr_ship_ammer/spr_ship_ammer.yy",},},
+    {"id":{"name":"scr_diplomacy_helpers","path":"scripts/scr_diplomacy_helpers/scr_diplomacy_helpers.yy",},},
     {"id":{"name":"spr_dread_iron_clad","path":"sprites/spr_dread_iron_clad/spr_dread_iron_clad.yy",},},
     {"id":{"name":"scr_has_adv","path":"scripts/scr_has_adv/scr_has_adv.yy",},},
     {"id":{"name":"spr_ship_deth","path":"sprites/spr_ship_deth/spr_ship_deth.yy",},},

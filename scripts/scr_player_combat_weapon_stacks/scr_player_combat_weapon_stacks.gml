@@ -70,7 +70,9 @@ function scr_player_combat_weapon_stacks(){
 	    wep_num[i]=round(obj_ncombat.player_defenses/2);
 	    range[i]=99;
 	    att[i]=160*wep_num[i];
-	    apa[i]=0;ammo[i]=-1;splash[i]=1;
+	    apa[i]=0;
+	    ammo[i]=-1;
+	    splash[i]=1;
 
 	    i+=1;
 	    wep[i]="Missile Launcher Emplacement";
@@ -81,7 +83,8 @@ function scr_player_combat_weapon_stacks(){
 	    ammo[i]=-1;
 	    splash[i]=1;
 
-	    i+=1;wep[i]="Missile Silo";
+	    i+=1;
+	    wep[i]="Missile Silo";
 	    wep_num[i]=min(30,obj_ncombat.player_silos);
 	    range[i]=99;
 	    att[i]=350*wep_num[i];
@@ -116,7 +119,7 @@ function scr_player_combat_weapon_stacks(){
 	var dreaded=false, unit;
 
 	var mobi_item;
-	for (g=1;g<array_length(unit_struct);g++){
+	for (g=0;g<array_length(unit_struct);g++){
 	    unit = unit_struct[g];
 	    if (is_struct(unit)){
 	        if (marine_casting[g]>=0) then marine_casting[g]=0;
@@ -292,3 +295,47 @@ function scr_player_combat_weapon_stacks(){
 	    }
 	}
 }
+
+
+function scr_add_unit_to_roster(unit, is_ally=false){
+	array_push(unit_struct, unit);
+	array_push(marine_co, unit.company);
+	array_push(marine_id, unit.marine_number);
+	array_push(marine_type, unit.role());
+	array_push(marine_wep1, unit.weapon_one());
+	array_push(marine_wep2, unit.weapon_two());
+	array_push(marine_armour, unit.armour());
+	array_push(marine_gear, unit.gear());
+	array_push(marine_mobi, unit.mobility_item());
+	array_push(marine_hp, unit.hp());
+	array_push(marine_mobi, unit.mobility_item());
+	array_push(marine_exp, unit.experience());
+	array_push(marine_powers, unit.specials());
+	array_push(marine_ranged, unit.ranged_attack());
+	array_push(marine_powers, unit.specials());
+	array_push(marine_ac, unit.armour_calc());
+	array_push(marine_attack, unit.melee_attack());
+	array_push(marine_local, 0);
+	array_push(marine_casting, 0);
+	array_push(marine_defense, 1);
+
+	array_push(marine_dead, 0);
+	array_push(marine_mshield, 0);
+	array_push(marine_quick, 0);
+	array_push(marine_might, 0);
+	array_push(marine_fiery, 0);
+	array_push(marine_fshield, 0);
+	array_push(marine_iron, 0);
+	array_push(marine_dome, 0);
+	array_push(marine_spatial, 0);
+	array_push(marine_dementia, 0);
+	array_push(ally, is_ally);
+
+    if (unit.IsSpecialist("dreadnoughts")){
+        dreads++;
+    } else {
+    	men++;
+    }
+}
+
+

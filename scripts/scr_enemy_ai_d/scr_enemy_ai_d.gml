@@ -351,7 +351,7 @@ function scr_enemy_ai_d() {
         }
          if (has_problem_planet_and_time(i,"spyrer", 0)){
             var alert_text,text;
-            var planet_name = planet_numeral_ name(i, self);
+            var planet_name = planet_numeral_name(i, self);
             alert_text=$"The Spyrer on {planet_name} has been left unchecked.  In the ensuing carnage some high-ranking officials have been killed, along with several Nobles.  Panic is running amock in several parts of the hives and the Inquisition is less than pleased.";
             text="Inquisition Mission Failed: The Spyrer on {planet_name} was not removed.";
             scr_popup("Inquisition Mission Failed",alert_text,"spyrer","");

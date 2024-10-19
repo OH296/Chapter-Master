@@ -203,7 +203,7 @@ function calculate_action_speed(capitals=true, frigates=true, escorts=true){
 	}else if (escorts>0){
 	    fleet_speed=174;
 	}
-	if (obj_controller.stc_ships>=6) and (fleet_speed>=100) then fleet_speed*=0.8;
+	if (obj_controller.stc_ships>=6) and (fleet_speed>=100) then fleet_speed*=1.2;
 	return fleet_speed;
 }
 

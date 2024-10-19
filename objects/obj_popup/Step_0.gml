@@ -812,7 +812,7 @@ if (press=1) and (option1!="") or ((demand=1) and (mission!="") and (string_coun
         obj_temp8.loc=loc;
         obj_temp8.wid=planet;
         
-        title="Necron Tunnels : "+string(obj_temp8.stage);
+        title = $"Necron Tunnels : {obj_temp8.stage}";
         if (obj_temp8.stage=1){
             image="necron_tunnels_1";
             text="Your marines enter the massive tunnel complex, following the energy readings.  At first the walls are cramped and tiny, closing about them, but the tunnels widen at a rapid pace.";
@@ -844,7 +844,7 @@ if (press=1) and (option1!="") or ((demand=1) and (mission!="") and (string_coun
         // Result
         if (roll<=60){
             obj_temp8.stage+=1;
-            title="Necron Tunnels : "+string(obj_temp8.stage);
+            title= $"Necron Tunnels : {obj_temp8.stage}";
             
             if (obj_temp8.stage=2){
                 image="necron_tunnels_2";
@@ -872,7 +872,7 @@ if (press=1) and (option1!="") or ((demand=1) and (mission!="") and (string_coun
                 with(obj_temp8){instance_destroy();}
                 instance_activate_object(obj_star);
                 
-                scr_event_log("","Inquisition Mission Completed: Your Astartes have sealed the Necron Tomb on "+mission_star.name+" "+string(scr_roman(planet))+".", mission_star.name);
+                scr_event_log("",$"Inquisition Mission Completed: Your Astartes have sealed the Necron Tomb on {mission_star.name} {scr_roman(planet)}.", mission_star.name);
                 scr_gov_disp(mission_star.name,planet,choose(3,4,5,6,7));
                 var have_bomb=scr_check_equip("Plasma Bomb",self.loc,self.planet,1);
                 exit;
@@ -947,11 +947,11 @@ if (press=1) and (option1!="") or ((demand=1) and (mission!="") and (string_coun
         var mission_star = star_by_name(obj_controller.temp[200]);
         if (add_new_problem(planet, "recon",estimate, mission_star)){
             title="Inquisition Mission Demand";
-            text="The Inquisition demands that your Chapter demonstrate its loyalty to the Imperium of Mankind and the Emperor.  mission_star are to land Astartes on "+mission_star.name+" "+scr_roman(planet)+" to investigate the planet within "+string(estimate)+" months.";
+            text=$"The Inquisition demands that your Chapter demonstrate its loyalty to the Imperium of Mankind and the Emperor.  mission_star are to land Astartes on {mission_star.name} {scr_roman(planet)} to investigate the planet within {estimate} months.";
             with (mission_star){
                 new_star_event_marker("green");
             }
-            scr_event_log("","Inquisition Mission Accepted: The Inquisition wish for Astartes to land on and investigate "+mission_star.name+" "+scr_roman(planet)+" within "+string(estimate)+" months.", mission_star.name);            
+            scr_event_log("",$"Inquisition Mission Accepted: The Inquisition wish for Astartes to land on and investigate {mission_star.name} {scr_roman(planet)} within {estimate} months.", mission_star.name);            
         }
     }else if (mission!="") and (title="Inquisition Mission"){
         obj_controller.temp[200]=string(loc);
@@ -970,36 +970,36 @@ if (press=1) and (option1!="") or ((demand=1) and (mission!="") and (string_coun
             }
             if (mission_is_go){
                 if (demand){
-                    title=  "Inquisition Mission Demand";
+                    title = "Inquisition Mission Demand";
                 }
 
                 if (mission=="purge"){
                     scr_event_log("",$"Inquisition Mission Accepted: The nobles of {mission_star.name} {scr_roman(planet)} must be selectively purged within {estimate} months.", mission_star.name);
                     if (demand){
-                        text="The Inquisition demands that your Chapter demonstrate its loyalty to the Imperium of Mankind and the Emperor.  mission_star are to selectively purge the Nobles on "+string(mission_star.name)+" "+scr_roman(onceh)+" within "+string(estimate)+" months.";
+                        text=$"The Inquisition demands that your Chapter demonstrate its loyalty to the Imperium of Mankind and the Emperor.  mission_star are to selectively purge the Nobles on {mission_star.name} {scr_roman(onceh)} within {estimate} months.";
                     }               
                 }
                 else if (mission=="cleanse"){
 
-                    scr_event_log("","Inquisition Mission Accepted: The mutants beneath {planet_numeral_name(planet,mission_star)} must be cleansed by fire within {estimate} months.",mission_star.name);
+                    scr_event_log("",$"Inquisition Mission Accepted: The mutants beneath {planet_numeral_name(planet,mission_star)} must be cleansed by fire within {estimate} months.",mission_star.name);
                     if (demand){
-                        text=$"The Inquisition demands that your Chapter demonstrate its loyalty to the Imperium of Mankind and the Emperor.  mission_star are to cleanse by fire the mutants in Hive {planet_numeral_name(planet,mission_star)} within "+string(estimate)+" months.";
+                        text=$"The Inquisition demands that your Chapter demonstrate its loyalty to the Imperium of Mankind and the Emperor.  mission_star are to cleanse by fire the mutants in Hive {planet_numeral_name(planet,mission_star)} within {estimate} months.";
                     } 
                 }else if (mission="inquisitor"){
-                    scr_event_log("","Inquisition Mission Accepted: A radical Inquisitor enroute to "+mission_star.name+" must be removed.  Estimated arrival in "+string(estimate)+" months.",mission_star.name);
+                    scr_event_log("",$"Inquisition Mission Accepted: A radical Inquisitor enroute to {mission_star.name} must be removed.  Estimated arrival in {estimate} months.",mission_star.name);
                     if (demand){
-                        text="The Inquisition demands that your Chapter demonstrate its loyalty to the Imperium of Mankind and the Emperor.  A radical inquisitor is enroute to "+mission_star.name+", expected within "+string(estimate)+" months.  They are to be silenced and removed.";
+                        text=$"The Inquisition demands that your Chapter demonstrate its loyalty to the Imperium of Mankind and the Emperor.  A radical inquisitor is enroute to {mission_star.name}, expected within {estimate} months.  They are to be silenced and removed.";
                     }
                 }
                 
                 if (mission="spyrer"){
-                    scr_event_log("","Inquisition Mission Accepted: The Spyrer on "+mission_star.name+" "+string(scr_roman(planet))+" must be killed within "+string(estimate)+" months.", mission_star.name,mission_star.name);
+                    scr_event_log("",$"Inquisition Mission Accepted: The Spyrer on {mission_star.name} {scr_roman(planet)} must be killed within {estimate} months.", mission_star.name);
                     if (demand){
-                        text="The Inquisition demands that your Chapter demonstrate its loyalty to the Imperium of Mankind and the Emperor.  An out of control Spyrer on Hive "+mission_star.name+" "+scr_roman(onceh)+" must be removed within "+string(estimate)+" months.";
+                        text=$"The Inquisition demands that your Chapter demonstrate its loyalty to the Imperium of Mankind and the Emperor.  An out of control Spyrer on Hive {mission_star.name} {scr_roman(onceh)} must be removed within {estimate} months.";
                     }
                 }else if (mission="necron"){
                     
-                    scr_event_log("","Inquisition Mission Accepted: mission_star have been given a Bomb to seal the Necron Tomb on "+mission_star.name+" "+scr_roman(planet)+".", mission_star.name);
+                    scr_event_log("",$"Inquisition Mission Accepted: mission_star have been given a Bomb to seal the Necron Tomb on {mission_star.name} {scr_roman(planet)}.", mission_star.name);
                     
                     image="necron_cave";
                     title="New Equipment";
@@ -1008,7 +1008,7 @@ if (press=1) and (option1!="") or ((demand=1) and (mission!="") and (string_coun
                     text="mission_star have been provided with 1x Plasma Bomb in order to complete the mission.";
                     
                     if (demand){
-                        text="The Inquisition demands that your Chapter demonstrate its loyalty.  mission_star have been given a Plasma Bomb to seal the Necron Tomb on "+mission_star.name+" "+scr_roman(onceh)+".  It is expected to be completed within "+string(estimate)+" months.";
+                        text=$"The Inquisition demands that your Chapter demonstrate its loyalty.  mission_star have been given a Plasma Bomb to seal the Necron Tomb on {mission_star.name} {scr_roman(onceh)}.  It is expected to be completed within {estimate} months.";
                     }
                     option1="";
                     option2="";
@@ -1037,7 +1037,7 @@ if (press=1) and (option1!="") or ((demand=1) and (mission!="") and (string_coun
                     option3="";
                     scr_add_item("Webber",4);
                     obj_controller.cooldown=10;
-                    scr_event_log("","Inquisition Mission Accepted: The Inquisition wishes for the capture of a particular strain Gaunt noticed on "+mission_star.name+" "+string(scr_roman(planet))+" is advisable.", mission_star.name);            
+                    scr_event_log("",$"Inquisition Mission Accepted: The Inquisition wishes for the capture of a particular strain Gaunt noticed on {mission_star.name} {scr_roman(planet)} is advisable.", mission_star.name);            
                     obj_controller.useful_info+="Tyr|";
                     if (demand) then demand=0;
                     exit;
@@ -1051,8 +1051,8 @@ if (press=1) and (option1!="") or ((demand=1) and (mission!="") and (string_coun
                     obj_controller.useful_info+="Tau|";
                     
                     if (demand){title="Inquisition Mission Demand";
-                    text="The Inquisition demands that your Chapter demonstrate its loyalty to the Imperium of Mankind and the Emperor.  mission_star are to capture the Tau Ethereal somewhere within the "+mission_star.name+" system.";}
-                    if (mission_star.p_problem[planet,1]="recon") then scr_event_log("","Inquisition Mission Accepted: The Inquisition wish for mission_star to capture the Tau Ethereal somewhere within "+mission_star.name+".", mission_star.name);
+                    text=$"The Inquisition demands that your Chapter demonstrate its loyalty to the Imperium of Mankind and the Emperor.  mission_star are to capture the Tau Ethereal somewhere within the {mission_star.name} system.";}
+                    if (mission_star.p_problem[planet,1]="recon") then scr_event_log("",$"Inquisition Mission Accepted: The Inquisition wish for mission_star to capture the Tau Ethereal somewhere within {mission_star.name}.", mission_star.name);
                 }
             }
         }
@@ -1080,10 +1080,10 @@ if (press=1) and (option1!="") or ((demand=1) and (mission!="") and (string_coun
                 text_center=0;
                 text="The Inquisition has left an Artifact in your care, until it may be retrieved.  It has been stored ";
                 if (obj_ini.fleet_type=ePlayerBase.home_world) then text+="within your Fortress Monastery.";
-                if (obj_ini.fleet_type != ePlayerBase.home_world) then text+="upon your ship '"+string(obj_ini.ship[1])+"'.";
+                if (obj_ini.fleet_type != ePlayerBase.home_world) then text+=$"upon your ship '{obj_ini.ship[1]}'.";
                 scr_event_log("","Inquisition Mission Accepted: The Inquisition has left an Artifact in your care.");
                 
-                text+="  It is some form of "+string(obj_ini.artifact[last_artifact])+".";
+                text+=$"  It is some form of {obj_ini.artifact[last_artifact]}.";
                 option1="";
                 option2="";
                 option3="";

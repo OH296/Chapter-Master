@@ -162,8 +162,6 @@ function scr_mission_reward(argument0, argument1, argument2) {
 
 	                        argument1.p_player[argument2]-=scr_unit_size(obj_ini.armour[com][i],obj_ini.role[com][i],true);
 
-	                        if (obj_ini.role[com][i]="Chapter Master"){obj_controller.alarm[7]=10;global.defeat=3;}
-
 	                        kill_and_recover(com, i, true, true);
 
 	                        cleanup[com]=1;

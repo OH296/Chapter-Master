@@ -268,24 +268,9 @@ function scr_battle_roster(required_location, _target_location, _is_planet) {
                         if (col = 0) then col = obj_controller.bat_hire_column;
 
                         targ = instance_nearest(col * 10, 240, obj_pnunit);
-                        targ.men++;
-                        targ.unit_struct[targ.men] = unit;
-                        targ.marine_co[targ.men] = company;
-                        targ.marine_id[targ.men] = v;
-                        targ.marine_type[targ.men] = _u_role;
-                        targ.marine_wep1[targ.men] = obj_ini.wep1[cooh][va];
-                        targ.marine_wep2[targ.men] = obj_ini.wep2[cooh][va];
-                        targ.marine_armour[targ.men] = obj_ini.armour[cooh][va];
-                        targ.marine_gear[targ.men] = obj_ini.gear[cooh][va];
-                        targ.marine_mobi[targ.men] = unit.mobility_item();
-                        targ.marine_hp[targ.men] = unit.hp();
-                        targ.marine_exp[targ.men] = obj_ini.experience[cooh][va];
-                        targ.marine_powers[targ.men] = obj_ini.spe[cooh][va];
-                        targ.marine_ranged[targ.men] = unit.ranged_attack();
-                        targ.marine_ac[targ.men]=unit.armour_calc();
-                        targ.marine_attack[targ.men]=unit.melee_attack();
-                        if (okay = 2) then targ.marine_local[targ.men] = 1;
-
+                        with (targ){
+                            scr_add_unit_to_roster(unit);
+                        }
 
                         if (unit.role() = "Death Company") { // Ahahahahah
                             var really;
@@ -301,9 +286,6 @@ function scr_battle_roster(required_location, _target_location, _is_planet) {
                         // marine_ranged[i]=1;
                         // marine_defense[i]=1;
 
-                        if (unit.IsSpecialist("dreadnoughts")){
-                            targ.dreads++;
-                        }
                         if (obj_ini.mobi[cooh][va] = "Bike") {
                             man_Size = 3;
                         }

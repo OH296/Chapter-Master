@@ -14,8 +14,8 @@ var roles = obj_ini.role[100];
 var ground_mission = (instance_exists(obj_ground_mission));
 if (final_deaths+final_command_deaths>0){
     part1=$"Marines Lost: {final_deaths+final_command_deaths}";
-    if(apoth){
-        part1+=$" ({roles[Role.APOTHECARY]}{apoth>1?"s":""} prevented the death of {units_saved})";
+    if (units_saved > 0){
+        part1+=$" ({roles[Role.APOTHECARY]}{apothecaries_alive>1?"s":""} prevented the death of {units_saved})";
     }
     if (injured>0) then part8=$"Marines Critically Injured: {injured}";
     
@@ -39,26 +39,26 @@ if (final_deaths+final_command_deaths>0){
 }
 
 if (ground_mission){
-	if (apoth < 0){
-		obj_ground_mission.apothecary_present = apoth;
+	if (apothecaries_alive < 0){
+		obj_ground_mission.apothecary_present = apothecaries_alive;
 	}
 };
 
-seed_saved=(min(seed_max,apoth*40))-gene_penalty;
+seed_saved=(min(seed_max,apothecaries_alive*40))-gene_penalty;
 if (string_count("Doom",obj_ini.strin2)>0) then seed_saved=0;
 if (seed_saved>0) then obj_controller.gene_seed+=seed_saved;
 
-if (string_count("Doom",obj_ini.strin2)>0) &&  (!apoth){
+if (string_count("Doom",obj_ini.strin2)>0) &&  (!apothecaries_alive){
     part3=$"Chapter Mutation prevents retrieving Gene-Seed.  {seed_max} Gene-Seed lost.";
     newline=part3;
     scr_newtext();
     newline=" ";
     scr_newtext();
-}else if (!apoth) and (string_count("Doom",obj_ini.strin2)=0){
+}else if (!apothecaries_alive) and (string_count("Doom",obj_ini.strin2)=0){
     part3=$"No able-bodied {roles[Role.APOTHECARY]}.  {seed_max} Gene-Seed lost.";
     newline=part3;scr_newtext();
     newline=" ";scr_newtext();
-}else if (apoth>0) and (final_deaths+final_command_deaths>0) and (string_count("Doom",obj_ini.strin2)=0){
+}else if (apothecaries_alive>0) and (final_deaths+final_command_deaths>0) and (string_count("Doom",obj_ini.strin2)=0){
     part3=$"Gene-Seed Recovered: {seed_saved}(";
     part3 += seed_saved ? $"{round((seed_saved/seed_max)*100)}" : "0";
     part3 += "%)";
@@ -81,10 +81,10 @@ if (red_thirst>2){
 }
 
 
-if (vehicle_deaths>0){
+if (vehicle_deaths>0 || vehicles_saved>0){
     part4="Vehicles Lost: "+string(vehicle_deaths);
-    if (techma=1) then part4+=" ("+string(roles[16])+" prevented the destruction of "+string(vehicles_saved)+")";
-    if (techma>1) then part4+=" ("+string(roles[16])+"s prevented the destruction of "+string(vehicles_saved)+")";
+    if (techmarines_alive=1) then part4+=" ("+string(roles[16])+" prevented the destruction of "+string(vehicles_saved)+")";
+    if (techmarines_alive>1) then part4+=" ("+string(roles[16])+"s prevented the destruction of "+string(vehicles_saved)+")";
     
     var i;i=0;
     repeat(30){i+=1;

@@ -138,10 +138,10 @@ repeat(70){i+=1;
     if (i<=10) then mucra[i]=0;
 }
 slime=0;
+unit_recovery_score=0;
 apothecaries_alive=0;
-apoth=0;
-techma=0;
 techmarines_alive=0;
+vehicle_recovery_score=0;
 injured=0;
 command_injured=0;
 seed_saved=0;

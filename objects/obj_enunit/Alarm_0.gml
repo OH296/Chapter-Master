@@ -103,10 +103,12 @@ if (engaged=0){// Shooting
                     
                     with(obj_temp5){instance_destroy();}
                     with(obj_pnunit){
-                        var i;i=0;
-                        repeat(200){
-                            i+=1;if (marine_type[i]="Chapter Master"){
-                                obj_ncombat.hue=i;instance_create(x,y,obj_temp5);
+                        var i=0;
+                        for (var i=0;i<array_length(unit_struct);i++){
+                            i+=1;
+                            if (marine_type[i]="Chapter Master"){
+                                obj_ncombat.hue=i;
+                                instance_create(x,y,obj_temp5);
                             }
                         }
                     }
@@ -171,20 +173,22 @@ if (engaged=0){// Shooting
                                 enemy2=instance_nearest(x2,y,obj_pnunit);
                                 
                                 var j,totes;j=0;totes=0;
-                                repeat(600){j+=1;
+                                for (j=0;j<array_length(enemy2.unit_struct);j++){
                                     unit = enemy2.unit_struct[j];
                                     if (!is_struct(unit))then continue;
                                     if (unit.hp()>0){
                                         if (enemy2.marine_type[j]=obj_ini.role[100][6]) then totes+=1;
                                         if (enemy2.marine_type[j]="Venerable "+string(obj_ini.role[100][6])) then totes+=1;
                                     }
-                                    if (enemy2.veh_hp[j]>0){
+
+                                }
+                                for (j=0;j<array_length(enemy2.veh_hp);j++){
+                                        if (enemy2.veh_hp[j]>0){
                                         if (enemy2.veh_type[i]="Rhino") then totes+=1;
                                         if (enemy2.veh_type[i]="Predator") then totes+=1;
                                         if (enemy2.veh_type[i]="Land Raider") then totes+=1;
                                     }
                                 }
-                                
                                 // show_message(totes);
                                 
                                 // if (enemy2.veh+enemy2.dreads>10) then block=1;

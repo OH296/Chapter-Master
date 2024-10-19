@@ -29,21 +29,24 @@ for (var i=0;i<array_length(unit_struct);i++){
         
         if (!marine_dead[i]){
             if (unit.IsSpecialist("apoth", true)) {
-                skill_level = unit.intelligence / 80;
+                skill_level = unit.intelligence * 0.0125;
                 if (marine_gear[i]=="Narthecium"){
-                    obj_ncombat.apoth++;
                     skill_level*=2;
+                    obj_ncombat.apothecaries_alive++;
                 } 
-                skill_level += random(unit.luck/10);
-                obj_ncombat.apothecaries_alive += skill_level;
+                skill_level += random(unit.luck*0.05);
+                obj_ncombat.unit_recovery_score += skill_level;
             }
             else if (unit.IsSpecialist("forge", true)) {
-                skill_level = unit.technology / 60;
-                if (marine_mobi[i]=="Servo-arm") then skill_level*=2; 
-                else if (marine_mobi[i]=="Servo-harness") then skill_level*=4;
-                skill_level += random(unit.luck/10);
-                obj_ncombat.techmarines_alive += skill_level;
-                obj_ncombat.techma++;
+                skill_level = unit.technology * 0.01;
+                if (marine_mobi[i]=="Servo-arm") {
+                    skill_level*=2; 
+                } else if (marine_mobi[i]=="Servo-harness") {
+                    skill_level*=4;
+                }
+                skill_level += random(unit.luck*0.05);
+                obj_ncombat.vehicle_recovery_score += skill_level;
+                obj_ncombat.techmarines_alive++;
             }
         } else if (marine_dead[i]>0) and (marine_dead[i]<2) and (unit.hp()>-25) and (marine_type[i]!="") and ((obj_ncombat.dropping+obj_ncombat.defeat)!=2){
             var rand1, survival;

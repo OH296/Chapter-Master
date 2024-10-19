@@ -2,7 +2,7 @@
 
 // with(obj_enunit){show_message(string(dudes[1])+"|"+string(dudes_num[1])+"|"+string(men+medi)+"|"+string(dudes_hp[1]));}
 
-var rightest,charge,enemy2;charge=0;enemy2=0;// psy=false;
+var rightest,charge=0,enemy2=0;// psy=false;
 
 
 if (instance_number(obj_enunit)!=1){
@@ -38,7 +38,7 @@ var i=0,dist=999;
 var range_shoot="";
 dist=point_distance(x,y,enemy.x,enemy.y)/10;
 
-for (var i=1;i<array_length(marine_id);i++){
+for (var i=0;i<array_length(unit_struct);i++){
     if (marine_mshield[i]>0) then marine_mshield[i]-=1;
     if (marine_quick[i]>0) then marine_quick[i]-=1;
     if (marine_might[i]>0) then marine_might[i]-=1;
@@ -49,8 +49,8 @@ for (var i=1;i<array_length(marine_id);i++){
 }i=0;
 
 if (instance_exists(obj_enunit)){
-    for (var i=1;i<array_length(wep);i++){
-         if (wep[i]=="") then continue;
+    for (var i=0;i<array_length(wep);i++){
+        if (wep[i]=="") then continue;
         weapon_data = gear_weapon_data("weapon", wep[i])
         once_only=0;
         enemy=instance_nearest(0,y,obj_enunit);
@@ -210,59 +210,61 @@ if (instance_exists(obj_enunit)){
 instance_activate_object(obj_enunit);
 
 i=0;
-if (instance_exists(obj_enunit)) then repeat(700){i+=1;
-    if (marine_dead[i]==0) and (marine_casting[i]=1) and (instance_exists(obj_enunit)){
-        var let,buvvs,buvvs_num;let="D";
-        if (string_count("D0",marine_powers[i])>0) then let="D";
-        if (string_count("B0",marine_powers[i])>0) then let="B";
-        if (string_count("P0",marine_powers[i])>0) then let="P";
-        if (string_count("T0",marine_powers[i])>0) then let="T";
-        if (string_count("R0",marine_powers[i])>0) then let="R";
-        
-        var powerz,buvvs_roll,tha,p;tha=-1;
-        powerz=string_count(let,marine_powers[i]);
-        p=-1;repeat(20){p+=1;buvvs[p]=-1;}
-        if (let="D"){buvvs[1]=2;buvvs[2]=5;buvvs[3]=6;buvvs_num=3;}
-        if (let="B"){buvvs[1]=2;buvvs[2]=3;buvvs_num=2;}
-        if (let="P"){buvvs[1]=1;buvvs[2]=2;buvvs_num=2;}
-        if (let="T"){buvvs[1]=3;buvvs[2]=4;buvvs_num=2;}
-        if (let="R"){buvvs[1]=2;buvvs_num=1;}
-        
-        p=0;repeat(10){p+=1;if (buvvs[p]>powerz-1){buvvs_num-=1;buvvs[p]=-1;}}
-        buvvs_roll=floor(random(100))+1;
-        
-        if (buvvs_roll<=(105-(obj_ncombat.turns*35))) and (obj_ncombat.enemy_forces>=obj_ncombat.player_forces) and (buvvs_num>0){// Cast buffs
-        // if (obj_ncombat.turns<2) and (obj_ncombat.enemy_max>=obj_ncombat.player_max) and (buvvs_num>0){
-            tha=max(buvvs[floor(random(buvvs_num))+1],buvvs[floor(random(buvvs_num))+1]);
-        }
-        
-        if (buvvs_roll>(105-(obj_ncombat.turns*35))) or (obj_ncombat.enemy_forces<obj_ncombat.player_forces) or (buvvs_num=0){// Slam away
-        // if (obj_ncombat.turns>=2) or (obj_ncombat.enemy_max<obj_ncombat.player_max) or (buvvs_num=0){
-            repeat(100){
-                if (tha=-1) or (tha=buvvs[1]) or (tha=buvvs[2]) or (tha=buvvs[3]) or (tha=buvvs[4]) or (tha=buvvs[5]){
-                    tha=max(floor(random(powerz)),floor(random(powerz)));
-                    if (marine_type[i]="Chief "+string(obj_ini.role[100,17])) then tha=powerz-choose(-1,0,0,1,1,2);
-                    if (marine_type[i]="Chapter Master") then tha=powerz-choose(-1,0,0,1,1,2);
+if (instance_exists(obj_enunit)){
+    for (var i=0;i<array_length(unit_struct);i++){
+        if (marine_dead[i]==0 && marine_casting[i]=1){
+            var let,buvvs,buvvs_num;let="D";
+            if (string_count("D0",marine_powers[i])>0) then let="D";
+            if (string_count("B0",marine_powers[i])>0) then let="B";
+            if (string_count("P0",marine_powers[i])>0) then let="P";
+            if (string_count("T0",marine_powers[i])>0) then let="T";
+            if (string_count("R0",marine_powers[i])>0) then let="R";
+            
+            var powerz,buvvs_roll,tha,p;tha=-1;
+            powerz=string_count(let,marine_powers[i]);
+            p=-1;repeat(20){p+=1;buvvs[p]=-1;}
+            if (let="D"){buvvs[1]=2;buvvs[2]=5;buvvs[3]=6;buvvs_num=3;}
+            if (let="B"){buvvs[1]=2;buvvs[2]=3;buvvs_num=2;}
+            if (let="P"){buvvs[1]=1;buvvs[2]=2;buvvs_num=2;}
+            if (let="T"){buvvs[1]=3;buvvs[2]=4;buvvs_num=2;}
+            if (let="R"){buvvs[1]=2;buvvs_num=1;}
+            
+            p=0;repeat(10){p+=1;if (buvvs[p]>powerz-1){buvvs_num-=1;buvvs[p]=-1;}}
+            buvvs_roll=floor(random(100))+1;
+            
+            if (buvvs_roll<=(105-(obj_ncombat.turns*35))) and (obj_ncombat.enemy_forces>=obj_ncombat.player_forces) and (buvvs_num>0){// Cast buffs
+            // if (obj_ncombat.turns<2) and (obj_ncombat.enemy_max>=obj_ncombat.player_max) and (buvvs_num>0){
+                tha=max(buvvs[floor(random(buvvs_num))+1],buvvs[floor(random(buvvs_num))+1]);
+            }
+            
+            if (buvvs_roll>(105-(obj_ncombat.turns*35))) or (obj_ncombat.enemy_forces<obj_ncombat.player_forces) or (buvvs_num=0){// Slam away
+            // if (obj_ncombat.turns>=2) or (obj_ncombat.enemy_max<obj_ncombat.player_max) or (buvvs_num=0){
+                repeat(100){
+                    if (tha=-1) or (tha=buvvs[1]) or (tha=buvvs[2]) or (tha=buvvs[3]) or (tha=buvvs[4]) or (tha=buvvs[5]){
+                        tha=max(floor(random(powerz)),floor(random(powerz)));
+                        if (marine_type[i]="Chief "+string(obj_ini.role[100,17])) then tha=powerz-choose(-1,0,0,1,1,2);
+                        if (marine_type[i]="Chapter Master") then tha=powerz-choose(-1,0,0,1,1,2);
+                    }
                 }
             }
-        }
-        
-        enemy=instance_nearest(0,y,obj_enunit);enemy2=enemy;
-        if (enemy.men+enemy.veh+enemy.medi<=0){
-            var x5;x5=enemy.x;
-            with(enemy){
-                instance_destroy();
+            
+            enemy=instance_nearest(0,y,obj_enunit);enemy2=enemy;
+            if (enemy.men+enemy.veh+enemy.medi<=0){
+                var x5=enemy.x;
+                with(enemy){
+                    instance_destroy();
+                }
+                enemy=instance_nearest(0,y,obj_enunit);
+                enemy2=enemy;
             }
-            enemy=instance_nearest(0,y,obj_enunit);
-            enemy2=enemy;
+            
+            var ham=false;
+            if (marine_type[i]="Chapter Master") and (obj_ncombat.kamehameha=true) and ((obj_ncombat.big_boom>0) or (choose(1,2)=2)){
+                if (obj_ncombat.enemy_forces>=40) then ham=true;
+            }
+            if (ham=false) then scr_powers(string_upper(let),tha,enemy2,i);
+            if (ham=true) then scr_powers("Z",tha,enemy2,i);
         }
-        
-        var ham=false;
-        if (marine_type[i]="Chapter Master") and (obj_ncombat.kamehameha=true) and ((obj_ncombat.big_boom>0) or (choose(1,2)=2)){
-            if (obj_ncombat.enemy_forces>=40) then ham=true;
-        }
-        if (ham=false) then scr_powers(string_upper(let),tha,enemy2,i);
-        if (ham=true) then scr_powers("Z",tha,enemy2,i);
     }
 }
 

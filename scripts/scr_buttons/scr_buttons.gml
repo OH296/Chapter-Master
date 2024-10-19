@@ -118,6 +118,9 @@ function TextBarArea(XX,YY,Max_width = 400) constructor{
 	cooloff=0
     // Draw BG
     static draw = function(string_area){
+		var old_font = draw_get_font();
+		var old_halign = draw_get_halign();
+
     	if (cooloff>0) then cooloff--;
     	if (allow_input){
     		string_area=keyboard_string;
@@ -157,6 +160,10 @@ function TextBarArea(XX,YY,Max_width = 400) constructor{
         	obj_cursor.image_index=2;
         	draw_text(xx,yy+2,string_hash_to_newline("''"+string(string_area)+"|''"))
         };
+
+		draw_set_font(old_font);
+		draw_set_halign(old_halign);
+
 		return string_area;
 	}
 }

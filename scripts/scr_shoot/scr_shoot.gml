@@ -17,7 +17,7 @@ function scr_shoot(weapon_index_position, target_object, target_type, damage_dat
 	var armour_pierce = apa[weapon_index_position];
 	if (obj_ncombat.wall_destroyed = 1) then exit;
 
-	// target_object.hostile_men=0;
+	// target_object.hostile_type=0;
 
 	if (weapon_index_position>0) and (instance_exists(target_object)) and (owner==2) {
 		var stop, damage_type, doom;
@@ -76,13 +76,12 @@ function scr_shoot(weapon_index_position, target_object, target_type, damage_dat
 				if (wep_owner[weapon_index_position] != "assorted") then target_object.hostile_shooters = 1;
 				target_object.hostile_damage = 0;
 				target_object.hostile_weapon = wep[weapon_index_position];
-				target_object.hostile_men = 1;
-				// target_object.hostile_men=0;
+				target_object.hostile_type = 1;
+				// target_object.hostile_type=0;
 				target_object.hostile_range = range[weapon_index_position];
 				target_object.hostile_splash = attack_count_mod;
-				with(target_object) {
-					scr_clean(999);
-				}
+				
+				scr_clean(target_object);
 			}
 		} else if (damage_type = "att") and(aggregate_damage > 0) and(stop = 0) and(shots_fired > 0) {
 			var damage_per_weapon, hit_number;
@@ -111,15 +110,13 @@ function scr_shoot(weapon_index_position, target_object, target_type, damage_dat
 				if (wep_owner[weapon_index_position] != "assorted") then target_object.hostile_shooters = 1;
 				target_object.hostile_damage = damage_per_weapon / hit_number;
 				target_object.hostile_weapon = wep[weapon_index_position];
-				// target_object.hostile_men=0;
-				target_object.hostile_men = 1;
+				// target_object.hostile_type=0;
+				target_object.hostile_type = 1;
 				target_object.hostile_range = range[weapon_index_position];
 				target_object.hostile_splash = attack_count_mod;
 				if (target_object.hostile_splash > 1) then target_object.hostile_damage += attack_count_mod * 3;
 
-				with(target_object) {
-					scr_clean(999);
-				}
+				scr_clean(target_object);
 			}
 		} else if ((damage_type = "arp") or(damage_type = "dread")) and(armour_pierce > 0) and(stop = 0) and(shots_fired > 0) {
 			var damage_per_weapon, hit_number;
@@ -155,16 +152,14 @@ function scr_shoot(weapon_index_position, target_object, target_type, damage_dat
 
 				// 135; this might be the problem right here
 				// this is the problem right here
-				target_object.hostile_men = 0;
-				// if (damage_type="dread") then target_object.hostile_men=1;
+				target_object.hostile_type = 0;
+				// if (damage_type="dread") then target_object.hostile_type=1;
 
 				target_object.hostile_range = range[weapon_index_position];
 				target_object.hostile_splash = attack_count_mod;
 				if (target_object.hostile_splash = 1) then target_object.hostile_damage += attack_count_mod * 3;
 
-				with(target_object) {
-					scr_clean(999);
-				}
+				scr_clean(target_object);
 			}
 
 			if (hit_number > 0) and(melee_or_ranged = "wall") and(instance_exists(target_object)) {

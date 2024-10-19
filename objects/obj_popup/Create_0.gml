@@ -60,7 +60,7 @@ prev_selected = 0;
 
 new_target=0;
 
-if (instance_exists(obj_controller)){obj_controller.cooldown=9999;}
+if (instance_exists(obj_controller)){obj_controller.cooldown=8000;}
 number=0;
 company_promote_data = [
 //index 0 = draw x, 1 = draw y, 2 = exp requirement for company

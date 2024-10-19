@@ -416,10 +416,41 @@ global.trait_list = {
 		constitution : [2,2],
 		flavour_text:"Understands the ins and outs of defences both in building them and in taking them appart",
 		effect:"Bonus when commanding defences and extra boosts when leading a garrison",
+	},
+	"lobotomized" : {
+		wisdom : -50,
+		intelligence : -50,
+		charisma : -5,
+		constitution : 1, // Slight buff to health, as clear mind helps to stay healthy in some cases
+		technology : 1, // Also helps with some boring tasks, I think?
+		display_name : "Lobotomized",
+		flavour_text : "received treatment or damage, which resulted in portion of brain missing, akin to servitors",
+	},
+	"psychotic" : { // IT IS THE BANEBLAAADE!!! - Captain Diomedes, DoW 2 Retribution
+		wisdom : 10,
+		intelligence : -5,
+		constitution : -1, // Being bonkers can sometimes be damaging to one's health, I think..?
+		display_name : "Psychotic",
+		flavour_text : "whether due to experience or some other cause, acquired access to hidden knowledge...",
 	}
+	// "crazy" : {
+		// wisdom : [5, 2],
+		// intelligence : [-2, 2],
+		// constitution : -1,
+		// display_name : "Crazy",
+		// flavor_text : "lost sense of reason"
+	// },
+	// "eccentric" : {
+		// wisdom : [3, 2],
+		// intelligence : [3, 2],
+		// charisma : [3, 2],
+		// technology : [3, 2],
+		// display_name : "Eccentric",
+		// flavor_text : "has a tendency to do things in original way"
+	// }
 }
 global.base_stats = { //tempory stats subject to change by anyone that wishes to try their luck
-	"chapter_master":{
+	"chapter_master":{ // TODO consider allowing the player to change the starting stats of the chapter master, and closest advisors, especially for custom chapters
 			title : "Adeptus Astartes",
 			strength:[42,5],
 			constitution:[44,3],

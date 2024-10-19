@@ -47,7 +47,7 @@ repeat(200){i+=1;
     artifact_struct[i] =  new ArtifactStruct(i);    
 }
 
-var i=-1,v=0;
+var i=-1;
 repeat(210){i+=1;
     ship[i]="";
     ship_uid[i]=0;
@@ -95,13 +95,11 @@ repeat(11){
         veh_hp[company,v]=100;
         veh_chaos[company,v]=0;
         veh_pilots[company,v]=0;
-        veh_lid[company,i]=0;
+        veh_lid[company,v]=0;
         veh_wid[company,v]=2;
         veh_uid[company,v]=0;
     }
 }
-
-v=0;company=0;
 
 /*if (obj_creation.fleet_type=3){
     obj_controller.penitent=1;
