@@ -3,6 +3,11 @@
 /// @returns {bool}
 function scr_hit(x1=0, y1=0, x2=0, y2=0) {
 	var mouse_consts = return_mouse_consts();
+
+	if (obj_ui_controller.interact_forbid) {
+		return false;
+	}
+
 	if (is_array(x1)){
 		return point_in_rectangle(mouse_consts[0],mouse_consts[1],x1[0],x1[1],x1[2],x1[3]);
 	} else {
@@ -28,6 +33,10 @@ function point_and_click(rect) {
 
 	if (controller_exist && obj_controller.cooldown > 0) {
 		show_debug_message("point_and_click: ignored click for cooldown, " + string(obj_controller.cooldown) + " steps remaining");
+		return false;
+	}
+
+	if (obj_ui_controller.interact_forbid) {
 		return false;
 	}
 

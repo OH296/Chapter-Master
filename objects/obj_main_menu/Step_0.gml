@@ -80,3 +80,8 @@ if (mess_alpha > 120) then mess_alpha = 0;
 //     file_decrypt("dec_save" + string(which) + ".ini", "p");
 //     game_end();
 // }
+
+if (keyboard_check_pressed(vk_end)) {
+    instance_create_depth(0, 0, -9999, obj_fade_controller)
+    obj_fade_controller.fading_out = true;
+}

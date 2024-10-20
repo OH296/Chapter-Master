@@ -952,6 +952,7 @@
     {"id":{"name":"scr_item_count","path":"scripts/scr_item_count/scr_item_count.yy",},},
     {"id":{"name":"scr_marine_count","path":"scripts/scr_marine_count/scr_marine_count.yy",},},
     {"id":{"name":"scr_role_count","path":"scripts/scr_role_count/scr_role_count.yy",},},
+    {"id":{"name":"obj_fade_controller","path":"objects/obj_fade_controller/obj_fade_controller.yy",},},
     {"id":{"name":"spr_dreadnought_chasis_colors","path":"sprites/spr_dreadnought_chasis_colors/spr_dreadnought_chasis_colors.yy",},},
     {"id":{"name":"scr_vehicle_count","path":"scripts/scr_vehicle_count/scr_vehicle_count.yy",},},
     {"id":{"name":"scr_bionics_count","path":"scripts/scr_bionics_count/scr_bionics_count.yy",},},
