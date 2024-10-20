@@ -10,10 +10,10 @@ function add_second_profiles_to_stack (weapon,head_role=false, unit="none"){
             if (!is_struct(secondary_profile)) then continue;
             var wep_index =  find_stack_index(secondary_profile.name, head_role,unit);
             if (wep_index>-1){
-            	add_data_to_stack(wep_index,secondary_profile);
-            }   
+                add_data_to_stack(wep_index,secondary_profile);
+            }
         }
-    }    
+    }
 }
 
 
@@ -31,7 +31,7 @@ function add_data_to_stack (stack_index, weapon, unit_damage=false, head_role=fa
     if (obj_ncombat.started=0) then ammo[stack_index]=weapon.ammo;
 
     if (unit!="none"){//this stops a potential infinite loop of secondary profiles
-    	add_second_profiles_to_stack(weapon, head_role, unit);
+        add_second_profiles_to_stack(weapon, head_role, unit);
     }
 }
 
@@ -41,8 +41,8 @@ function find_stack_index (weapon_name, head_role=false, unit="none"){
     for (var stack_index=1;stack_index<array_length(wep);stack_index++){
         allow = false
         if (is_struct(unit)){
-        	allow = (head_role && ( wep_title[stack_index] == unit.role())) && (wep[stack_index]==weapon_name);
-    	}
+            allow = (head_role && ( wep_title[stack_index] == unit.role())) && (wep[stack_index]==weapon_name);
+        }
         if (!allow){
             allow = ((wep[stack_index]=="" || (wep[stack_index]==weapon_name && !head_role)) && wep_title[stack_index]=="");
         }

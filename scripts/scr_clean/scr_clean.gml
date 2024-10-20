@@ -36,8 +36,7 @@ function scr_clean(target_object, target_is_infantry, hostile_shots, hostile_dam
                 }
 
                 // Select a random vehicle from the valid list
-                var random_index = array_random(valid_vehicles);
-                you = valid_vehicles[random_index];
+                you = array_random(valid_vehicles);
 
                 // Apply damage
                 var minus = hostile_damage - veh_ac[you];
@@ -57,14 +56,12 @@ function scr_clean(target_object, target_is_infantry, hostile_shots, hostile_dam
                     obj_ncombat.player_forces -= 1;
 
                     // Record loss
-                    if (!is_undefined(lost)) {
-                        var existing_index = array_get_index(lost, veh_type[you]);
-                        if (existing_index != -1) {
-                            lost_num[existing_index] += 1;
-                        } else {
-                            array_push(lost, veh_type[you]);
-                            array_push(lost_num, 1);
-                        }
+                    var existing_index = array_get_index(lost, veh_type[you]);
+                    if (existing_index != -1) {
+                        lost_num[existing_index] += 1;
+                    } else {
+                        array_push(lost, veh_type[you]);
+                        array_push(lost_num, 1);
                     }
 
                     // Remove dead vehicles from further hits
@@ -136,14 +133,12 @@ function scr_clean(target_object, target_is_infantry, hostile_shots, hostile_dam
                     obj_ncombat.player_forces -= 1;
 
                     // Record loss
-                    if (!is_undefined(lost)) {
-                        var existing_index = array_get_index(lost, marine_type[marine_index]);
-                        if (existing_index != -1) {
-                            lost_num[existing_index] += 1;
-                        } else {
-                            array_push(lost, marine_type[marine_index]);
-                            array_push(lost_num, 1);
-                        }
+                    var existing_index = array_get_index(lost, marine_type[marine_index]);
+                    if (existing_index != -1) {
+                        lost_num[existing_index] += 1;
+                    } else {
+                        array_push(lost, marine_type[marine_index]);
+                        array_push(lost_num, 1);
                     }
                     
                     // Remove dead infantry from further hits

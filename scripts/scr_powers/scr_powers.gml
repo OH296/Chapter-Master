@@ -531,10 +531,10 @@ function scr_powers(power_set, power_count, enemy_target, unit_id) {
             }
 
             // Update unit counts
-            var armour_data = unit.armour_data();
+            var armour_data = unit.get_armour_data();
             var is_dread = false;
             if (is_struct(armour_data)){
-                 is_dread = armour_data.has_tag("dreadnought);
+                 is_dread = armour_data.has_tag("dreadnought");
             }
             if (is_dread) {
                 dreads -= 1;
