@@ -1,12 +1,15 @@
 function scr_clean(target_object, target_is_infantry, hostile_shots, hostile_damage, hostile_weapon, hostile_range, hostile_splash) {
-    // Converts enemy scr_shoot damage into player marine casualties.
-    // target_object: the obj_pnunit taking casualties
-    // target_is_infantry: 1 for infantry, 0 for vehicles, where dreads are inf.
-    // hostile_shots: 
-    // hostile_damage: 
-    // hostile_weapon: 
-    // hostile_range: 
-    // hostile_splash: 
+    // Converts enemy scr_shoot damage into player marine or vehicle casualties.
+    //
+    // Parameters:
+    // target_object: The obj_pnunit instance taking casualties. Represents the player's rank being attacked.
+    // target_is_infantry: Boolean-like value (1 for infantry, 0 for vehicles). Determines whether to process as infantry/dreadnoughts or vehicles.
+    // hostile_shots: The number of shots fired at the target. Represents the total hits from the attacking unit.
+    // hostile_damage: The amount of damage per shot. This value is reduced by armor or damage resistance before being applied.
+    // hostile_weapon: The name of the weapon used in the attack. Certain weapons have special effects that modify damage behavior.
+    // hostile_range: The range of the weapon. This may influence damage or other combat mechanics.
+    // hostile_splash: The splash damage modifier. Indicates if the weapon affects multiple targets or has an area-of-effect component.
+
     with (target_object) {
         if (obj_ncombat.wall_destroyed == 1) {
             exit;
