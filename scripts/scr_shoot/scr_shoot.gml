@@ -76,8 +76,8 @@ function scr_shoot(weapon_index_position, target_object, target_type, damage_dat
 			}
 			if (hit_number > 0) and(melee_or_ranged != "wall") and(instance_exists(target_object)) {
 				hostile_shots = hit_number;
-				if (wep_owner[weapon_index_position] = "assorted") then target_object.hostile_shooters = 999;
-				if (wep_owner[weapon_index_position] != "assorted") then target_object.hostile_shooters = 1;
+				if (wep_owner[weapon_index_position] == "assorted"){ target_object.hostile_shooters = 999;}
+				else if (wep_owner[weapon_index_position] != "assorted"){ target_object.hostile_shooters = 1;}
 				hostile_damage = 0;
 				hostile_weapon = wep[weapon_index_position];
 				hostile_type = 1;

@@ -515,7 +515,7 @@ function scr_powers(power_set, power_count, enemy_target, unit_id) {
 	    flavour_text1=$"{unit.name_role()} suffers Perils of the Warp!  ";
 	    flavour_text2=scr_perils_table(peril3, unit, psy_discipline, power_name,unit_id, book_powers);
     
-        if (unit.hp() < 0){
+        if (unit.hp() < 0){//TODO create is_dead function to remove repeats of this log
             if (marine_dead[unit_id] == 0) {
                 marine_dead[unit_id] = 1;
                 obj_ncombat.player_forces -= 1;
@@ -531,7 +531,12 @@ function scr_powers(power_set, power_count, enemy_target, unit_id) {
             }
 
             // Update unit counts
-            if (unit.IsSpecialist("dreadnoughts")) {
+            var armour_data = unit.armour_data();
+            var is_dread = false;
+            if (is_struct(armour_data)){
+                 is_dread = armour_data.has_tag("dreadnought);
+            }
+            if (is_dread) {
                 dreads -= 1;
             } else {
                 men -= 1;

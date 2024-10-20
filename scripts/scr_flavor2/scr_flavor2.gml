@@ -345,7 +345,7 @@ function scr_flavor2(lost_units_count, target_type, hostile_range, hostile_weapo
                     if (marine_type[him] == obj_ini.role[100][5]) {
                         obj_ncombat.dead_jim[obj_ncombat.dead_jims] = $"A {marine_type[him]} has been critically injured!";
                     } else {
-                        obj_ncombat.dead_jim[obj_ncombat.dead_jims] = $"{obj_ini.TTRPG[marine_co[him]][marine_id[him]].name_role()} has been critically injured!";
+                        obj_ncombat.dead_jim[obj_ncombat.dead_jims] = $"{unit_struct[him].name_role()} has been critically injured!";
                     }
                 }
             }

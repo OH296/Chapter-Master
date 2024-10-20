@@ -122,7 +122,11 @@ function scr_player_combat_weapon_stacks(){
 	        if ((marine_id[g]>0) or (ally[g]=true)) and (unit.hp()>0) then marine_dead[g]=0;
 	        if ((marine_id[g]>0) or (ally[g]=true)) and (unit.hp()>0) and (marine_dead[g]!=1){
 	            var head_role = unit.IsSpecialist();
-                var is_dreadnought = unit.armour()=="Dreadnought";
+            var armour_data = unit.armour_data();
+            var is_dreadnought = false;
+            if (is_struct(armour_data)){
+                 is_dreadnought = armour_data.has_tag("dreadnought);
+            }
                 var unit_hp =unit.hp();
 
                 if (unit_hp) {

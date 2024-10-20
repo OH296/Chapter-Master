@@ -5,8 +5,9 @@ array_resize(lost, 0)
 array_resize(lost_num, 0)
 
 highlight=0;
-var diff,siz,pos;
-diff=0;pos=880;siz=min(400,(men*0.5)+(veh*2.5)+(dreads*2));
+var diff=0;
+var pos=880;
+var siz=min(400,(men*0.5)+(veh*2.5)+(dreads*2));
 if (instance_exists(obj_centerline)){
     diff=x-obj_centerline.x;
 }
