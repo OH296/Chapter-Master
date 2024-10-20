@@ -531,9 +531,10 @@ function scr_powers(power_set, power_count, enemy_target, unit_id) {
             }
 
             // Update unit counts
-            men -= 1;
             if (unit.IsSpecialist("dreadnoughts")) {
                 dreads -= 1;
+            } else {
+                men -= 1;
             }
 
             // Trigger red thirst

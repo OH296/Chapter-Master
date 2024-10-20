@@ -1,5 +1,4 @@
-function scr_flavor2(lost_units_count, target_type) {
-
+function scr_flavor2(lost_units_count, target_type, hostile_range, hostile_weapon, hostile_shots, hostile_splash) {
 	// Generates flavor based on the damage and casualties from scr_shoot, only for the opponent
 
 	if (obj_ncombat.wall_destroyed = 1) then exit;
@@ -25,9 +24,7 @@ function scr_flavor2(lost_units_count, target_type) {
 		_hostile_range = hostile_range;
 		_hostile_weapon = hostile_weapon;
 		_hostile_shots = hostile_shots;
-	}
-
-	if (target_type = "wall") and(instance_exists(obj_nfort)) {
+	} else if (target_type = "wall") and(instance_exists(obj_nfort)) {
 		var hehh;
 		hehh = "the fortification";
 

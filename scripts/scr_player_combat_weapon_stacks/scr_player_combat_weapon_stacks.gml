@@ -122,14 +122,17 @@ function scr_player_combat_weapon_stacks(){
 	        if ((marine_id[g]>0) or (ally[g]=true)) and (unit.hp()>0) then marine_dead[g]=0;
 	        if ((marine_id[g]>0) or (ally[g]=true)) and (unit.hp()>0) and (marine_dead[g]!=1){
 	            var head_role = unit.IsSpecialist();
-	
-	            if (unit.hp()>0) then men+=1;
+                var is_dreadnought = unit.armour()=="Dreadnought";
+                var unit_hp =unit.hp();
 
-	            if (unit.armour()=="Dreadnought"){
-	                dreads+=1;
-	                dreaded=true;
-	            }
-	            //if (marine_mobi[g]="Bike") then scr_special_weapon("Twin Linked Bolters",g,true);
+                if (unit_hp) {
+                    if (is_dreadnought) {
+                        dreads+=1;
+                        dreaded=true;
+                    } else {
+                        men+=1;
+                    }
+                }
 
 	            var mobi_item=unit.get_mobility_data();
 	            var gear_item=unit.get_gear_data();

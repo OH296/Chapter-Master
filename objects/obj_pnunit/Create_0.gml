@@ -105,10 +105,7 @@ hostile_damage=0;
 hostile_weapon="";
 hostile_unit="";
 hostile_type=0;
-hostile_range=0;
 hostile_splash=0;
-
-new_unit = scr_add_unit_to_roster;
 
 alarm[1]=4;
 
