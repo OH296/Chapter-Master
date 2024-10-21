@@ -39,7 +39,8 @@ function scr_clean(target_object, target_is_infantry, hostile_shots, hostile_dam
                 }
 
                 // Select a random vehicle from the valid list
-                you = array_random(valid_vehicles);
+                random_index = array_random(valid_vehicles);
+                you = valid_vehicles[random_index];
 
                 // Apply damage
                 var minus = hostile_damage - veh_ac[you];
