@@ -41,6 +41,8 @@ if (action==""){
     sys_dist=point_distance(action_x,action_y,sys.x,sys.y);
     if (scr_valid_fleet_target(target)){
         target_dist=point_distance(x,y,target.action_x,target.action_y);
+    } else {
+        target=0;
     }
     
     act_dist=point_distance(x,y,sys.x,sys.y);
@@ -70,8 +72,10 @@ if (action==""){
                         sys=instance_nearest(action_x,action_y,obj_star);
                     }
                 }
+            } else {
+                target = 0;
             }
-        }        
+        }
         
         eta=floor(point_distance(x,y,action_x,action_y)/action_spd)+1;
         if (connected=0) then eta=eta*2;

@@ -20,9 +20,6 @@ function scr_valid_fleet_target(target) {
     if (valid) {
         valid = (target.object_index == obj_p_fleet || target.object_index == obj_en_fleet);
     }
-    if (!valid) {
-        target = 0;
-    }
     return valid;
 }
 
@@ -40,7 +37,11 @@ function fleets_next_location(fleet = "none", visited = []) {
         // Check if the fleet has a 'target' variable
         if (variable_instance_exists(fleet, "target")) {
             // If the target is valid and not already in the visited list, proceed recursively
-            if (scr_valid_fleet_target(fleet.target) && !array_contains(visited, fleet.target.id)) {
+            var fleet_target_valid = scr_valid_fleet_target(fleet.target);
+            if (!fleet_target_valid) {
+                fleet.target = 0;
+            }
+            if (fleet_target_valid && !array_contains(visited, fleet.target.id)) {
                 // Recursive call with the target and the updated visited list
                 targ_location = fleets_next_location(fleet.target, visited);
             } else if (fleet.action != "") {
