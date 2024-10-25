@@ -254,10 +254,11 @@ function scr_flavor(id_of_attacking_weapons, target, target_type, number_of_shot
 		if (casulties = 0) then attack_message = $"{target_name} engaged in hand-to-hand combat, no casualties.";
 		if (casulties > 0) {
 			attack_message = $"{target_name} ranks ";
-			if (ra = 1) then attack_message = "are struck with gun-barrels and fists.";
-			if (ra = 2) then attack_message = "are savaged by your marines in hand-to-hand combat.";
-			if (ra = 3) then attack_message = "are smashed by your marines.";
-			if (ra = 4) then attack_message = "are struck by your marines in melee.";
+			if (ra = 1) then attack_message += "are struck with gun-barrels and fists.";
+			if (ra = 2) then attack_message += "are savaged by your marines in hand-to-hand combat.";
+			if (ra = 3) then attack_message += "are smashed by your marines.";
+			if (ra = 4) then attack_message += "are struck by your marines in melee.";
+			attack_message += $" {casulties} killed."
 		}
 
 	} else if (weapon_name = "Force Staff") {

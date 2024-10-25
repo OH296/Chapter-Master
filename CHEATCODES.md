@@ -15,7 +15,7 @@ Arguments with stars `(argument*)` can be omitted.
 - `finishforge` - gives 1 million Forge Points (ending all crafting).
 ### Spawning:
 - `recruit (number*)` - spawns a new recruit (or amount specified) with 1 month of remaining training and 20 XP.
-- `artifact (type*)` - spawns an artifact of a random type, if unspecified.
+- `artifact (type*) (number*)` - spawns an artifact of a random type, if unspecified.
     - `(type*)` - possible values: random, random_nodemon, Weapon, Armour, Gear, Device, Robot, Tome, chaos_gift, good. Case sensitive.
 - `artifactpopulate` - spawns artifacts on all planets.
 - `additem "(name)" (number*) (quality*)` - spawns an item(s) with specified parameters.

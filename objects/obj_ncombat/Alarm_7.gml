@@ -24,39 +24,36 @@ debugl($"Ground Combat - {defeat ? "Defeat" : "Victory"}Victory - Enemy:{enemy} 
 
 if (enemy=1){
 
-    var cleann,j;
-    j=-1;repeat(11){j+=1;cleann[j]=0;}
-
-    with(obj_enunit){var q;q=0;
-        repeat(700){q+=1;
+    var j=-1
+    var cleann = array_create(11,false)
+    with(obj_enunit){var q=0;
+        repeat(700){
+            q+=1;
             if (dude_id[q]>0){
-                var nco,nid,commandy;
-                nco=0;nid=0;commandy=false;
-                nco=dude_co[q];nid=dude_id[q];
-                cleann[nco]=1;
+                var commandy=false;
+                var nco=dude_co[q];
+                var nid=dude_id[q];
+                cleann[nco]=true;
                 
                 // show_message("dude ID:"+string(q)+" ("+string(obj_ini.name[nco,nid])+") is being removed from the array");
                 
                 commandy=is_specialist(obj_ini.role[nco,nid]);
                 if (commandy=true) then obj_controller.command-=1;
                 if (commandy=false) then obj_controller.marines-=1;
-                
-                if (obj_ncombat.defeat=0){// Marine was killed, recover equipment
-                    if (obj_ini.wep1[nco,nid]!="") then scr_add_item(obj_ini.wep1[nco,nid],1);
-                    if (obj_ini.wep2[nco,nid]!="") then scr_add_item(obj_ini.wep2[nco,nid],1);
-                    if (obj_ini.armour[nco,nid]!="") then scr_add_item(obj_ini.armour[nco,nid],1);
-                    if (obj_ini.gear[nco,nid]!="") then scr_add_item(obj_ini.gear[nco,nid],1);
-                    if (obj_ini.mobi[nco,nid]!="") then scr_add_item(obj_ini.mobi[nco,nid],1);
-                }
-                
-                obj_ncombat.world_size+=scr_unit_size(obj_ini.armour[nco,nid],obj_ini.role[nco,nid],true, obj_ini.mobi[nco,nid]);
-                
-                scr_kill_unit(nco,nid);
+
+                obj_ncombat.world_size+=scr_unit_size(obj_ini.armour[nco][nid],obj_ini.role[nco][nid],true, obj_ini.mobi[nco][nid]);
+
+                var recover = !obj_ncombat.defeat
+                kill_and_recover(nco,nid, recover, recover);
             }
         }
     }
     
-    j=-1;repeat(11){j+=1;if (cleann[j]!=0) then with(obj_ini){scr_company_order(j);}}
+   for (j=0;j<=10;j++){
+        if (cleann[j]) then with(obj_ini){
+            scr_company_order(j);
+        }
+    }
 }
 if (string_count("cs_meeting",battle_special)>0){
     with(obj_temp_meeting){instance_destroy();}
@@ -64,23 +61,30 @@ if (string_count("cs_meeting",battle_special)>0){
     with(obj_star){
         if (name=obj_ncombat.battle_loc){
             instance_create(x,y,obj_temp_meeting);
-            var i,co,ii,otm,good,master_present;ii=0;i=0;co=-1;good=0;master_present=0;
-            var run,s,chaos_meeting;run=0;s=0;chaos_meeting=0;
+            var i=0,ii=0,otm,good=0,master_present=0;
+            var run=0,s=0,chaos_meeting=0;
             
-            chaos_meeting=obj_ini.TTRPG[0][1].planet_location;
+            var master_index = array_get_index(obj_ini.role[0], "Chapter Master");
+            chaos_meeting=fetch_unit([0,master_index]).planet_location;            
             
             // show_message("meeting planet:"+string(chaos_meeting));
-            repeat(11){co+=1;i=0;
-                repeat(200){i+=1;good=0;
-                    if (obj_ini.role[co][i]!="") and (obj_ini.loc[co][i]=name) and (obj_ini.TTRPG[co][i].planet_location==floor(chaos_meeting)) then good+=1;
+            for (var co=0;co<=10;co++){
+                for (var i=0;i<array_length(obj_ini.TTRPG[co]);i++){
+                    good=0;
+                    unit = fetch_unit([co,i]);
+                    if (unit.role()=="" || obj_ini.loc[co][i]!=name) then continue;
+                    if (unit.planet_location==floor(chaos_meeting)) then good+=1;
                     if (obj_ini.role[co][i]!=obj_ini.role[100][6]) and (obj_ini.role[co][i]!="Venerable "+string(obj_ini.role[100][6])) then good+=1;
                     if (string_count("Dread",obj_ini.armour[co][i])=0) or (obj_ini.role[co][i]="Chapter Master") then good+=1;
                     
                     // if (good>=3) then show_message(string(obj_ini.role[co][i])+": "+string(co)+"."+string(i));
                     
                     if (good>=3){
-                        obj_temp_meeting.dudes+=1;otm=obj_temp_meeting.dudes;
-                        obj_temp_meeting.present[otm]=1;obj_temp_meeting.co[otm]=co;obj_temp_meeting.ide[otm]=i;
+                        obj_temp_meeting.dudes+=1;
+                        otm=obj_temp_meeting.dudes;
+                        obj_temp_meeting.present[otm]=1;
+                        obj_temp_meeting.co[otm]=co;
+                        obj_temp_meeting.ide[otm]=i;
                         if (obj_ini.role[co][i]="Chapter Master") then master_present=1;
                     }
                 }
@@ -94,19 +98,8 @@ if (string_count("cs_meeting",battle_special)>0){
 
 
 
-
-
-
-
-
-var i=0,that=0;
-repeat(50){
-    if (that=0){
-        i+=1;
-        if (post_equipment_lost[i]="Company Standard") then that=i;
-    }
-}
-if (that!=0){
+that = array_get_index(post_equipment_lost,"Company Standard");
+if (that!=-1){
     repeat(post_equipments_lost[that]){
         scr_loyalty("Lost Standard","+");
     }

@@ -48,7 +48,19 @@ function point_and_click(rect) {
 }
 
 function scr_click_left(){
-	return device_mouse_check_button_pressed(0,mb_left) || mouse_check_button_pressed(mb_left);
+	var mouse_clicked = event_number==ev_gui ? device_mouse_check_button_pressed(0,mb_left) : mouse_check_button_pressed(mb_left);
+
+	if (!mouse_clicked) {
+		return false;
+	}
+
+	var controller_exist = instance_exists(obj_controller);
+	if (controller_exist && obj_controller.cooldown > 0) {
+		show_debug_message("scr_click_left: ignored click for cooldown, " + string(obj_controller.cooldown) + " steps remaining");
+		return false;
+	}
+
+	return mouse_clicked;
 }
 
 function return_mouse_consts(){

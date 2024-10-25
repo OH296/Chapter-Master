@@ -104,7 +104,7 @@ function NameGenerator() constructor {
 
         if (syllable_amount >= 3) {
             var random_third_syllable_list = syllables.third_syllables[irandom(array_length(syllables.third_syllables) - 1)];
-            name += array_random(random_third_syllable_list);
+            name += array_random_element(random_third_syllable_list);
         }
 
         return name;
@@ -113,12 +113,12 @@ function NameGenerator() constructor {
     static ComplexTitledName = function(mains, embelishments, titles){
         var require_embelishments = choose(true, false);
         var require_titles = choose(true, false);
-        var name = array_random(array_random(mains));
+        var name = array_random_element(array_random_element(mains));
         if (require_embelishments){
-            name+=" " + array_random(array_random(embelishments));
+            name+=" " + array_random_element(array_random_element(embelishments));
         }
         if (require_titles){
-            name+=" " + array_random(array_random(titles));
+            name+=" " + array_random_element(array_random_element(titles));
         }
         return name;
 

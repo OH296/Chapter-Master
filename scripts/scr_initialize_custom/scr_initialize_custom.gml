@@ -18,6 +18,7 @@ enum Role {
 	SERGEANT = 18,
 	VETERAN_SERGEANT = 19
 }
+
 function complex_livery_default(){
 	return {
 		sgt : {
@@ -91,28 +92,28 @@ function progenitor_livery(chapter, specific="none"){
 				helm_pattern: 0,
 				helm_primary: obj_creation.main_color,
 				helm_secondary: obj_creation.main_color,
-				helm_detail: obj_creation.trim_color,
+				helm_detail: obj_creation.main_trim,
 				helm_lens: obj_creation.lens_color,
 			},
 			vet_sgt: {
 				helm_pattern: 1,
 				helm_primary: obj_creation.main_color,
 				helm_secondary: obj_creation.main_color,
-				helm_detail: obj_creation.trim_color,
+				helm_detail: obj_creation.main_trim,
 				helm_lens: obj_creation.lens_color,
 			},
 			captain: {
 				helm_pattern: 0,
 				helm_primary: obj_creation.main_color,
 				helm_secondary: obj_creation.main_color,
-				helm_detail: obj_creation.trim_color,
+				helm_detail: obj_creation.main_trim,
 				helm_lens: obj_creation.lens_color,
 			},
 			veteran: {
 				helm_pattern: 0,
 				helm_primary: obj_creation.main_color,
 				helm_secondary: obj_creation.main_color,
-				helm_detail: obj_creation.trim_color,
+				helm_detail: obj_creation.main_trim,
 				helm_lens: obj_creation.lens_color,
 			}
 		}
@@ -1148,14 +1149,20 @@ function scr_initialize_custom() {
 	// This needs to be updated
 	main_color = obj_creation.main_color;
 	secondary_color = obj_creation.secondary_color;
-	trim_color = obj_creation.trim_color;
-	pauldron2_color = obj_creation.pauldron2_color;
-	pauldron_color = obj_creation.pauldron_color;
+	main_trim = obj_creation.main_trim;
+	left_pauldron = obj_creation.left_pauldron;
+	right_pauldron = obj_creation.right_pauldron;
 	lens_color = obj_creation.lens_color;
 	weapon_color = obj_creation.weapon_color;
 	col_special = obj_creation.col_special;
 	trim = obj_creation.trim;
 	skin_color = obj_creation.skin_color;
+	full_liveries = obj_creation.full_liveries;
+	for (var i=1;i<array_length(full_liveries);i++){
+		if (!full_liveries[i].is_changed){
+			full_liveries[i] = DeepCloneStruct(full_liveries[0]);
+		}
+	}
 	complex_livery_data = obj_creation.complex_livery_data;
 	var complex_type = ["sgt", "vet_sgt", "captain", "veteran"];
 	for (var i=0;i<array_length(complex_type);i++){

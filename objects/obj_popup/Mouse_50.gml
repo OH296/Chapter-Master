@@ -226,16 +226,6 @@ if (scr_hit(1465, 499, 1576, 518)) {// Transfering right here
             
             if (obj_controller.managing>0){
                 reset_manage_arrays();
-                repeat(501){w+=1;
-                    
-                    sh_ide[w]=0;
-                    sh_name[w]="";
-                    sh_class[w]="";
-                    sh_loc[w]="";
-                    sh_hp[w]="";
-                    sh_cargo[w]=0;
-                    sh_cargo_max[w]="";
-                }
                 alll=0;
                 update_general_manage_view();
             }

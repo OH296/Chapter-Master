@@ -120,10 +120,10 @@ if (change_slide==35) or (change_slide==36) or (chapter_name=="Doom Benefactors"
         battle_cry="For the Emperor";
         main_color=1;
         secondary_color=1;
-        trim_color=1;
+        main_trim=1;
         // Left/Right pauldron
-        pauldron2_color=1;
-        pauldron_color=1;
+        left_pauldron=1;
+        right_pauldron=1;
         lens_color=1;
         weapon_color=1;
         col_special=0;
@@ -203,75 +203,65 @@ if (custom==2){
 	if (chapter_name=="Soul Drinkers") then name_bad=1;
 }
 var good=0;
-if (color_to_main!=""){
-    good=0;
-    for(var q=0; q<global.colors_count; q++){
-        if (color_to_main=col[q]) and (good=0){
-            good=q;
-            color_to_main="";
-            main_color=q;
-        }
+if (array_length(col)>0){
+    if (color_to_main!=""){
+        main_color = max(array_find_value(col,color_to_main),0);
+        color_to_main = "";
+        full_liveries = "none";
+    }
+    if (color_to_secondary!=""){
+        secondary_color = max(array_find_value(col,color_to_secondary),0);
+        color_to_secondary = "";
+        full_liveries = "none";
+    }
+    if (color_to_trim!=""){
+        main_trim = max(array_find_value(col,color_to_trim),0);
+        color_to_trim = "";
+        full_liveries = "none";
+    }
+    if (color_to_pauldron!=""){
+        right_pauldron = max(array_find_value(col,color_to_pauldron),0);
+        color_to_pauldron = "";  
+        full_liveries = "none";   
+    }
+    if (color_to_pauldron2!=""){
+        left_pauldron = max(array_find_value(col,color_to_pauldron2),0);
+        color_to_pauldron2 = "";
+        full_liveries = "none";
+    }
+    if (color_to_lens!=""){
+        lens_color = max(array_find_value(col,color_to_lens),0);
+        color_to_lens = ""; 
+        full_liveries = "none"; 
+    }
+    if (color_to_weapon!=""){
+        weapon_color = max(array_find_value(col,color_to_weapon),0);
+        color_to_weapon = "";
+        full_liveries = "none";
     }
 }
-if (color_to_secondary!=""){
-    good=0;
-    for(var q=0; q<global.colors_count; q++){
-        if (color_to_secondary=col[q]) and (good=0){
-            good=q;
-            color_to_secondary="";
-            secondary_color=q;
-        }
+if (full_liveries == "none"){
+    var struct_cols = {
+        main_color :main_color,
+        secondary_color:secondary_color,
+        main_trim:main_trim,
+        right_pauldron:right_pauldron,
+        left_pauldron:left_pauldron,
+        lens_color:lens_color,
+        weapon_color:weapon_color
     }
-}
-if (color_to_trim!=""){
-    good=0;
-    for(var q=0; q<global.colors_count; q++){
-        if (color_to_trim=col[q]) and (good=0){
-            good=q;
-            color_to_trim="";
-            trim_color=q;
-        }
-    }
-}
-if (color_to_pauldron!=""){
-    good=0;
-    for(var q=0; q<global.colors_count; q++){
-        if (color_to_pauldron=col[q]) and (good=0){
-            good=q;
-            color_to_pauldron="";
-            pauldron_color=q;
-        }
-    }
-}
-if (color_to_pauldron2!=""){
-    good=0;
-    for(var q=0; q<global.colors_count; q++){
-        if (color_to_pauldron2=col[q]) and (good=0){
-            good=q;
-            color_to_pauldron2="";
-            pauldron2_color=q;
-        }
-    }
-}
-if (color_to_lens!=""){
-    good=0;
-    for(var q=0; q<global.colors_count; q++){
-        if (color_to_lens=col[q]) and (good=0){
-            good=q;
-            color_to_lens="";
-            lens_color=q;
-        }
-    }
-}
-if (color_to_weapon!=""){
-    good=0;
-    for(var q=0; q<global.colors_count; q++){
-        if (color_to_weapon=col[q]) and (good=0){
-            good=q;
-            color_to_weapon="";
-            weapon_color=q;
-        }
-    }
+    livery_picker.scr_unit_draw_data();
+    livery_picker.set_defualt_armour(struct_cols,col_special);
+    full_liveries = array_create(21,DeepCloneStruct(livery_picker.map_colour));
+    full_liveries[Role.LIBRARIAN] = livery_picker.set_defualt_librarian(struct_cols);
+
+    full_liveries[Role.CHAPLAIN] = livery_picker.set_defualt_chaplain(struct_cols);
+
+    full_liveries[Role.APOTHECARY] = livery_picker.set_defualt_apothecary(struct_cols);
+
+    full_liveries[Role.TECHMARINE] = livery_picker.set_defualt_techmarines(struct_cols);
+    livery_picker.scr_unit_draw_data();
+    livery_picker.set_defualt_armour(struct_cols,col_special);    
 }
 
 // on left mouse release, if greater than 5000 and less than 9000, set cooldown to 0

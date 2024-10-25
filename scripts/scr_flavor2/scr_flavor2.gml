@@ -1,5 +1,4 @@
-function scr_flavor2(lost_units_count, target_type) {
-
+function scr_flavor2(lost_units_count, target_type, hostile_range, hostile_weapon, hostile_shots, hostile_splash) {
 	// Generates flavor based on the damage and casualties from scr_shoot, only for the opponent
 
 	if (obj_ncombat.wall_destroyed = 1) then exit;
@@ -25,9 +24,7 @@ function scr_flavor2(lost_units_count, target_type) {
 		_hostile_range = hostile_range;
 		_hostile_weapon = hostile_weapon;
 		_hostile_shots = hostile_shots;
-	}
-
-	if (target_type = "wall") and(instance_exists(obj_nfort)) {
+	} else if (target_type = "wall") and(instance_exists(obj_nfort)) {
 		var hehh;
 		hehh = "the fortification";
 
@@ -316,48 +313,45 @@ function scr_flavor2(lost_units_count, target_type) {
 		exit;
 	}
 
-	var w = 0;
-	var s, him, speshul, unit;
-	repeat(20) {
-		w += 1;
-		if (lost[w] != "") and(lost_num[w] > 0) {
-			speshul = 0
-			if (is_specialist(lost[w], "heads")) then speshul = 1;
-			if (lost[w] = "Chapter Master") then speshul = 1;
-			if (lost[w] = "Venerable " + string(obj_ini.role[100][6])) then speshul = 1;
-			if (lost[w] = obj_ini.role[100][5]) then speshul = 1;
+	var marine_length = array_length(marine_type);
+	var s, him, special, unit, unit_role, units_lost, plural;
+    var lost_roles_count = array_length(lost);
+    for (var role_index = 0; role_index < lost_roles_count; role_index++) {
+        unit_role = lost[role_index];
+        units_lost = lost_num[role_index];
+        if (unit_role != "" && units_lost > 0) {
+            special = (
+                is_specialist(unit_role, "heads") ||
+                unit_role == "Chapter Master" ||
+                unit_role == "Venerable " + string(obj_ini.role[100][6]) ||
+                unit_role == obj_ini.role[100][5] ||
+                obj_ncombat.player_max <= 6
+            );
 
-			if (obj_ncombat.player_max <= 6) then speshul = 1;
+            if (!special) {
+                plural = units_lost > 1 ? "s" : "";
+                m2 += $"{units_lost} {unit_role}{plural}, ";
+            } else {
+                him = -1; // Find which unit this is
+                for (var marine = 0; marine < marine_length; marine++) {
+                    if (marine_type[marine] == unit_role && marine_hp[marine] <= 0) {
+                        him = marine;
+                        break; // found the unit
+                    }
+                }
 
-			// if (speshul=1) then show_message("Lost "+string(lost[w]));
+                if (him != -1) { // found a valid unit
+                    obj_ncombat.dead_jims += 1;
+                    if (marine_type[him] == obj_ini.role[100][5]) {
+                        obj_ncombat.dead_jim[obj_ncombat.dead_jims] = $"A {marine_type[him]} has been critically injured!";
+                    } else {
+                        obj_ncombat.dead_jim[obj_ncombat.dead_jims] = $"{unit_struct[him].name_role()} has been critically injured!";
+                    }
+                }
+            }
+        }
+    }
 
-			if (speshul == 0) {
-				m2 += string(lost_num[w]) + " " + string(lost[w]);
-				if (lost_num[w] > 1) then m2 += "s";
-				m2 += ", ";
-			}
-			if (speshul = 1) {
-				s = 0;
-				him = 0; // Find which dude this is
-				repeat(100) {
-					s += 1; // was 700
-					// show_message("["+string(s)+"]"+string(marine_type[s])+" = ["+string(w)+"]"+string(lost[w])+"?");
-					if (marine_type[s] = lost[w]) and(marine_hp[s] <= 0) and(him = 0) {
-						him = s; // show_message(string(marine_type[s])+"=="+string(lost[w]));
-					}
-				}
-				if (him != 0) {
-					obj_ncombat.dead_jims += 1;
-					if (marine_type[him] = obj_ini.role[100][5]) then obj_ncombat.dead_jim[obj_ncombat.dead_jims] = "A " + string(marine_type[him]) + " has been critically injured!";
-					if (marine_type[him] != obj_ini.role[100][5]) {
-						obj_ncombat.dead_jim[obj_ncombat.dead_jims] = $"{obj_ini.TTRPG[marine_co[him]][marine_id[him]].name_role()} has been critically injured!";
-						// show_message(string(obj_ncombat.dead_jim[obj_ncombat.dead_jims]));
-					}
-				}
-
-			}
-		}
-	}
 
 	var unce = 0;
 
@@ -398,13 +392,6 @@ function scr_flavor2(lost_units_count, target_type) {
 		m2 = string_delete(m2, lis, 3);
 		if (lost_units_count > 1) then m2 += " have been incapacitated.";
 		if (lost_units_count = 1) then m2 += " has been incapacitated.";
-	}
-
-	i = 0;
-	repeat(60) {
-		i += 1;
-		lost[i] = "";
-		lost_num[i] = 0;
 	}
 
 	mes = m1 + m2 + m3;

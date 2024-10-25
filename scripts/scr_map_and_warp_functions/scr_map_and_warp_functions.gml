@@ -136,6 +136,10 @@ function draw_warp_lanes(){
 
 			var hit_box = [route_coords[0]+dist_x-(warp_width/2),route_coords[1]+dist_y-(warp_height/2), route_coords[0]+dist_x+(warp_width/2) ,route_coords[1]+dist_y+(warp_height/2) ];
 			
+			var allow_tooltips = (!instance_exists(obj_star_select))
+			if (allow_tooltips && instance_exists(obj_fleet_select)){
+				allow_tooltips = !obj_fleet_select.currently_entered;
+			}
 			if (scr_hit(hit_box)){
 				//TODO centralise this for efficiency so it's only run once at the beggingin of step sequence
 				var star_overlap = false;
@@ -147,7 +151,9 @@ function draw_warp_lanes(){
 				}
 				if (!star_overlap){
 					var to = instance_nearest(route_coords[2],route_coords[3], obj_star);
-					tooltip_draw($"Major warp route to {to.name} (4 X travel for warp capable crafts, click to see destination)");
+					if (allow_tooltips){
+						tooltip_draw($"Major warp route to {to.name} (4 X travel for warp capable crafts, click to see destination)");
+					}
 					warp_point_hover = true;
 
 					if (array_equals(hover_loc,[route_coords[0] ,route_coords[1]])){
@@ -179,7 +185,9 @@ function draw_warp_lanes(){
 				}
 				if (!star_overlap){				
 					var to = instance_nearest(route_coords[0] ,route_coords[1], obj_star);
-					tooltip_draw($"Major warp route to {to.name} (4 X travel for warp capable crafts, click to see destination)");
+					if (allow_tooltips){
+						tooltip_draw($"Major warp route to {to.name} (4 X travel for warp capable crafts, click to see destination)");
+					}
 					warp_point_hover = true;
 					if (array_equals(hover_loc,[route_coords[2], route_coords[3]])){
 						hover_time++;

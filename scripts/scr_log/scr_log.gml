@@ -14,7 +14,7 @@ function try_and_report_loop(dev_marker="generic crash",func, turn_end=true, arg
         method_call(func,args);
     } catch (_exception){
         var _popup_header = $"Your game just encountered an error ({dev_marker}) :(";
-        var _popup_message = ERROR_MESSAGE;
+        var _popup_message = ERROR_MESSAGE + "\n\n\nP.S. You can try to continue playing - if the error is not severe, the game should continue working, just try to avoid what caused it. \n\nBut it's recommended to wait for a response on the bug-report forum, otherwise you may make the issue worse.";
 
         pip = instance_create(0,0,obj_popup);
         pip.title = _popup_header;

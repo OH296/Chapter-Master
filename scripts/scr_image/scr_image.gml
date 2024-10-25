@@ -35,40 +35,8 @@ function scr_image(path, image_id, x1, y1, width, height) {
 	if(string_count("/", path) > 0){
 		var old_alpha = draw_get_alpha();
 		var old_color = draw_get_color();
-		var drawing_sprite;
-		var cache_arr_exists = struct_exists(obj_img.image_cache, path);
-		if(!cache_arr_exists){
-			var empty_arr = array_create(100, -1);
-			variable_struct_set(obj_img.image_cache, path, empty_arr);
-		}
-		// Start with 100 slots but allow it to expand if needed
-		if(cache_arr_exists && image_id > 100){
-			for(var i = 100; i <= image_id; i++){
-				array_push(obj_img.image_cache, -1);
-			}
-		}
-	
-		var existing_sprite = -1;
-		try {
-			existing_sprite = array_get(obj_img.image_cache[$path], image_id);
-		} catch (_ex){
-			debugl($"error trying to fetch image {path}/{image_id}.png from cache: {_ex}");
-			existing_sprite = -1;
-		}
+		var drawing_sprite = scr_image_cache(path, image_id);
 		
-		if(sprite_exists(existing_sprite)){
-			drawing_sprite = existing_sprite;
-		} else {
-			var folders = string_replace_all(path, "/", "\\");
-			var dir = $"{working_directory}\\images\\{folders}\\{string(image_id)}.png";
-			if(file_exists(dir)){
-				drawing_sprite = sprite_add(dir,1, false,false,0,0);
-				array_set(obj_img.image_cache[$path], image_id, drawing_sprite);
-			} else {
-				drawing_sprite = -1;
-				debugl($"No directory/file found matching {dir}");
-			}
-		}
 		// Draws the red box with a X through it
 		if(is_undefined(drawing_sprite) || !sprite_exists(drawing_sprite)){
 			debugl($"No drawing sprite exists from args {path} id {image_id}");
@@ -578,4 +546,43 @@ function scr_image(path, image_id, x1, y1, width, height) {
 	    draw_set_color(old_color);
     
 	}}
+}
+
+
+function scr_image_cache(path, image_id){
+	var drawing_sprite;
+	var cache_arr_exists = struct_exists(obj_img.image_cache, path);
+	if(!cache_arr_exists){
+		var empty_arr = array_create(100, -1);
+		variable_struct_set(obj_img.image_cache, path, empty_arr);
+	}
+	// Start with 100 slots but allow it to expand if needed
+	if(cache_arr_exists && image_id > 100){
+		for(var i = 100; i <= image_id; i++){
+			array_push(obj_img.image_cache, -1);
+		}
+	}
+
+	var existing_sprite = -1;
+	try {
+		existing_sprite = array_get(obj_img.image_cache[$path], image_id);
+	} catch (_ex){
+		debugl($"error trying to fetch image {path}/{image_id}.png from cache: {_ex}");
+		existing_sprite = -1;
+	}
+	
+	if(sprite_exists(existing_sprite)){
+		drawing_sprite = existing_sprite;
+	} else {
+		var folders = string_replace_all(path, "/", "\\");
+		var dir = $"{working_directory}\\images\\{folders}\\{string(image_id)}.png";
+		if(file_exists(dir)){
+			drawing_sprite = sprite_add(dir,1, false,false,0,0);
+			array_set(obj_img.image_cache[$path], image_id, drawing_sprite);
+		} else {
+			drawing_sprite = -1;
+			debugl($"No directory/file found matching {dir}");
+		}
+	}
+	return drawing_sprite;
 }

@@ -1,13 +1,11 @@
-function scr_destroy_planet(argument0) {
+function scr_destroy_planet(destruction_method) {
 
-	// argument0: method   (1 being combat exterminatus, 2 being star select cyclonic torpedo)
+	// destruction_method: method   (1 being combat exterminatus, 2 being star select cyclonic torpedo)
 
-
-	var baid,enemy9;
-	baid=0;enemy9=0;
+	var baid=0;enemy9=0;
 
 
-	if (argument0=2){
+	if (destruction_method=2){
 	    var pip;pip=instance_create(0,0,obj_popup);
 	    with(pip){
 	        title="Exterminatus";
@@ -15,7 +13,8 @@ function scr_destroy_planet(argument0) {
 	        text="You give the order to fire the Cyclonic Torpedo.  After a short descent it lands upon the surface and detonates- the air itself igniting across ";
 	    }
 
-	    var you;you=obj_star_select.target;pip.text+=you.name;
+	    var you=obj_star_select.target;
+	    pip.text+=you.name;
 	    pip.text+=" "+scr_roman(obj_controller.selecting_planet);
 	    baid=obj_controller.selecting_planet;
 	    scr_add_item("Cyclonic Torpedo",-1);
@@ -25,8 +24,8 @@ function scr_destroy_planet(argument0) {
 
 
 
-	if (argument0=1){
-	    var pip;pip=instance_create(0,0,obj_popup);
+	else if (destruction_method=1){
+	    var pip=instance_create(0,0,obj_popup);
 	    with(pip){
 	        title="Exterminatus";
 	        image="exterminatus";
@@ -35,10 +34,8 @@ function scr_destroy_planet(argument0) {
 
 	    instance_activate_object(obj_star);
 	    var you;you=battle_object;
-	    pip.text+=you.name;
-    
-	    if (obj_ncombat.battle_id=1) then pip.text+=" I";if (obj_ncombat.battle_id=2) then pip.text+=" II";
-	    if (obj_ncombat.battle_id=3) then pip.text+=" III";if (obj_ncombat.battle_id=4) then pip.text+=" IV";
+	    pip.text+=you.name +scr_roman(obj_controller.obj_ncombat.battle_id);
+
 	    baid=obj_ncombat.battle_id;
 	    scr_add_item("Exterminatus",-1);
     

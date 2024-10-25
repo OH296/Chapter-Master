@@ -1,4 +1,5 @@
 // Restarts variables, ensuring loaded saves are properly initialized
+/// @mixin 
 function scr_restart_variables(saved_game) {
 	if (saved_game==1) then with(obj_ini){
     
@@ -44,9 +45,9 @@ function scr_restart_variables(saved_game) {
     
 	    obj_restart_vars.restart_main_color=obj_creation.main_color;
 	    obj_restart_vars.restart_secondary_color=obj_creation.secondary_color;
-	    obj_restart_vars.restart_trim_color=obj_creation.trim_color;
-	    obj_restart_vars.restart_pauldron2_color=obj_creation.pauldron2_color;
-	    obj_restart_vars.restart_pauldron_color=obj_creation.pauldron_color;
+	    obj_restart_vars.restart_trim_color=obj_creation.main_trim;
+	    obj_restart_vars.restart_pauldron2_color=obj_creation.left_pauldron;
+	    obj_restart_vars.restart_pauldron_color=obj_creation.right_pauldron;
 	    obj_restart_vars.restart_lens_color=obj_creation.lens_color;
 	    obj_restart_vars.restart_weapon_color=obj_creation.weapon_color;
 	    obj_restart_vars.restart_col_special=obj_creation.col_special;
@@ -126,7 +127,7 @@ function scr_restart_variables(saved_game) {
 	        obj_restart_vars.r_race[i,6]=1;
 	        obj_restart_vars.r_role[i,6]="Dreadnought";
 			obj_restart_vars.r_wep1[i,6]="Close Combat Weapon";
-			obj_restart_vars.r_wep2[i,6]="Lascannon";
+			obj_restart_vars.r_wep2[i,6]="Twin Linked Lascannon";
 	        obj_restart_vars.r_armour[i,6]="Dreadnought";
 			obj_restart_vars.r_mobi[i,6]="";
 			obj_restart_vars.r_gear[i,6]="";
@@ -363,7 +364,7 @@ function scr_restart_variables(saved_game) {
 	        obj_controller.r_race[i,6]=1;
 	        obj_controller.r_role[i,6]="Dreadnought";
 			obj_controller.r_wep1[i,6]="Close Combat Weapon";
-			obj_controller.r_wep2[i,6]="Lascannon";
+			obj_controller.r_wep2[i,6]="Twin Linked Lascannon";
 	        obj_controller.r_armour[i,6]="Dreadnought";
 			obj_controller.r_mobi[i,6]="";
 			obj_controller.r_gear[i,6]="";
@@ -620,7 +621,7 @@ function scr_restart_variables(saved_game) {
 			race[i,6]=1;
 			role[i,6]="Dreadnought";
 			wep1[i,6]="Close Combat Weapon";
-			wep2[i,6]="Lascannon";
+			wep2[i,6]="Twin Linked Lascannon";
 			armour[i,6]="Dreadnought";
 	        
 			race[i,8]=1;
@@ -742,9 +743,9 @@ function scr_restart_variables(saved_game) {
     
 	    main_color=obj_restart_vars.restart_main_color;
 	    secondary_color=obj_restart_vars.restart_secondary_color;
-	    trim_color=obj_restart_vars.restart_trim_color;
-	    pauldron2_color=obj_restart_vars.restart_pauldron2_color;
-	    pauldron_color=obj_restart_vars.restart_pauldron_color;
+	    main_trim=obj_restart_vars.restart_trim_color;
+	    left_pauldron=obj_restart_vars.restart_pauldron2_color;
+	    right_pauldron=obj_restart_vars.restart_pauldron_color;
 	    lens_color=obj_restart_vars.restart_lens_color;
 	    weapon_color=obj_restart_vars.restart_weapon_color;
 	    col_special=obj_restart_vars.restart_col_special;
@@ -805,7 +806,7 @@ function scr_restart_variables(saved_game) {
 		for(var i=1; i<=4; i++){
 	        if (adv[i]!="") and (adv_num[i]=0){
 				for (var n=1; n<=40; n++){
-	                if (advantage[n]=adv[i]) then adv_num[i]=n;
+	                if (obj_creation.all_advantages[n].name=adv[i]) then adv_num[i]=n;
 	            }
 	        }
 	    }
@@ -813,7 +814,7 @@ function scr_restart_variables(saved_game) {
 		for(var i=1; i<=4; i++){
 	        if (dis[i]!="") and (dis_num[i]=0){
 	            for (var n=1; n<=40; n++){
-	                if (disadvantage[n]=dis[i]) then dis_num[i]=n;
+	                if (obj_creation.all_disadvantages[n].name[n]=dis[i]) then dis_num[i]=n;
 	            }
 	        }
 	    }

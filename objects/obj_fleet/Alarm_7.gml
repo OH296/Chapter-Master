@@ -111,7 +111,7 @@ if (killer>0){
     if (obj_controller.loyalty>=50) and (obj_controller.loyalty<70) then obj_controller.last_world_inspection-=20;
     if (obj_controller.loyalty<50) then scr_loyalty("Inquisitor Killer","+");
     
-    var msg,msg2,i,remove;msg="";msg2="";i=0;remove=0;
+    var msg="",msg2="",i=0,remove=0;
     remove=killer_tg;
     if (killer_tg>0){
         var inquis_name = obj_controller.inquisitor[killer_tg];
@@ -120,20 +120,13 @@ if (killer>0){
     }
     if (obj_controller.inquisitor_type[remove]="Ordo Hereticus") then scr_loyalty("Inquisitor Killer","+");
     
-    i=remove;
-    repeat(10-remove){
-        if (i<10){
-            obj_controller.inquisitor_gender[i]=obj_controller.inquisitor_gender[i+1];
-            obj_controller.inquisitor_type[i]=obj_controller.inquisitor_type[i+1];
-            obj_controller.inquisitor[i]=obj_controller.inquisitor[i+1];
-        }
-        if (i=10){
-            obj_controller.inquisitor_gender[i]=choose(0,0,0,1,1,1,1); // 4:3 chance of male Inquisitor
-            obj_controller.inquisitor_type[i]=choose("Ordo Malleus","Ordo Xenos","Ordo Hereticus","Ordo Hereticus","Ordo Hereticus","Ordo Hereticus","Ordo Hereticus","Ordo Hereticus");
-            obj_controller.inquisitor[i]=global.name_generator.generate_imperial_name(obj_controller.inquisitor_gender[i]);// For 'random inquisitor wishes to inspect your fleet
-        }
-        i+=1;
-    }
+    array_delete(obj_controller.inquisitor_gender, remove,1);
+    array_delete(obj_controller.inquisitor_type, remove,1);
+    array_delete(obj_controller.inquisitor, remove,1);
+
+    array_push(obj_controller.inquisitor_gender, choose(0,0,0,1,1,1,1));
+    array_push(obj_controller.inquisitor_type, choose("Ordo Malleus","Ordo Xenos","Ordo Hereticus","Ordo Hereticus","Ordo Hereticus","Ordo Hereticus","Ordo Hereticus","Ordo Hereticus"));
+    array_push(obj_controller.inquisitor, global.name_generator.generate_imperial_name(obj_controller.inquisitor_gender[i]));
     
     instance_activate_object(obj_turn_end);
     

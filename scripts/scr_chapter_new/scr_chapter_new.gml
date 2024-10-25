@@ -21,6 +21,9 @@ function ChapterData() constructor {
 	homeworld_rule = HOMEWORLD_RULE.NONE;
 	advantages = [];
 	disadvantages = [];
+
+	full_liveries = "none"
+
 	colors = {
 		main: "Grey",
 		secondary: "Grey",
@@ -110,6 +113,8 @@ function ChapterData() constructor {
 /// @mixin obj_creation
 function scr_chapter_new(argument0) {
 
+	full_liveries = "none"; // until chapter objects are in full use kicks off livery propogation
+
 	// argument0 = chapter
 	obj_creation.use_chapter_object = 0; // for the new json testing
 	var chapter_id = CHAPTERS.UNKNOWN;
@@ -152,7 +157,7 @@ function scr_chapter_new(argument0) {
 	    role[i,3]="Veteran";wep1[i,3]="Chainsword";wep2[i,3]="Combiflamer";armour[i,3]="Power Armour";
 	    role[i,4]="Terminator";wep1[i,4]="Power Fist";wep2[i,4]="Storm Bolter";armour[i,4]="Terminator Armour";
 	    role[i,5]="Captain";wep1[i,5]="Power Sword";wep2[i,5]="Bolt Pistol";armour[i,5]="Power Armour";gear[i,5]="Iron Halo";
-	    role[i,6]="Dreadnought";wep1[i,6]="Close Combat Weapon";wep2[i,6]="Lascannon";armour[i,6]="Dreadnought";
+	    role[i,6]="Dreadnought";wep1[i,6]="Close Combat Weapon";wep2[i,6]="Twin Linked Lascannon";armour[i,6]="Dreadnought";
 	    role[i,8]="Tactical Marine";wep1[i,8]="Bolter";wep2[i,8]="Combat Knife";armour[i,8]="Power Armour";
 	    role[i,9]="Devastator Marine";wep1[i,9]="Heavy Ranged";wep2[i,9]="Combat Knife";armour[i,9]="Power Armour";mobi[i,9]="Heavy Weapons Pack";
 	    role[i,10]="Assault Marine";wep1[i,10]="Chainsword";wep2[i,10]="Bolt Pistol";armour[i,10]="Power Armour";mobi[i,10]="Jump Pack";
@@ -349,7 +354,8 @@ function scr_chapter_new(argument0) {
 	        company_title[7]="Guardians of Phalanx";company_title[8]="Dorn's Huscarls";company_title[9]="The Wardens";
 	        company_title[10]="The Eyes of Dorn";
 
-	    i=99;repeat(3){i+=1;
+	    i=99;repeat(3){
+	    	i+=1;
 	        role[i,2]="Huscarl";wep1[i,2]="Power Sword";wep2[i,2]="Storm Shield";armour[i,2]="Power Armour";
 		}
 	}
@@ -907,6 +913,8 @@ if (argument0="Lamenters"){founding=5;points=150;
 		obj_creation.adv = chapter_object.advantages;
 		obj_creation.dis = chapter_object.disadvantages;
 
+		obj_creation.full_liveries = chapter_object.full_liveries;
+
 		obj_creation.color_to_main = chapter_object.colors.main;
 		obj_creation.color_to_secondary = chapter_object.colors.secondary;
 		obj_creation.color_to_pauldron = chapter_object.colors.pauldron_r;
@@ -978,7 +986,7 @@ if (argument0="Lamenters"){founding=5;points=150;
 		}
 
 		points = chapter_object.points;
-		maxpoints=chapter_object.points;
+		maxpoints=chapter_object.points;	
 
 	}
 
@@ -987,18 +995,26 @@ if (argument0="Lamenters"){founding=5;points=150;
 
 
 
-	var i,a;i=0;a=0;
-	repeat(8){a+=1;i=0;
-	    repeat(40){i+=1;
-	        if (adv[a]!="") and (advantage[i]=adv[a]) then adv_num[a]=i;
-	        if (dis[a]!="") and (disadvantage[i]=dis[a]) then dis_num[a]=i;
-	    }
+	
+	for(var a = 0; a < array_length(adv); a++){
+	    for(var k = 0; k < array_length(obj_creation.all_advantages); k++){
+			if(adv[a]!="" && obj_creation.all_advantages[k].name=adv[a]){
+				adv_num[a] = k;
+			}
+		}
+		for(var j = 0; j < array_length(obj_creation.all_disadvantages); j++){
+			if (dis[a]!="" && obj_creation.all_disadvantages[j].name=dis[a]){
+				dis_num[a]=j;
+			}
+		}
 	}
 
 
 
 	maxpoints=points;
-
+	var livery_picker = new colour_item(0,0);
+	livery_picker.scr_unit_draw_data();
+	full_liveries = array_create(21,DeepCloneStruct(livery_picker.map_colour));	
 	return true;
 }
 

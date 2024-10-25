@@ -350,6 +350,8 @@ function ArtifactStruct(Index) constructor{
 			} else if (b_type=="mobility"){
 				unit.update_mobility_item("", false, false);
 			}
+			bearer =false;
+			obj_ini.artifact_equipped[index] = false;
 		}
 	}
 	custom_data = {};

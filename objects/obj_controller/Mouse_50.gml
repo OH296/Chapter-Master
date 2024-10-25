@@ -107,7 +107,7 @@ else if (menu==15) and (cooldown<=0){
             training_chaplain+=1;
             scr_income();
         }
-        if (mouse_y>=yy+435) and (mouse_y<yy+452) and (training_psyker<6) and (string_count("Intolerant",obj_ini.strin2)==0){
+        if (mouse_y>=yy+435) and (mouse_y<yy+452) and (training_psyker<6) and (!scr_has_disadv("Psyker Intolerant")){
             cooldown=8000;
             training_psyker+=1;
             scr_income();

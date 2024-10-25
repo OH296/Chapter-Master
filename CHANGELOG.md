@@ -21,20 +21,68 @@ All notable changes to this project will be documented in this file.
     - everything that a normal player doesn't need to know.
 ----------------------------------
 
-## [0.9.3.4]
+## [0.9.4.0]
 
 ### Changed:
+- Artifacts and Librarium:
+	- Now able to unequip artifacts from the Librarium screen.
+	- `artifact` cheat now supports quantity parameter. `CHEATCODES.md` updated.
+	- Added support for mouse wheel scrolling of the artifact list, just hover over the general artifact box and scroll.
+	- Added tooltips to scroll arrows that remind you about the mouse wheel.
+	- The limit for artifacts now is 200. Getting new artifacts above this limit, will simply poof them.
 - Battle debug (d) now only works with debug mode enabled.
+- Tartaros sprite is replaced with a clean, tweaked version (by Abomination).
+- Various, minor error popup changes.
+- Reducing population via bombardment to 0 will now destroy genestealer cults and set Tyranid influence to 0.
 
 ### Fixed:
-- Spelling error in `scr_navy_planet_action` "orbiting" causing crash.
+- Crashes:
+	- Spelling error in `scr_navy_planet_action` "orbiting" causing crash.
+	- Possible fix of some weird stuff and some crashes in battles, caused by `obj_ini.hp`, pointing to `TTRPG_stats_scr_marine_struct`.
+	- Crashes pointing to `scr_company_order_scr_company_order`.
+	- Diplomacy dialogue crashes, particularly with Chaos Emissary.
+	- Fixed a typo in Spyrer mission, may fix a related crash.
+	- [Possible fix to crashes related to vehicle movement/transfer (#18)](https://github.com/EttyKitty/ChapterMaster/pull/18).
+	- [Possible fix to various battle crashes, pointing to `scr_clean` (#20)](https://github.com/EttyKitty/ChapterMaster/pull/20).
+	- Crash from destroying inquisitor ship.
+	- Crash from non-star instance with end location when calculating travel ETA (`calculate_fleet_eta`).
 - Probably a lot of missclicks, when one screen opens and you immediately click on something, should be fixed.
-- Possible fix of some weird stuff and some crashes in battles, cased by `obj_ini.hp`.
+- Vehicle loss and recovery flavour text now should be repaired.
+- Fixed formula for vehicle recovery score from Techmarines, as it was a bit overblown by stats.
+- STC fleet speed bonus reducing speed instead.
+- Warp portal selectable through other UI elements.
+- Inquisitor inspection throwing errors (`fleets_next_location`).
+- Adjustments to Artifact preview screen. Fixed button font, bigger description box.
+- Equipped artifacts breaking on save/loading after their count goes over 20.
+- Fixed artifact list ping-pong that didn't work properly when going backwards.
+- Artifact list being limited to 30, even if the player has more.
+- Psyker Intolerant stuff breaking if the disadvantage is in the 5+ slot.
 
 ### Under The Hood:
-- `obj_ini.hp[][]` is replaced with `unit.hp()`.
-- `point_and_click()` now sets `obj_controller` cooldown and checks for it to work.
-- `obj_managment_panel` is now drawn in GUI layer, mouse event merged into draw.
+- **All constructors from now on use PascalCase, to prevent variable name overlaps with the YYC compiler.**
+- UI:
+	- `point_and_click()` now sets `obj_controller` cooldown and checks for it to be allowed to execute.
+	- `obj_popup` cooldown on creation is reduced to 8k to fix the UI lock caused by the above change, may have unintended consequences.
+	- `obj_managment_panel` is now drawn in GUI layer, mouse event merged into draw.
+	- Minor refactors to Artifact preview screen. Use `draw_unit_button()`.
+	- Added cooldown check to `scr_click_left()`, to be able to use it nested in scr_hit, when point_and_click is unneeded.
+- Combat code:
+	- Many repeats and bad array practices are removed from the combat related code.
+	- Various minor efficiency improvements and refactors. 
+	- Recovery (vehicle and marine) code variable naming changes.
+	- A lot of major refactors, rewrites and overhauls of `scr_clean`.
+- [Various adjustments to the log and report system (#12)](https://github.com/EttyKitty/ChapterMaster/pull/12).
+- Diplomacy dialogue refactored and reworked.
+- `obj_ini.hp[][]` is replaced with `unit.hp()` in the majority (all?) places.
+- Refactored a lot of lines in the `obj_popup` step event, to use `$` instead of `string()`, to improve readability.
+- [`point_and_click()` efficiency improvements (#17)](https://github.com/EttyKitty/ChapterMaster/pull/17).
+- Refactored `scr_company_order`.
+- [New, unused Psychotic and Lobotomized traits (#14)](https://github.com/EttyKitty/ChapterMaster/pull/14).
+- Minor refactor of `scr_destroy planet`.
+- Minor refactor of alarm 7 `obj_n_combat`.
+- New function: `draw_rectangle_outline()` to draw rectangles with an outline backed in.
+- New function: `choose_weighted_range()` to generate a random number, from one of the ranges, with custom weights per each range.
+- Deprecate `int_strings[]` in `scr_load`.
 
 ## [0.9.3.3-YYC]
 
@@ -97,6 +145,9 @@ All notable changes to this project will be documented in this file.
 - Added fail safes to stop crash when viewing some planetary features.
 - Artifact screen text overlap, broken strings are fixed.
 - Some of the tooltip issues.
+
+- new cheat "ruinspopulate" to put an ancient ruins on every planet
+
 
 ### Under The Hood:
 - `scr_has_adv` and `scr_has_disadv` functions.

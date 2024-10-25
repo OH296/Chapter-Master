@@ -213,7 +213,7 @@ for(var i=100; i<103; i++){
     
     obj_controller.r_role[i,6]="Dreadnought";
     obj_controller.r_wep1[i,6]="Close Combat Weapon";
-    obj_controller.r_wep2[i,6]="Lascannon";
+    obj_controller.r_wep2[i,6]="Twin Linked Lascannon";
     obj_controller.r_armour[i,6]="Dreadnought";
     obj_controller.r_mobi[i,6]="";
     obj_controller.r_gear[i,6]="";
@@ -542,7 +542,8 @@ command_set[8]=1;
 command_set[9]=1;
 command_set[20]=1;
 command_set[24]=1;
-blandify=0;
+modest_livery=0;
+progenitor_visuals=0;
 
 // ** Default menu items **
 selecting_planet=0;
@@ -698,14 +699,6 @@ for(var i=0; i<501; i++){
     ma_chaos[i]=0;
     ma_exp[i]=0;
     ma_god[i]=0;
-    sh_ide[i]=0;
-    sh_uid[i]=0;
-    sh_name[i]="";
-    sh_class[i]="";
-    sh_loc[i]="";
-    sh_hp[i]="";
-    sh_cargo[i]=0;
-    sh_cargo_max[i]="";
     squad[i]=0;
     display_unit[i]=0;
 
@@ -719,6 +712,17 @@ for(var i=0; i<501; i++){
         event_duration[i]=0;
     }
 }
+// ship management arrays
+// they are used to display a paginated subset of ships
+// at a particular location for the load to ship screen.
+sh_ide = []
+sh_uid = []
+sh_name = []
+sh_class = []
+sh_loc = []
+sh_hp = []
+sh_cargo = []
+sh_cargo_max = []
 alll=0;
 //
 popup=0;// 1: fleet, 2: other, 3: system
@@ -1265,9 +1269,9 @@ recruiting_type="";
 // ** Sets up chapter colors **
 main_color=0;
 secondary_color=0;
-trim_color=0;
-pauldron2_color=0;
-pauldron_color=0;
+main_trim=0;
+left_pauldron=0;
+right_pauldron=0;
 lens_color=0;
 weapon_color=0;
 col_special=0;
@@ -1328,9 +1332,9 @@ if (instance_exists(obj_ini)){
         mutation="";
         main_color=obj_ini.main_color;
         secondary_color=obj_ini.secondary_color;
-        trim_color=obj_ini.trim_color;
-        pauldron2_color=obj_ini.pauldron2_color;
-        pauldron_color=obj_ini.pauldron_color;
+        main_trim=obj_ini.main_trim;
+        left_pauldron=obj_ini.left_pauldron;
+        right_pauldron=obj_ini.right_pauldron;
         lens_color=obj_ini.lens_color;
         weapon_color=obj_ini.weapon_color;
         col_special=obj_ini.col_special;

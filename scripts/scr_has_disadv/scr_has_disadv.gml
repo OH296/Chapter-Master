@@ -4,7 +4,12 @@
  */
 function scr_has_disadv(disadvantage){
 	try {
-		var result = array_contains(obj_ini.dis, disadvantage);
+		var result;
+		if (instance_exists(obj_creation)) {
+			result = array_contains(obj_creation.dis, disadvantage);
+		} else {
+			result = array_contains(obj_ini.dis, disadvantage);
+		}
 	} catch (_exception){
 		show_debug_message(_exception);
 		result = false;

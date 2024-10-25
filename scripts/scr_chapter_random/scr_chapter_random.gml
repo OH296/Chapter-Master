@@ -28,8 +28,8 @@ function scr_chapter_random(argument0) {
 	homeworld_rule=1;aspirant_trial=eTrials.BLOODDUEL;
 	discipline="default";battle_cry="For the Emperor";
 
-	main_color=1;secondary_color=1;trim_color=1;
-	pauldron2_color=1;pauldron_color=1;// Left/Right pauldron
+	main_color=1;secondary_color=1;main_trim=1;
+	left_pauldron=1;right_pauldron=1;// Left/Right pauldron
 	lens_color=1;weapon_color=1;col_special=choose(0,0,0,0,0,1,2,3);
 
 	color_to_main="";
