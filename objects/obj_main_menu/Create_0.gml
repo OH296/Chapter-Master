@@ -136,8 +136,6 @@ if (last_legal=0) {
     tim2=424;
 }
 
-obj_cursor.image_alpha=0;
-
 // show_message(string(last_legal)+", stage: "+string(stage));
 
 
@@ -150,3 +148,6 @@ if (!directory_exists("ErrorLogs")) {
 action_set_alarm(1, 3);
 action_set_alarm(30, 4);
 /*  */
+
+// Main-menu fade-in at the start of the game
+screen_fade_in();

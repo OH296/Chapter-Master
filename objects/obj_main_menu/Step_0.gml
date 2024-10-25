@@ -42,9 +42,6 @@ if (stage = 3) {
     }
 
     if (tim3 <= -15) then tim4 += 0.75;
-    if (tim4 > 0) and (instance_exists(obj_cursor)) {
-        obj_cursor.image_alpha = 1;
-    }
 }
 
 if (fade > 0) then fade -= 0.5;
@@ -82,6 +79,6 @@ if (mess_alpha > 120) then mess_alpha = 0;
 // }
 
 if (keyboard_check_pressed(vk_end)) {
-    instance_create_depth(0, 0, -9999, obj_fade_controller)
-    obj_fade_controller.fading_out = true;
+    instance_create_depth(0, 0, -9999, obj_screen_fade)
+    obj_screen_fade.fading_in = true;
 }

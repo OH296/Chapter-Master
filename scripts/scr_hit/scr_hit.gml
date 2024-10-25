@@ -4,7 +4,7 @@
 function scr_hit(x1=0, y1=0, x2=0, y2=0) {
 	var mouse_consts = return_mouse_consts();
 
-	if (obj_ui_controller.interact_forbid) {
+	if (obj_ui_controller.interaction_forbid) {
 		return false;
 	}
 
@@ -36,7 +36,7 @@ function point_and_click(rect) {
 		return false;
 	}
 
-	if (obj_ui_controller.interact_forbid) {
+	if (obj_ui_controller.interaction_forbid) {
 		return false;
 	}
 
