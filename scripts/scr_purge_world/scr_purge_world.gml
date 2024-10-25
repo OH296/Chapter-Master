@@ -21,7 +21,7 @@ function scr_purge_world(star, planet, action_type, action_score) {
 
 
 
-
+	// TODO - while I don't expect Surface to Orbit weapons retaliating against player's purge bombardment, it might still be worthwhile to consider possible situations
 
 	if (action_type=1){// Bombardment
 	    txt1="Your cruiser and larger ship";
@@ -100,7 +100,7 @@ function scr_purge_world(star, planet, action_type, action_score) {
 	            scr_event_log("","Inquisition Mission Completed: The mutants of "+string(star.name)+" "+string(scr_roman(planet))+" have been cleansed by promethium.");
 	            scr_gov_disp(star.name,planet,choose(1,2,3));
 	        }
-	    }else if (isquest=0){
+	    }else if (isquest=0){ // TODO add more variation, with planets, features, marine equipment perhaps?
 	        txt1="Timing their visits right, Your forces scour "+string(star.name)+" "+string(planet)+", burning down whatever the local heretic communities call their homes. Their screams were quickly extinguished by fire, turning whatever it was before, into ash.";
      
 	        if (star.p_large[planet]=0) then max_kill=action_score*12000;// Population if normal
@@ -165,7 +165,7 @@ function scr_purge_world(star, planet, action_type, action_score) {
 	            scr_gov_disp(star.name,planet,choose(1,2,3));
 	        }
 	    }
-	    else if (isquest=0){
+	    else if (isquest=0){ // TODO add more variation, with planets, features, possibly marine equipment
 	        txt1=$"Your marines move across {star.name} {scr_roman(planet)}, searching for high profile targets. Once found, they are dragged outside from their lairs. Their execution would soon follow.";
     
 	        if (star.p_large[planet]=0) then max_kill=action_score*30;// Population if normal
@@ -219,7 +219,7 @@ function scr_purge_world(star, planet, action_type, action_score) {
 	    // Ambushers go!
 	    if (ambush=true) then chance=round(chance/2);
     
-	    var txt,spec1,spec2;spec1=0;spec2=0;
+	    var txt,spec1,spec2;spec1=0;spec2=0; // TODO consider making it a battle with Planetary governor's guards
 	    txt="Your Astartes descend upon the surface of "+string(star.name)+" "+string(scr_roman(planet))+" and plot the movements and schedule of the governor.  ";    
 	    txt+="Once the time is right their target is ambushed "+choose("in their home","in the streets","while driving","taking a piss")+" and tranquilized.  ";
     

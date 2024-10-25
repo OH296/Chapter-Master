@@ -3,7 +3,9 @@ function scr_bomb_world(star_system, planet_number, bombard_target_faction, bomb
 	var pop_before=0,pop_after=0,reduced_bombard_score=0,strength_reduction=0,txt2="",txt3="",txt4="",max_kill,overkill,roll,kill;
 	var score_before=star_system.p_population[planet_number];
 
-	var txt1="Your cruiser and larger ship";
+	// TODO - update descriptions below, once we get Surface to Orbit weaponry into the game
+
+	var txt1="Your cruiser and larger ship"; // TODO - add more variation, for different planets, perhaps different ships, CMs positioning, planetary features and other factors
 	if (ships_selected>1) then txt1+="s";
 	txt1+=" position themselves over the target in close orbit, and unleash";
 	if (ships_selected=1) then txt1+="s";
