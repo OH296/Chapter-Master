@@ -614,11 +614,13 @@ function scr_initialize_custom() {
 
 	if (obj_creation.fleet_type != 1) {
 		battle_barges = 1;
-		if (array_contains(obj_creation.adv, "Kings of Space")) battle_barges += 1;
+		if scr_has_adv ("Kings of Space") battle_barges += 1;
 		strike_cruisers = 6;
-		if (array_contains(obj_creation.adv, "Boarders")) strike_cruisers += 2;
+		if scr_has_adv("Boarders") then strike_cruisers += 2;
 		gladius = 7;
 		hunters = 3;
+		if scr_has_disadv("Obliterated") then battle_barges = 0; strike_cruisers = 1; gladius = 2; hunters = 0;
+		
 		// obj_controller.fleet_type="Fleet";
 	}
 	if (obj_creation.fleet_type = 1) {
@@ -627,6 +629,7 @@ function scr_initialize_custom() {
 		gladius = 7;
 		hunters = 3;
 		if (array_contains(obj_creation.adv, "Kings of Space")) battle_barges += 1;
+		if scr_has_disadv("Obliterated") then battle_barges = 0; strike_cruisers = 1; gladius = 2; hunters = 0;
 		// obj_controller.fleet_type="Homeworld";
 	}
 
@@ -865,9 +868,13 @@ function scr_initialize_custom() {
 		techmarines += 6;
 		tenth -= 6;
 	}
-	if scr_has_adv("Melee Enthusiasts") {
+	if scr_has_adv("Assault Doctrine") {
 		assault += 10;
 		devastator -= 10;
+	}
+	if scr_has_adv("Devastator Doctrine") {
+		assault -= 10;
+		devastator += 10;
 	}
 	if scr_has_adv("Siege Masters") {
 		siege = 1;
@@ -932,6 +939,28 @@ function scr_initialize_custom() {
 		ninth -= 10;
 		tenth -= 10;
 	}
+	if scr_has_disadv("Obliterated") {
+		techmarines = 0;
+		epistolary = 0;
+		codiciery = 0;
+		lexicanum = 0;
+		apothecary = 0;
+		chaplains = 0;
+		terminator = 0;
+		veteran = 0;
+		second = 0;
+		third = 0;
+		fourth = 0;
+		fifth = 0;
+		sixth = 0;
+		seventh = 0;
+		eighth = 0;
+		ninth = 0;
+		tenth = 10; 
+		assault = 0;
+		siege = 0;
+		devastator = 0;
+	}
 
 	if  scr_has_adv ("Tech-Heresy") {
 		techmarines -= 4;
@@ -960,6 +989,7 @@ function scr_initialize_custom() {
 		var bonus_marines = 0,
 			o = 0;
 		if (obj_creation.strength > 5) then bonus_marines = (obj_creation.strength - 5) * 50;
+		if scr_has_disadv("Obliterated") then bonus_marines = (obj_creation.strength - 5) * 5;
 		i = 0
 		while (bonus_marines >= 5) {
 			switch (i % 10) {
@@ -2903,7 +2933,7 @@ function scr_initialize_custom() {
 	chapter_option = 0;
 	repeat(4) {
 		o += 1;
-		if (obj_creation.adv[o] = "Brothers, All") then chapter_option = 1;
+		if (obj_creation.adv[o] = "Retinue of Renown") then chapter_option = 1;
 	}
 	if (chapter_option = 1) then _honour_guard_count += 10;
 	if (progenitor = 0) and (obj_creation.custom = 0) then _honour_guard_count += 6;
@@ -2921,7 +2951,7 @@ function scr_initialize_custom() {
 		role[company][k] = roles.honour_guard;
 		name[company][k] = global.name_generator.generate_space_marine_name();
 		spawn_unit.marine_assembling();
-		spawn_unit.add_trait(choose("guardian", "champion", "observant", "perfectionist"));
+		spawn_unit.add_trait(choose("guardian", "champion", "observant", "perfectionist","natural_leader"));
 		gear[company][k] = gear[defaults_slot, Role.HONOUR_GUARD];
 		mobi[company][k] = mobi[defaults_slot,  Role.HONOUR_GUARD];
 		// wep1 power sword // wep2 storm bolter default
@@ -3496,6 +3526,7 @@ function scr_initialize_custom() {
 				rhinoy = 8;
 				whirly = 0;
 				speedy = 0;
+				if scr_has_disadv("Obliterated") then rhinoy = 0;
 
 				// if (obj_creation.custom=0) then temp1-=5;
 
@@ -4105,11 +4136,22 @@ function scr_initialize_custom() {
 		scr_add_item("Close Combat Weapon", 4);
 	}
 
-	if(scr_has_adv("Crafters") || scr_has_adv("Melee Enthusiasts")){
-		scr_add_item("MK3 Iron Armour", round(random_range(2, 12)));
+	// man_size+=80;// bikes
+
+	// if (string_count("Crafter",strin)>0) and (string_count("Enthusi",strin)>0) then equipment_number[1]=20;
+	// if (string_count("Crafter",strin)>0) and (string_count("Enthusi",strin)=0) then equipment_number[2]=20;
+
+	if (string_count("Crafter", strin) > 0) and(string_count("Enthusi", strin) > 0) {
+		eqi += 1;
+		equipment[eqi] = "MK3 Iron Armour";
+		equipment_number[eqi] = round(random_range(2, 12));
+		equipment_type[eqi] = "armour";
 	}
-	if(scr_has_adv("Crafters") && !scr_has_adv("Melee Enthusiasts")){	
-		scr_add_item("MK4 Maximus", round(random_range(3, 18)));
+	if (string_count("Crafter", strin) > 0) and(string_count("Enthusi", strin) = 0) {
+		eqi += 1;
+		equipment[eqi] = "MK4 Maximus";
+		equipment_number[eqi] = round(random_range(3, 18));
+		equipment_type[eqi] = "armour";
 	}
 
 
