@@ -230,13 +230,16 @@ function set_shader_array(shader_array){
 }
 function scr_draw_unit_image(_background=false){
     function draw_unit_hands(x_surface_offset, y_surface_offset, armour_type, specialist_colours, hide_bionics, right_left){
-        if (armour_type == ArmourType.Normal || armour_type == ArmourType.Terminator){
+        if (armour_type != ArmourType.None){
             var offset_x = x_surface_offset;
             var offset_y = y_surface_offset;
             switch(armour_type){
                 case ArmourType.Terminator:
                     var _hand_spr = spr_terminator_hands;
                     break;
+                case ArmourType.Scout:
+                    var _hand_spr = spr_pa_hands;
+                    offset_y += 11;
                 default:
                 case ArmourType.Normal:
                     var _hand_spr = spr_pa_hands;
@@ -244,10 +247,9 @@ function scr_draw_unit_image(_background=false){
             }
             if (hand_variant[right_left] > 0){
                 var _spr_index = (hand_variant[right_left] - 1) * 2;
-                var _spr_w = sprite_get_width(_hand_spr) - sprite_get_xoffset(_hand_spr) * 2;
                 if (right_left == 2) {
                     _spr_index += (specialist_colours >= 2) ? 1 : 0;
-                    draw_sprite_ext(_hand_spr, _spr_index, offset_x + _spr_w, offset_y, -1, 1, 0, c_white, 1);
+                    draw_sprite_flipped(_hand_spr, _spr_index, offset_x, offset_y);
                 } else {
                     draw_sprite(_hand_spr, _spr_index, offset_x, offset_y);
                 }
@@ -256,11 +258,10 @@ function scr_draw_unit_image(_background=false){
             if (hand_variant[right_left] == 1){
                 if (armour_type == ArmourType.Normal && !hide_bionics && struct_exists(body[$ (right_left == 1 ? "right_arm" : "left_arm")], "bionic")) {
                     var bionic_hand = body[$ (right_left == 1 ? "right_arm" : "left_arm")][$ "bionic"];
-                    var _spr_w = sprite_get_width(spr_bionics_hand) - sprite_get_xoffset(spr_bionics_hand) * 2;
                     var bionic_spr_index = bionic_hand.variant * 2;
                     if (right_left == 2) {
                         bionic_spr_index += (specialist_colours >= 2) ? 1 : 0;
-                        draw_sprite_ext(spr_bionics_hand, bionic_spr_index, offset_x + _spr_w, offset_y, -1, 1, 0, c_white, 1);
+                        draw_sprite_flipped(spr_bionics_hand, bionic_spr_index, offset_x, offset_y);
                     } else {
                         draw_sprite(spr_bionics_hand, bionic_spr_index, offset_x, offset_y);
                     }
@@ -293,32 +294,27 @@ function scr_draw_unit_image(_background=false){
                 var bionic_on_body = get_body_data("bionic",right_left == 1 ? "right_arm" : "left_arm");
                 if (arm_variant[right_left] == 1 && armour_type == ArmourType.Normal && !hide_bionics && bionic_on_body){
                     var bionic_arm = bionic_on_body;
-                    var _spr_w = sprite_get_width(spr_bionics_arm) - sprite_get_xoffset(spr_bionics_arm) * 2;
                     var bionic_spr_index = bionic_arm.variant * 2;
                     if (right_left == 2) {
                         bionic_spr_index += (specialist_colours >= 2) ? 1 : 0;
-                        draw_sprite_ext(spr_bionics_arm, bionic_spr_index, offset_x + _spr_w, offset_y, -1, 1, 0, c_white, 1);
+                        draw_sprite_flipped(spr_bionics_arm, bionic_spr_index, offset_x, offset_y);
                     } else {
                         draw_sprite(spr_bionics_arm, bionic_spr_index, offset_x, offset_y);
                     }
-                } else if (arm_variant[right_left] > 0){
-                    if (right_left==1 && (struct_exists(complex_set, "right_arm"))){
-
+                } else if (arm_variant[right_left] > 0) {
+                    if (right_left==1) && (struct_exists(complex_set, "right_arm")) && (arm_variant[right_left] == 1){
                         setup_complex_livery_shader(role());
                         draw_sprite(complex_set.right_arm,0,x_surface_offset,y_surface_offset);
                         shader_set(sReplaceColor);
-
-                    } else if (right_left==1 && (struct_exists(complex_set, "left_arm"))){
-
+                    } else if (right_left==2) && (struct_exists(complex_set, "left_arm")) && (arm_variant[right_left] == 1){
                         setup_complex_livery_shader(role());
                         draw_sprite(complex_set.left_arm,0,x_surface_offset,y_surface_offset);
                         shader_set(sReplaceColor);                      
                     } else {
                         var _spr_index = (arm_variant[right_left] - 1) * 2;
-                        var _spr_w = sprite_get_width(_arm_spr) - sprite_get_xoffset(_arm_spr) * 2;
-                        if (right_left == 2) {
+                            if (right_left == 2) {
                             _spr_index += (specialist_colours >= 2) ? 1 : 0;
-                            draw_sprite_ext(_arm_spr, _spr_index, offset_x + _spr_w, offset_y, -1, 1, 0, c_white, 1);
+                            draw_sprite_flipped(_arm_spr, _spr_index, offset_x, offset_y);
                         } else {
                             draw_sprite(_arm_spr, _spr_index, offset_x, offset_y);
                         }
@@ -340,22 +336,17 @@ function scr_draw_unit_image(_background=false){
     var progenitor_visuals = obj_controller.progenitor_visuals;
     var draw_sequence = [];
     if (name_role()!="") and (base_group=="astartes"){
-        ui_weapon[1]=spr_weapon_blank;
-        ui_weapon[2]=spr_weapon_blank;
-        arm_variant[1]=1;
-        arm_variant[2]=1;
-        hand_variant[1]=1;
-        hand_variant[2]=1;
-        hand_on_top[1]=false;
-        hand_on_top[2]=false;
-        ui_spec[1]=false;
-        ui_spec[2]=false;
-        ui_twoh[1]=false;
-        ui_twoh[2]=false;
-        ui_xmod[1]=0;
-        ui_xmod[2]=0;
-        ui_ymod[1]=0;
-        ui_ymod[2]=0;
+        for (var i = 1; i <= 2; i++) {
+            ui_weapon[i]=spr_weapon_blank;
+            arm_variant[i]=1;
+            hand_variant[i]=1;
+            hand_on_top[i]=false;
+            ui_spec[i]=false;
+            ui_twoh[i]=false;
+            ui_xmod[i]=0;
+            ui_ymod[i]=0;
+            new_weapon_draw[i]=false;
+        }
         var draw_backpack = true;
         var ui_force_both=false;
         var pauldron_trim=false;
@@ -950,8 +941,9 @@ function scr_draw_unit_image(_background=false){
                     specific_armour_sprite = spr_artificer_colors;
                     if (array_contains(["Champion",obj_ini.role[100][2],obj_ini.role[100][5]], unit_role)){
                         if (unit_chapter=="Ultramarines"){
-                            armour_draw=[spr_ultra_honor_guard2,body.torso.armour_choice];
+                            armour_draw=[spr_ultra_honor_guard2, body.torso.armour_choice];
                             armour_bypass=true;
+                            // Draw cape;
                             draw_sprite(spr_ultra_honor_guard2,2,x_surface_offset,y_surface_offset);
                         } else {
                             armour_draw=[spr_generic_honor_guard,body.torso.armour_choice];
@@ -965,6 +957,7 @@ function scr_draw_unit_image(_background=false){
                             robes_bypass = true;
                             robes_hood_bypass = true;
                             armour_draw=[spr_dante,0];
+                            // Draw wings;
                             draw_sprite(spr_dante,1,x_surface_offset,y_surface_offset);
                         } else if (unit_role==obj_ini.role[100][2]){
                             armour_bypass=true;
@@ -1039,6 +1032,7 @@ function scr_draw_unit_image(_background=false){
                     }
                     draw_sprite(spr_gear_halo,halo_type+halo_color,x_surface_offset,y_surface_offset+halo_offset_y);
                 }
+
                  // Draw the backpack
                 if (draw_backpack){
                     var _backpack_sprite = "";
@@ -1083,19 +1077,14 @@ function scr_draw_unit_image(_background=false){
                             _backpack_index = 1;
                         }
                     }
-                    if (complex_livery){
-                        if (struct_exists(complex_set, "backpack")){
-                            var choice = get_body_data("backpack_variation","torso")%sprite_get_number(complex_set.backpack);
-                            setup_complex_livery_shader(role());
-                            draw_sprite(complex_set.backpack,choice,x_surface_offset,y_surface_offset);
-                            shader_set(sReplaceColor);
-                        }else {
-                            draw_sprite(_backpack_sprite, _backpack_index, x_surface_offset, y_surface_offset);
-                        }
+                    if (complex_livery) && (struct_exists(complex_set, "backpack")){
+                        var choice = get_body_data("backpack_variation","torso")%sprite_get_number(complex_set.backpack);
+                        setup_complex_livery_shader(role());
+                        draw_sprite(complex_set.backpack,choice,x_surface_offset,y_surface_offset);
+                        shader_set(sReplaceColor);
                     } else {
                         draw_sprite(_backpack_sprite, _backpack_index, x_surface_offset, y_surface_offset);
                     }
-
                 }else{
                     if (back_equipment==BackType.Jump){
                         var color_variant = min(specialist_colours, 2);
@@ -1104,7 +1093,8 @@ function scr_draw_unit_image(_background=false){
                         var color_variant = min(specialist_colours, 2);
                         draw_sprite(spr_pack_devastator,color_variant,x_surface_offset,y_surface_offset);
                     }
-                } 
+                }
+
                 // Draw arms
                 draw_unit_arms(x_surface_offset, y_surface_offset, armour_type, specialist_colours, hide_bionics, complex_set);
 
@@ -1276,12 +1266,12 @@ function scr_draw_unit_image(_background=false){
                     if (unit_armour == "Terminator Armour" || unit_armour == "Tartaros"){
                         lens_offset = -6;
                     }
-                    if (irandom(1) == 0) {
-                        draw_sprite_ext(spr_gear_techa, 0, x_surface_offset + sprite_get_width(spr_gear_techa), y_surface_offset + lens_offset, -1, 1, 0, c_white, 1);
+                    if (body.head.variation > 5) {
+                        draw_sprite_flipped(spr_gear_techa, 0, x_surface_offset, y_surface_offset + lens_offset);
                     } else {
                         draw_sprite(spr_gear_techa,0,x_surface_offset,y_surface_offset + lens_offset);
                     }
-                    if (irandom(4) == 0 && !array_contains(traits, "tinkerer")) {
+                    if (body.torso.variation > 5) {
                         if (unit_armour == "Terminator Armour"){
                             draw_sprite(spr_gear_techb,1,x_surface_offset,y_surface_offset);
                         } else {
@@ -1526,11 +1516,6 @@ function scr_draw_unit_image(_background=false){
                 }              
             }
 
-            if (armour_type == ArmourType.Scout){
-                ui_ymod[1]+=7;
-                ui_ymod[2]+=7;
-            }
-
             var shield_offset_x = 0;
             var shield_offset_y = 0;
             if (unit_armour=="Terminator Armour"){
@@ -1553,26 +1538,38 @@ function scr_draw_unit_image(_background=false){
             }
 
             // // Draw weapons
-            if (ui_weapon[1]!=0) and (sprite_exists(ui_weapon[1])){
-                if (ui_twoh[1]==false) and (ui_twoh[2]==false){
-                    draw_sprite(ui_weapon[1],0,x_surface_offset+ui_xmod[1],y_surface_offset+ui_ymod[1]);                  
-                }
-                if (ui_twoh[1]==true){
-                    if (specialist_colours<=1) then draw_sprite(ui_weapon[1],0,x_surface_offset+ui_xmod[1],y_surface_offset+ui_ymod[1]);
-                    if (specialist_colours>=2) then draw_sprite(ui_weapon[1],3,x_surface_offset+ui_xmod[1],y_surface_offset+ui_ymod[1]);
-                    if (ui_force_both==true){
+            if (!new_weapon_draw[1]) {
+                if (ui_weapon[1]!=0) and (sprite_exists(ui_weapon[1])){
+                    if (ui_twoh[1]==false) and (ui_twoh[2]==false){
+                        draw_sprite(ui_weapon[1],0,x_surface_offset+ui_xmod[1],y_surface_offset+ui_ymod[1]);                  
+                    }
+                    if (ui_twoh[1]==true){
                         if (specialist_colours<=1) then draw_sprite(ui_weapon[1],0,x_surface_offset+ui_xmod[1],y_surface_offset+ui_ymod[1]);
-                        if (specialist_colours>=2) then draw_sprite(ui_weapon[1],1,x_surface_offset+ui_xmod[1],y_surface_offset+ui_ymod[1]);
+                        if (specialist_colours>=2) then draw_sprite(ui_weapon[1],3,x_surface_offset+ui_xmod[1],y_surface_offset+ui_ymod[1]);
+                        if (ui_force_both==true){
+                            if (specialist_colours<=1) then draw_sprite(ui_weapon[1],0,x_surface_offset+ui_xmod[1],y_surface_offset+ui_ymod[1]);
+                            if (specialist_colours>=2) then draw_sprite(ui_weapon[1],1,x_surface_offset+ui_xmod[1],y_surface_offset+ui_ymod[1]);
+                        }
                     }
                 }
-            }
-            if (ui_weapon[2]!=0) and (sprite_exists(ui_weapon[2])) and ((ui_twoh[1]==false || ui_force_both==true)){
-                if (ui_spec[2]==false){
-                    draw_sprite(ui_weapon[2],1,x_surface_offset+ui_xmod[2],y_surface_offset+ui_ymod[2]);
+            } else {
+                if (ui_weapon[1]!=0) and (sprite_exists(ui_weapon[1])){
+                        draw_sprite(ui_weapon[1],0,x_surface_offset+ui_xmod[1],y_surface_offset+ui_ymod[1]);                  
                 }
-                if (ui_spec[2]==true){
-                    if (specialist_colours<=1) then draw_sprite(ui_weapon[2],2,x_surface_offset+ui_xmod[2],y_surface_offset+ui_ymod[2]);
-                    if (specialist_colours>=2) then draw_sprite(ui_weapon[2],3,x_surface_offset+ui_xmod[2],y_surface_offset+ui_ymod[2]);                    
+            }
+            if (!new_weapon_draw[2]) {
+                if (ui_weapon[2]!=0) and (sprite_exists(ui_weapon[2])) and ((ui_twoh[1]==false || ui_force_both==true)){
+                    if (ui_spec[2]==false){
+                        draw_sprite(ui_weapon[2],1,x_surface_offset+ui_xmod[2],y_surface_offset+ui_ymod[2]);
+                    }
+                    if (ui_spec[2]==true){
+                        if (specialist_colours<=1) then draw_sprite(ui_weapon[2],2,x_surface_offset+ui_xmod[2],y_surface_offset+ui_ymod[2]);
+                        if (specialist_colours>=2) then draw_sprite(ui_weapon[2],3,x_surface_offset+ui_xmod[2],y_surface_offset+ui_ymod[2]);                    
+                    }
+                }
+            } else {
+                if (ui_weapon[2]!=0) and (sprite_exists(ui_weapon[2])){
+                        draw_sprite_flipped(ui_weapon[2],0,x_surface_offset+ui_xmod[2],y_surface_offset+ui_ymod[2]);                  
                 }
             }
 

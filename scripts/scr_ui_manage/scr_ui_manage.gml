@@ -307,7 +307,7 @@ function scr_ui_manage() {
         	var armour = selected_unit.armour();
 	        if (armour!=""){
 				var_text= string_hash_to_newline(selected_unit.equipments_qual_string("armour", true));
-	        	tooltip_text += cn.temp[103];
+                tooltip_text = cn.temp[103];
 	        	x1 = x_left;
 	        	y1 = yy+216;
 	        	x2 = x1+string_width_ext(var_text, -1,187);
