@@ -40,7 +40,7 @@ function scr_add_man(man_role, target_company, spawn_exp, spawn_name, corruption
 			switch (man_role) {
 			case "Skitarii":
 				obj_ini.wep1[target_company][good] = "Hellgun";
-				obj_ini.wep2[target_company][good] = ""; // Consider giving the poor fellow a "Combat Knife" or other melee weapon
+				obj_ini.wep2[target_company][good] = "Combat Knife";
 				obj_ini.armour[target_company][good] = "Skitarii Armour";
 				obj_ini.experience[target_company][good] = 10;
 				obj_ini.race[target_company][good] = 3;
@@ -67,17 +67,17 @@ function scr_add_man(man_role, target_company, spawn_exp, spawn_name, corruption
 				break;
 		// Faction 5 - Sisters of Battle
 			case "Sister of Battle":
-				obj_ini.wep1[target_company][good] = "Bolter"; // Might want to create a "Light Bolter" variant for this one
+				obj_ini.wep1[target_company][good] = "Light Bolter";
 				obj_ini.wep2[target_company][good] = "Sarissa";
-				obj_ini.armour[target_company][good] = "Power Armour"; // Same here, Sororitas are glorified guard
+				obj_ini.armour[target_company][good] = "Light Power Armour";
 				obj_ini.experience[target_company][good] = 60;
 				obj_ini.race[target_company][good] = 5;
 				unit = new TTRPG_stats("adeptus_sororitas", target_company, good, "sister_of_battle");
 				break;
 			case "Sister Hospitaler":
-				obj_ini.wep1[target_company][good] = "Bolter"; // Same here
+				obj_ini.wep1[target_company][good] = "Light Bolter";
 				obj_ini.wep2[target_company][good] = "Sarissa";
-				obj_ini.armour[target_company][good] = "Power Armour"; // Same here
+				obj_ini.armour[target_company][good] = "Light Power Armour";
 				obj_ini.experience[target_company][good] = 100;
 				obj_ini.gear[target_company][good] = "Sororitas Medkit";
 				obj_ini.race[target_company][good] = 5;
