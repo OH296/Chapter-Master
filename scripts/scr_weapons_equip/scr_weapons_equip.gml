@@ -344,6 +344,8 @@ function scr_weapons_equip() {
 	        i+=1;item_name[i]="(None)";
 	        i+=1;item_name[i]="Scout Armour";
 	        i+=1;item_name[i]="Power Armour";
+			i+=1;item_name[i]="MK1 Thunder Armour";
+			i+=1;item_name[i]="MK2 Crusade Armour";
 	        i+=1;item_name[i]="MK3 Iron Armour";
 	        i+=1;item_name[i]="MK4 Maximus";
 	        i+=1;item_name[i]="MK5 Heresy";
@@ -352,7 +354,9 @@ function scr_weapons_equip() {
 	        i+=1;item_name[i]="MK8 Errant";
 	        i+=1;item_name[i]="Artificer Armour";
 	        i+=1;item_name[i]="Terminator Armour";
+	        i+=1;item_name[i]="Heavy Power Armour";
 	        i+=1;item_name[i]="Tartaros";
+	        i+=1;item_name[i]="Cataphractii Pattern Terminator";
 	    }
 
 	    else i+=1;

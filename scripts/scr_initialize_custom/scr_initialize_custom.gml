@@ -511,7 +511,7 @@ function scr_initialize_custom() {
 	}
 
 	if (progenitor = 10) { // Pretty sure that's random?
-		var legions = ["Dark Angels",
+		var legions = ["Dark Angels", // TODO - add more options and make them selectable
 			"Emperor's Children",
 			"Iron Warriors",
 			"White Scars",

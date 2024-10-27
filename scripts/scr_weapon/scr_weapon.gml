@@ -1684,6 +1684,143 @@ global.weapons = {
 }
 global.gear = {
 	"armour": {
+	//	Dreadnought types
+		"Dreadnought": {
+			"abbreviation": "Drdnght",
+			"armour_value": {
+				"standard": 50,
+				"master_crafted": 55,
+				"artifact": 60
+			},
+			"ranged_mod": {
+				"standard": 0,
+				"master_crafted": 5, // Augmented
+				"artifact": 10 // Augmented
+			},
+			"melee_mod": {
+				"standard": 0,
+				"master_crafted": 5, // Augmented
+				"artifact": 10 // Augmented
+			},
+			"melee_hands": 8,
+			"ranged_hands": 8,
+			"description": "A massive war-machine that can be piloted by an honored Astarte, who otherwise would have fallen in combat. Some of the Astartes consider this a fate worse than death",
+			"tags": ["dreadnought"],
+		},
+	//	Terminator armours
+		// a low budget and low-tech variant of terminator armour, TODO - add images, and consider the options for consistent naming
+		"Heavy Power Armour": {
+			"abbreviation": "HPArm",
+			"armour_value": {
+				"standard": 35,
+				"master_crafted": 37,
+				"artifact": 40
+			},
+			"ranged_mod": {
+				"standard": -20,
+				"master_crafted": -5,
+				"artifact": 5
+			},
+			"melee_mod": {
+				"standard": -20,
+				"master_crafted": -5,
+				"artifact": 5
+			},
+			"melee_hands": 1,
+			"ranged_hands":1,
+			"description": "A simple variant of personal heavy power armour. It generally is a modified heavy-duty industrial armour, hence is typically the weakest.",
+			"tags":["terminator"],
+		},
+		"Terminator Armour": {
+			"abbreviation": "Indmts",
+			"armour_value": {
+				"standard": 42,
+				"master_crafted": 46,
+				"artifact": 50
+			},
+			"ranged_mod": {
+				"standard": -10,
+				"master_crafted": -5,
+				"artifact": 0
+			},
+			"melee_mod": {
+				"standard": 20,
+				"master_crafted": 25,
+				"artifact": 30
+			},
+			"melee_hands": 2,
+			"ranged_hands": 2,
+			"description": "Terminator Armour is the strongest and most powerful armour designed by humanity, available only to the veterans of the Adeptus Astartes. The Indomitus Pattern is the most widespread and versatile pattern as of M41.",
+			"tags": ["terminator"],
+			"req_exp": 100,
+		},
+		"Tartaros": {
+			"abbreviation": "Tartrs",
+			"armour_value": {
+				"standard": 42,
+				"master_crafted": 46,
+				"artifact": 50
+			},
+			"ranged_mod": {
+				"standard": 0,
+				"master_crafted": 5, // Augmented
+				"artifact": 10 // Augmented
+			},
+			"melee_mod": {
+				"standard": 20,
+				"master_crafted": 25,
+				"artifact": 30
+			},
+			"melee_hands": 2,
+			"ranged_hands": 2,
+			"description": "This pattern is possibly considered the most advanced form of Terminator Armour, providing greater mobility for the wearer compared to the Indomitus with no loss in durability. In the M41 considered to be incredibly rare with wars being fought to secure more suits.",
+			"tags": ["terminator"],
+			"req_exp": 100,
+		},
+		"Cataphractii Pattern Terminator": { // TODO - make naming consistent with other terminator armours
+			"abbreviation": "Catphr",
+			"armour_value": {
+				"standard": 42,
+				"master_crafted": 46,
+				"artifact": 50
+			},
+			"ranged_mod": {
+				"standard": 0,
+				"master_crafted": 5, // Augmented
+				"artifact": 10 // Augmented
+			},
+			"melee_mod": {
+				"standard": 20,
+				"master_crafted": 25,
+				"artifact": 30,
+			},
+			"melee_hands": 2,
+			"ranged_hands": 2,
+			"description": "Among the first issued to the Space Marine Legions. Having additional plating and shield generators installed within the shoulder pads resulted in severe straining of the suit's exoskeleton and reduced the wearer's maneuverability, leading to its decline among some legions.",
+			"tags": ["terminator"],
+			"req_exp": 100,
+		},
+	//	Scout-tier armours
+		"Scout Armour": {
+			"abbreviation": "SctArm",
+			"armour_value": {
+				"standard": 11,
+				"master_crafted": 12,
+				"artifact": 14
+			},
+			"ranged_mod": {
+				"standard": 15,
+				"master_crafted": 20, // Augmented
+				"artifact": 25 // Augmented
+			},
+			"melee_mod": {
+				"standard": 0,
+				"master_crafted": 5, // Augmented
+				"artifact": 10 // Augmented
+			},
+			"description": "A non-powered suit made up of carapace armour and ballistic nylon. Includes biohazard shielding, nutrient feed, and camouflage."
+		},
+	//	Power armours
 		"Power Armour": {
 			"abbreviation": "PwrArm",
 			"armour_value": {
@@ -1724,12 +1861,12 @@ global.gear = {
 			"description": "A custom suit of power armored created by master artificiers and decorated without compare, this ancient Power Armour is beyond priceless. This suit's history is ancient and its users many.",
 			"tags": ["power_armour"],
 		},
-		"Terminator Armour": {
-			"abbreviation": "Indmts",
+		"MK1 Thunder Armour": {
+			"abbreviation": "MK1",
 			"armour_value": {
-				"standard": 42,
-				"master_crafted": 46,
-				"artifact": 50
+				"standard": 13,
+				"master_crafted": 15,
+				"artifact": 17
 			},
 			"ranged_mod": {
 				"standard": -10,
@@ -1737,121 +1874,34 @@ global.gear = {
 				"artifact": 0
 			},
 			"melee_mod": {
+				"standard": -10,
+				"master_crafted": -5, // Augmented
+				"artifact": 0 // Augmented
+			},
+			"description": "The very first variant of power armour. Lacking life support and other later improvements, this armour is mostly suited to ceremonial duty nowadays.",
+			"tags":["power_armour"],
+		},
+		"MK2 Crusade Armour": {
+			"abbreviation": "MK2",
+			"armour_value": {
 				"standard": 20,
-				"master_crafted": 25,
-				"artifact": 30
-			},
-			"melee_hands": 2,
-			"ranged_hands": 2,
-			"description": "Terminator Armour is the strongest and most powerful armour designed by humanity, available only to the veterans of the Adeptus Astartes. The Indomitus Pattern is the most widespread and versatile pattern as of M41.",
-			"tags": ["terminator"],
-			"req_exp": 100,
-		},
-		"Dreadnought": {
-			"abbreviation": "Drdnght",
-			"armour_value": {
-				"standard": 50,
-				"master_crafted": 55,
-				"artifact": 60
+				"master_crafted": 23,
+				"artifact": 25
 			},
 			"ranged_mod": {
 				"standard": 0,
-				"master_crafted": 5, // Augmented
-				"artifact": 10 // Augmented
+				"master_crafted": 5,
+				"artifact": 10
 			},
 			"melee_mod": {
 				"standard": 0,
 				"master_crafted": 5, // Augmented
 				"artifact": 10 // Augmented
 			},
-			"melee_hands": 8,
-			"ranged_hands": 8,
-			"description": "A massive war-machine that can be piloted by an honored Astarte, who otherwise would have fallen in combat. Some of the Astartes consider this a fate worse than death",
-			"tags": ["dreadnought"],
-		},
-		"Tartaros": {
-			"abbreviation": "Tartrs",
-			"armour_value": {
-				"standard": 42,
-				"master_crafted": 46,
-				"artifact": 50
-			},
-			"ranged_mod": {
-				"standard": 0,
-				"master_crafted": 5, // Augmented
-				"artifact": 10 // Augmented
-			},
-			"melee_mod": {
-				"standard": 20,
-				"master_crafted": 25,
-				"artifact": 30
-			},
-			"melee_hands": 2,
-			"ranged_hands": 2,
-			"description": "This pattern is possibly considered the most advanced form of Terminator Armour, providing greater mobility for the wearer compared to the Indomitus with no loss in durability. In the M41 considered to be incredibly rare with wars being fought to secure more suits.",
-			"tags": ["terminator"],
-			"req_exp": 100,
-		},
-		"Cataphractii Pattern Terminator": {
-			"abbreviation": "Catphr",
-			"armour_value": {
-				"standard": 42,
-				"master_crafted": 46,
-				"artifact": 50
-			},
-			"ranged_mod": {
-				"standard": 0,
-				"master_crafted": 5, // Augmented
-				"artifact": 10 // Augmented
-			},
-			"melee_mod": {
-				"standard": 20,
-				"master_crafted": 25,
-				"artifact": 30,
-			},
-			"melee_hands": 2,
-			"ranged_hands": 2,
-			"description": "Among the first issued to the Space Marine Legions. Having additional plating and shield generators installed within the shoulder pads resulted in severe straining of the suit's exoskeleton and reduced the wearer's maneuverability, leading to its decline among some legions.",
-			"tags": ["terminator"],
-			"req_exp": 100,
-		},
-		"Ork Armour": {
-			"abbreviation": "OrkArm",
-			"armour_value": {
-				"standard": 7,
-				"master_crafted": 8,
-				"artifact": 9
-			},
-			"ranged_mod": {
-				"standard": 0,
-				"master_crafted": 5, // Augmented
-				"artifact": 10 // Augmented
-			},
-			"melee_mod": {
-				"standard": 0,
-				"master_crafted": 5, // Augmented
-				"artifact": 10 // Augmented
-			},
-			"description": "Mismatched basic armour used by ork forces"
-		},
-		"Scout Armour": {
-			"abbreviation": "SctArm",
-			"armour_value": {
-				"standard": 11,
-				"master_crafted": 12,
-				"artifact": 14
-			},
-			"ranged_mod": {
-				"standard": 15,
-				"master_crafted": 20, // Augmented
-				"artifact": 25 // Augmented
-			},
-			"melee_mod": {
-				"standard": 0,
-				"master_crafted": 5, // Augmented
-				"artifact": 10 // Augmented
-			},
-			"description": "A non-powered suit made up of carapace armour and ballistic nylon. Includes biohazard shielding, nutrient feed, and camouflage."
+			// "melee_hands": 0.05,
+			// "ranged_hands": 0.05,
+			"description": "Armour made with Great Crusade in mind. Often believed to be the most efficient power armour design.",
+			"tags":["power_armour"],
 		},
 		"MK3 Iron Armour": {
 			"abbreviation": "MK3",
@@ -1993,6 +2043,7 @@ global.gear = {
 			"description": "The MKX Tacticus is the most advanced pattern of power armour available to the Adeptus Astartes, featuring advanced armor composites and systems. It was developed by Belisarius Cawl during the development of the Primaris Astartes program.",
 			"tags": ["power_armour"],
 		},
+	//	Hireling armours
 		"Skitarii Armour": {
 			"abbreviation": "SkitArm",
 			"description": "Skitarri Armour is something of a misnomer as most Skitarii are in fact bonded more or less permenantly to their advanced mars armour",
@@ -2011,6 +2062,53 @@ global.gear = {
 				"artifact": 16 // Augmented
 			},
 		},
+		"Light Power Armour":{
+			"abbreviation": "LPArm",
+			"description": "A type of power armour that can be used by regular humans.",
+			"armour_value": { // TODO - needs rebalancing, also in scr_weapon_en and other places
+				"standard": 20,
+				"master_crafted": 22,
+				"artifact": 25
+			},
+		},
+		"Ranger Armour":{
+			"abbreviation": "RngrArm",
+			"description": "This armour is used by eldar rangers.",
+			"armour_value": {
+				"standard": 25,
+				"master_crafted": 27,
+				"artifact": 30
+			},
+		},
+		"Ork Armour": {
+			"abbreviation": "OrkArm",
+			"armour_value": {
+				"standard": 7,
+				"master_crafted": 8,
+				"artifact": 9
+			},
+			"ranged_mod": {
+				"standard": 0,
+				"master_crafted": 5, // Augmented
+				"artifact": 10 // Augmented
+			},
+			"melee_mod": {
+				"standard": 0,
+				"master_crafted": 5, // Augmented
+				"artifact": 10 // Augmented
+			},
+			"description": "Mismatched basic armour used by ork forces"
+		},
+		"Fire Warrior Armour": {
+			"abbreviation": "FWarArm",
+			"description": "This armour is used by T'au fire warriors.",
+			"armour_value": { // TODO - needs rebalancing
+				"standard": 20,
+				"master_crafted": 22,
+				"artifact": 25
+			},
+		},
+	//	Vehicle armour
 		"Armoured Ceramite": {
 			"abbreviation": "ArmCrmt",
 			"description": "Supplemental ceramite armour packages provide protection far beyond stock configurations while also adding significant weight to the chassis.",
