@@ -97,7 +97,7 @@ function scr_librarium(){
                     break;
                 }
             }
-            draw_text(xx + 622, yy + 440, string_hash_to_newline("[Artifact " + string(usey) + " of " + string(artifacts) + "]"));
+            draw_text(xx + 622, yy + 440, $"[Artifact {usey} of {artifacts}]");
 
             if scr_hit(xx + 326 + 16, yy + 426, xx + 887 + 16, yy + 818) {
                 var arrow_hovered = false;
