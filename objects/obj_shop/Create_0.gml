@@ -458,6 +458,22 @@ if (shop = "equipment") {
 }
 if (shop = "equipment2") {
     i = 0;
+	i += 1;
+    item[i] = "MK1 Thunder Armour";
+    item_stocked[i] = scr_item_count("MK1 Thunder Armour");
+    nobuy[i] = 1; // TODO - add images and capability to craft/purchase
+    if (rene = 1) {
+        nobuy[i] = 1;
+        item_cost[i] = 0;
+    }
+	i += 1;
+    item[i] = "MK2 Crusade Armour";
+    item_stocked[i] = scr_item_count("MK2 Crusade Armour");
+    nobuy[i] = 1; // TODO - add images and capability to craft/purchase
+    if (rene = 1) {
+        nobuy[i] = 1;
+        item_cost[i] = 0;
+    }
     i += 1;
     item[i] = "MK3 Iron Armour";
     item_stocked[i] = scr_item_count("MK3 Iron Armour");
@@ -584,10 +600,16 @@ if (shop = "equipment2") {
         item_cost[i] = 0;
     }
     i += 1;
+    item[i] = "Heavy Power Armour";
+    item_stocked[i] = scr_item_count("Heavy Power Armour");
+    // item_cost[i] = 275;
+    // forge_cost[i] = 2750;
+    nobuy[i] = 1;
+    i += 1;
     item[i] = "Terminator Armour";
     item_stocked[i] = scr_item_count("Terminator Armour");
     nobuy[i] = 1;
-    if (obj_controller.stc_wargear >= 6) {
+    if (obj_controller.stc_wargear >= 6) { // TODO - rework trade system
         if (research.armour[1].stealth[0] >0 && research.armour[1].armour[0] >1){
             forge_cost[i] = 4000;
         } else {
@@ -598,6 +620,10 @@ if (shop = "equipment2") {
     i += 1;
     item[i] = "Tartaros";
     item_stocked[i] = scr_item_count("Tartaros");
+    nobuy[i] = 1;
+    i += 1;
+    item[i] = "Cataphractii Pattern Terminator";
+    item_stocked[i] = scr_item_count("Cataphractii Pattern Terminator");
     nobuy[i] = 1;
 
     i += 1;

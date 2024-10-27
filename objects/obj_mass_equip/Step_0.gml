@@ -170,6 +170,8 @@ if (refresh=true) and (obj_controller.settings>0){
                     var yes=false;
                     if (req_armour="Power Armour"){
                         if (obj_ini.armour[co][i]="Power Armour") then yes=true;
+                        if (obj_ini.armour[co][i]="MK1 Thunder Armour") then yes=true;
+                        if (obj_ini.armour[co][i]="MK2 Crusade Armour") then yes=true;
                         if (obj_ini.armour[co][i]="MK3 Iron Armour") then yes=true;
                         if (obj_ini.armour[co][i]="MK4 Maximus") then yes=true;
                         if (obj_ini.armour[co][i]="MK6 Corvus") then yes=true;
@@ -178,8 +180,10 @@ if (refresh=true) and (obj_controller.settings>0){
                         if (obj_ini.armour[co][i]="Artificer Armour") then yes=true;
                     }
                     if (req_armour="Terminator Armour"){
+                        if (obj_ini.armour[co][i]="Heavy Power Armour") then yes=true;
                         if (obj_ini.armour[co][i]="Terminator Armour") then yes=true;
                         if (obj_ini.armour[co][i]="Tartaros") then yes=true;
+                        if (obj_ini.armour[co][i]="Cataphractii Pattern Terminator") then yes=true;
                     }
                     if (req_armour="Scout Armour") and (obj_ini.armour[co][i]="Scout Armour") then yes=true;
                     if (string_count("&",obj_ini.armour[co][i])>0) then yes=true;
@@ -332,11 +336,16 @@ if (refresh=true) and (obj_controller.settings>0){
         have_armour_num+=scr_item_count("Power Armour");
         have_armour_num+=scr_item_count("MK4 Maximus");
         have_armour_num+=scr_item_count("MK5 Heresy");
-        have_armour_num+=scr_item_count("MK3 Iron");
+        have_armour_num+=scr_item_count("MK3 Iron Armour");
+        have_armour_num+=scr_item_count("MK2 Crusade Armour");
+        have_armour_num+=scr_item_count("MK1 Thunder Armour");
+        have_armour_num+=scr_item_count("Artificer Armour");
     }
     if (req_armour="Terminator Armour"){
+        have_armour_num+=scr_item_count("Heavy Power Armour");
         have_armour_num+=scr_item_count("Terminator Armour");
         have_armour_num+=scr_item_count("Tartaros");
+        have_armour_num+=scr_item_count("Cataphractii Pattern Terminator");
     }
     if (req_armour="Scout Armour") then have_armour_num+=scr_item_count("Scout Armour");
     have_armour_num+=scr_item_count(req_armour);

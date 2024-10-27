@@ -227,18 +227,22 @@ function scr_civil_roster(_unit_location, _target_location, _is_planet) {
                 
 					// todo find out what more targ.dudes does, relevant to targ.men?
 	                if (deploying_unit.armour[co][v]="Scout Armour") then targ.dudes_ac[targ.men]=8;
+	                if (deploying_unit.armour[co][v]="MK1 Thunder Armour"){targ.dudes_ac[targ.men]=13;targ.dudes_attack[targ.men]-=0.1;targ.marine_ranged[targ.men]-=0.1;}
+	                if (deploying_unit.armour[co][v]="MK2 Crusade Armour") then targ.dudes_ac[targ.men]=20;
 	                if (deploying_unit.armour[co][v]="MK3 Iron Armour"){targ.dudes_ac[targ.men]=20;targ.dudes_ranged[targ.men]-=0.1;}
 	                if (deploying_unit.armour[co][v]="MK4 Maximus"){targ.dudes_ac[targ.men]=19;targ.dudes_ranged[targ.men]+=0.05;targ.dudes_attack[targ.men]+=0.05;}
-                  if (deploying_unit.armour[co][v]="MK5 Heresy"){targ.dudes_ac[targ.men]=17;targ.dudes_attack[targ.men]+=0.1;targ.marine_ranged[targ.men]-=0.05;}
+                    if (deploying_unit.armour[co][v]="MK5 Heresy"){targ.dudes_ac[targ.men]=17;targ.dudes_attack[targ.men]+=0.1;targ.marine_ranged[targ.men]-=0.05;}
 	                if (deploying_unit.armour[co][v]="MK6 Corvus"){targ.dudes_ac[targ.men]=18;targ.dudes_ranged[targ.men]+=0.1;}
 	                if (deploying_unit.armour[co][v]="MK7 Aquila") then targ.dudes_ac[targ.men]=18;
 	                if (deploying_unit.armour[co][v]="MK8 Errant") then targ.dudes_ac[targ.men]=19;
 	                if (deploying_unit.armour[co][v]="Power Armour") then targ.dudes_ac[targ.men]=19;
 	                if (deploying_unit.armour[co][v]="Artificer Armour"){targ.dudes_ac[targ.men]=35;targ.dudes_attack[targ.men]+=0.1;}
+	                if (deploying_unit.armour[co][v]="Heavy Power Armour"){targ.dudes_ac[targ.men]=35;targ.dudes_ranged[targ.men]-=0.2;targ.dudes_attack[targ.men]-=0.2;}
 	                if (deploying_unit.armour[co][v]="Terminator Armour"){targ.dudes_ac[targ.men]=40;targ.dudes_ranged[targ.men]-=0.1;targ.dudes_attack[targ.men]+=0.2;}
 	                if (deploying_unit.armour[co][v]="Tartaros"){targ.dudes_ac[targ.men]=44;targ.dudes_ranged[targ.men]-=0.05;targ.dudes_attack[targ.men]+=0.2;}
+	                if (deploying_unit.armour[co][v]="Cataphractii Pattern Terminator"){targ.dudes_ac[targ.men]=42;targ.dudes_ranged[targ.men]+=0.0;targ.dudes_attack[targ.men]+=0.2;}
 	                if (deploying_unit.armour[co][v]="Dreadnought") then targ.dudes_ac[targ.men]=40;
-	                if (deploying_unit.armour[co][v]="Ork Armour") then targ.dudes_ac[targ.men]=15;
+	                if (deploying_unit.armour[co][v]="Ork Armour") then targ.dudes_ac[targ.men]=15; // TODO - add skitarii and other hirelings?
                 
 	                if (deploying_unit.wep1[co][v]="Boarding Shield") then targ.dudes_ac[targ.men]+=4;
 	                if (deploying_unit.wep2[co][v]="Boarding Shield") then targ.dudes_ac[targ.men]+=4;
