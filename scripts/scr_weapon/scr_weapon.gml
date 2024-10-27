@@ -1708,7 +1708,7 @@ global.gear = {
 			"tags": ["dreadnought"],
 		},
 	//	Terminator armours
-		/* a low budget and low-tech variant of terminator armour, TODO - add images, and consider the options for consistent naming
+		// a low budget and low-tech variant of terminator armour, TODO - add images, and consider the options for consistent naming
 		"Heavy Power Armour": {
 			"abbreviation": "HPArm",
 			"armour_value": {
@@ -1731,7 +1731,6 @@ global.gear = {
 			"description": "A simple variant of personal heavy power armour. It generally is a modified heavy-duty industrial armour, hence is typically the weakest.",
 			"tags":["terminator"],
 		},
-		*/
 		"Terminator Armour": {
 			"abbreviation": "Indmts",
 			"armour_value": {
