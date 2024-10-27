@@ -115,7 +115,7 @@ function scr_librarium(){
 
                 if (scroll_engaged) {
                     artifact_namer.allow_input=false;
-                    identifiable=0;
+                    identifiable=false;
                     artifact_equip = new ShutterButton();
                     artifact_gift = new ShutterButton();
                     artifact_destroy = new ShutterButton();
